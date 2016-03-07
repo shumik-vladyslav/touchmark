@@ -1,0 +1,15 @@
+{
+  "name": "touchmark",
+  "version": "1.0.0",
+  "description": "FrontEnd Web App for DesMark",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://root@88.198.144.241:20022/srv/repos/git/touchmark.git"
+  },
+  "author": "ShuhratBek",
+  "license": "ISC"
+}
