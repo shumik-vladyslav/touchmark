@@ -2,11 +2,11 @@
   'use strict';
 
   angular
-    .module('touchMark')
-    .directive('acmeMalarkey', acmeMalarkey);
+    .module('app')
+    .directive('malarKey', malarKey);
 
   /** @ngInject */
-  function acmeMalarkey(malarkey) {
+  function malarKey(malarkey) {
     var directive = {
       restrict: 'E',
       scope: {

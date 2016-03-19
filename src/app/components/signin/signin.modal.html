@@ -1,0 +1,33 @@
+<md-dialog aria-label="SignIn dialog">
+	<form name="form" ng-submit="form.$valid && vm.submit()" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Sign In</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="vm.cancel()">
+					<md-icon md-svg-icon="content:clear" aria-label="close"></md-icon>
+				</md-button>
+			</div>
+    	</md-toolbar>
+		<md-dialog-content>
+			<md-input-container class="md-block">
+				<label>Email</label>
+				<input required type="email" name="email" ng-model="vm.user.email">
+				<div ng-messages="form.email.$error">
+					<div ng-message="required">This is required.</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Password</label>
+				<input required type="password" name="password" ng-model="vm.user.password">
+				<div ng-messages="form.password.$error">
+					<div ng-message="required">This is required.</div>
+				</div>
+			</md-input-container>
+		</md-dialog-content>
+		<md-dialog-actions>
+			<md-button type="submit" class="md-primary">Sign In</md-button>
+			<md-button type="button" ng-click="vm.cancel()">Cancel</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

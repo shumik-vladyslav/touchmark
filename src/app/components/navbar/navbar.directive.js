@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('touchMark')
+    .module('app')
     .directive('navBar', navBar);
 
   /** @ngInject */
@@ -10,18 +10,12 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
-      controller: NavbarController,
+      controller: 'NavbarController',
       controllerAs: 'vm',
       bindToController: true
     };
 
     return directive;
-
-    /** @ngInject */
-    function NavbarController(moment) {
-      var vm = this;
-
-    }
   }
 
 })();
