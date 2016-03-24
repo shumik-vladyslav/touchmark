@@ -1,3 +1,15 @@
 .acme-navbar-text{
   color: white;
 }
+
+.md-button {
+  color: #004759;
+  font-family: Raleway Semibold;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar) .md-button:not(.md-raised), md-toolbar:not(.md-menu-toolbar) .md-button:not(.md-raised) {
+    color: #004759;
+}
