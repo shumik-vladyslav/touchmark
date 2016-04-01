@@ -2,7 +2,8 @@
   color: white;
 }
 
-.md-button {
+md-toolbar .md-button {
+  background-color: white;
   color: #004759;
   font-family: Raleway Semibold;
   font-size: 13px;
@@ -12,4 +13,8 @@
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar) .md-button:not(.md-raised), md-toolbar:not(.md-menu-toolbar) .md-button:not(.md-raised) {
     color: #004759;
+}
+
+md-toolbar button.md-button:not([disabled]):hover {
+     background-color: rgba(158, 158, 158, 0.2);
 }
