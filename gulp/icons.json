@@ -1,0 +1,20 @@
+[
+  {
+    "sizes": [24, 48],
+    "ids": ["blue"],
+    "fills": ["#005DAA"],
+    "icons": [
+      "action/account_circle",
+      "action/shopping_basket",
+      "action/lock",
+      "maps/place",
+      "maps/local_shipping",
+      "maps/store_mall_directory",
+      "navigation/fullscreen",
+      "navigation/close",
+      "navigation/menu",
+      "content/add",
+      "content/remove"
+    ]
+  }
+]

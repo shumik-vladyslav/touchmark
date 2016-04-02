@@ -1,0 +1,27 @@
+<md-dialog aria-label="Forget dialog">
+	<form name="form" ng-submit="form.$valid && forget.submit()" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Sign Up</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="forget.cancel()">
+					<md-icon md-svg-icon="content:clear" aria-label="close"></md-icon>
+				</md-button>
+			</div>
+    	</md-toolbar>
+		<md-dialog-content>
+			<div layout-padding>
+				<md-input-container class="md-block">
+					<label>Email</label>
+					<input required type="email" name="email" ng-model="forget.user.email">
+					<div ng-messages="form.email.$error">
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions>
+			<md-button type="submit" class="md-primary">Reset password</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

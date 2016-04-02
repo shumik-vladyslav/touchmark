@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider,$mdThemingProvider, toastrConfig) {
+  function config($logProvider, $mdThemingProvider, toastrConfig) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -17,7 +17,6 @@
     toastrConfig.preventDuplicates = true;
     toastrConfig.progressBar = true;
     
-
     $mdThemingProvider.definePalette('white', {
         '50': 'ffffff',
         '100': 'ffffff',
