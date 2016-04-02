@@ -8,17 +8,9 @@
 	/** @ngInject */
 	function ForgetController($mdDialog, AuthService, toastr) {
 		var vm = this;
-		vm.hide =  hide;
-		vm.cancel = cancel;
+		vm.hide =  $mdDialog.hide;
+		vm.cancel = $mdDialog.cancel;
 		vm.submit = submit;
-
-		function hide() {
-			$mdDialog.hide();
-		}
-
-		function cancel() {
-			$mdDialog.cancel();
-		}
 
 		function submit() {
 			if(AuthService.rememberPassword(vm.email)) {
