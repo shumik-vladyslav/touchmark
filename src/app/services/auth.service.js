@@ -6,14 +6,84 @@
 		.factory('AuthService', AuthService);
 
 	/** @ngInject */
-	function AuthService($mdDialog, $document) {
+	function AuthService($mdDialog, $document, toastr) {
+		var currentUser = {};
+		var users = [
+			{
+				email: 'user1@mail.com',
+				password: 'user1'
+			},
+			{
+				email: 'user2@mail.com',
+				password: 'user2'
+			}
+		];
 		var service = {
 			signIn: signIn,
 			signUp: signUp,
-			forget: forget
+			forget: forget,
+			checkUserExist: checkUserExist,
+			rememberPassword: rememberPassword,
+			registerUser: registerUser
 		};
 
 		return service;
+
+		function userExist(user, password) {
+			var result = false;
+			for(var i=0;i<users.length;i++){
+				if(password) {
+				    if(users[i].email===user.email && users[i].password === user.password){
+				        result = true;
+				    }
+				} else{
+				    if(users[i].email===user.email){
+				        result = true;
+				    }
+				}
+			}
+			return result;
+		}
+
+		function checkUserExist(user) {
+			if(userExist(user, true)) {
+				setUser(user);
+				toastr.success(user.email, 'Welcome!');
+				return true;
+			} else {
+				toastr.error('User not found', 'Sign In');
+				return false;
+			}
+		}
+
+		function rememberPassword(email) {
+			var result = false;
+			for(var i=0;i<users.length;i++){
+			    if(users[i].email===email){
+			        result = users[i].password;
+			    }
+			}
+			return result;
+		}
+
+		function setUser(user) {
+			currentUser = user;
+		}
+
+		function clearUser() {
+			currentUser = {};
+		}
+
+		function registerUser(user) {
+			if(userExist(user)) {
+				users.push(user);
+				toastr.success('Successfully', 'Sign Up');
+				return true;
+			} else {
+				toastr.warning('User exist', 'Sign Up');
+				return false;
+			}
+		}
 
 		function signIn(ev) {
 			$mdDialog.show({
@@ -26,7 +96,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-				
+
 			}, function() {
 				
 			});

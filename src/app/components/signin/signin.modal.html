@@ -1,10 +1,10 @@
 <md-dialog aria-label="SignIn dialog">
-	<form name="form" ng-submit="form.$valid && signIn.submit()" novalidate>
+	<form name="form" ng-submit="form.$valid && signIn.submit($event)" novalidate>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>Sign In</h2>
 				<span flex></span>
-				<md-button class="md-icon-button" ng-click="signIn.cancel()">
+				<md-button type="button" class="md-icon-button" ng-click="signIn.cancel($event)">
 					<md-icon md-svg-icon="content:clear" aria-label="close"></md-icon>
 				</md-button>
 			</div>
@@ -29,7 +29,7 @@
 		</md-dialog-content>
 		<md-dialog-actions>
 			<md-button type="submit" class="md-primary md-raised">Sign In</md-button>
-			<md-button type="button" ng-click="signIn.cancel()">Cancel</md-button>
+			<md-button type="button" ng-click="signIn.cancel($event)">Cancel</md-button>
 			<md-button type="button" ng-click="signIn.forget($event)">Forget</md-button>
 		</md-dialog-actions>
 	</form>

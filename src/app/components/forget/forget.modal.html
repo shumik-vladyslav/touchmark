@@ -1,10 +1,10 @@
 <md-dialog aria-label="Forget dialog">
-	<form name="form" ng-submit="form.$valid && forget.submit()" novalidate>
+	<form name="form" ng-submit="form.$valid && forget.submit($event)" novalidate>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>Sign Up</h2>
 				<span flex></span>
-				<md-button class="md-icon-button" ng-click="forget.cancel()">
+				<md-button type="button" class="md-icon-button" ng-click="forget.cancel($event)">
 					<md-icon md-svg-icon="content:clear" aria-label="close"></md-icon>
 				</md-button>
 			</div>

@@ -6,17 +6,17 @@
 		.controller('SignupController', SignupController);
 
 	/** @ngInject */
-	function SignupController($mdDialog) {
+	function SignupController($mdDialog, AuthService) {
 		var vm = this;
+		vm.user = {};
+		vm.hide = $mdDialog.hide;
+		vm.cancel = $mdDialog.cancel;
+		vm.submit = submit;
 
-		vm.hide = function() {
-			$mdDialog.hide();
-		};
-		vm.cancel = function() {
-			$mdDialog.cancel();
-		};
-		vm.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
+		function submit() {
+			if(AuthService.registerUser(vm.user)) {
+				$mdDialog.hide();	
+			}
+		}
 	}
 })();

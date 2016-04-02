@@ -8,16 +8,16 @@
 	/** @ngInject */
 	function SigninController($mdDialog, AuthService) {
 		var vm = this;
-
+		vm.user = {};
 		vm.forget = AuthService.forget;
-		vm.hide = function() {
-			$mdDialog.hide();
-		};
-		vm.cancel = function() {
-			$mdDialog.cancel();
-		};
-		vm.submit = function() {
-			$mdDialog.hide();
-		};
+		vm.hide = $mdDialog.hide;
+		vm.cancel = $mdDialog.cancel;
+		vm.submit = submit;
+		
+		function submit() {
+			if(AuthService.checkUserExist(vm.user)) {
+				$mdDialog.hide();
+			}
+		}
 	}
 })();
