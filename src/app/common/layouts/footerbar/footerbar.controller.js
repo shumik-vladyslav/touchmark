@@ -6,5 +6,5 @@
     .controller('FooterbarController', FooterbarController);
 
   /** @ngInject */
-  function FooterbarController(AuthService, $mdDialog) {}
+  function FooterbarController() {}
 })();
