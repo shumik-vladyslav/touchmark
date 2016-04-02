@@ -1,0 +1,19 @@
+<md-toolbar layout="row" layout-align="center center">
+
+  <a href="/" class="logo" layout="row" layout-align="center center">
+    <img src="/assets/images/main/logo.jpg" alt="">
+  </a>
+
+  <section layout="row" layout-align="left center" flex>
+    <md-button href="#/pricing">PRICING</md-button>
+    <md-button href="#/about">ABOUT US</md-button>
+    <md-button href="#/showcase">SHOWCASE</md-button>
+    <md-button href="#/support">ONLINE SUPPORT</md-button>
+    <md-button href="#/uikit">UI Kit</md-button>
+  </section>
+
+  <section layout="row" layout-align="center right">
+  	<md-button ng-click="navbar.signIn($event)">Sign in</md-button>
+  	<md-button ng-click="navbar.signUp($event)">Sign up</md-button>
+  </section>
+</md-toolbar>

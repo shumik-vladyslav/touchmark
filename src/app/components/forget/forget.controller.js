@@ -3,13 +3,12 @@
 
 	angular
 		.module('app')
-		.controller('SigninController', SigninController);
+		.controller('ForgetController', ForgetController);
 
 	/** @ngInject */
-	function SigninController($mdDialog, AuthService) {
+	function ForgetController($mdDialog) {
 		var vm = this;
 
-		vm.forget = AuthService.forget;
 		vm.hide = function() {
 			$mdDialog.hide();
 		};

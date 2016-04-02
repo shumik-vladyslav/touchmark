@@ -6,9 +6,10 @@
     .controller('NavbarController', NavbarController);
 
   /** @ngInject */
-  function NavbarController(AuthService, $mdDialog) {
+  function NavbarController(AuthService) {
     var vm = this;
 
     vm.signIn = AuthService.signIn;
+    vm.signUp = AuthService.signUp;
   }
 })();

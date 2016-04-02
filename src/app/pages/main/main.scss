@@ -20,11 +20,12 @@
 
  .baner-browser-window{
     position: absolute;
-    width: 570px;
+    width: 80%;
     left: 10%;
     top: 340px;
     
     img{
+        width: 100%;
         box-shadow: 0 0 3em #888888;
     }
  }

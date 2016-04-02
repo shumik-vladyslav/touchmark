@@ -2,7 +2,8 @@
   "name": "touchMark",
   "version": "0.0.0",
   "dependencies": {
-    "estraverse": "^4.2.0"
+    "estraverse": "^4.2.0",
+    "gulp-material-icons": "^1.0.4"
   },
   "scripts": {
     "test": "gulp test"

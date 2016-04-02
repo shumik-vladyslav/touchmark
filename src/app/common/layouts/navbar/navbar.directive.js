@@ -9,9 +9,10 @@
   function navBar() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/components/navbar/navbar.html',
+      replace: true,
+      templateUrl: 'app/common/layouts/navbar/navbar.html',
       controller: 'NavbarController',
-      controllerAs: 'vm',
+      controllerAs: 'navbar',
       bindToController: true
     };
 
