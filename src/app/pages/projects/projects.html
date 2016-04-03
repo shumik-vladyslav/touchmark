@@ -1,0 +1,44 @@
+ <section layout="row" layout-align="left center" flex>
+    <div flex="60">
+         <md-input-container >
+            <input ng-model="user.phone" type="text" placeholder="Search">
+        </md-input-container>
+    </div>
+    <div flex="40">  
+        <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)">
+                RECENT
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)">
+                ALL TYPES
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)">
+                ALL COLLABORATORS
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+  </section>
+  
+  <section class="projects" layout="row" layout-align="space-around center" layout-wrap>
+    <md-card flex="30" ng-repeat="project in proj.projects">
+        <img ng-src="{{project.img}}" class="md-card-image" alt="">
+        <div>  
+           {{project.name}} 
+           {{project.owner}} 
+           {{project.update}} 
+        </div> 
+    </md-card>
+  </section>
