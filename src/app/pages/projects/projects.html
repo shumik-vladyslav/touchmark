@@ -1,44 +1,62 @@
- <section layout="row" layout-align="left center" flex>
+ <section class="search-section" layout="row" layout-align="left center" flex>
     <div flex="60">
          <md-input-container >
-            <input ng-model="user.phone" type="text" placeholder="Search">
+            <input ng-model="proj.searchValue" type="text" placeholder="Search" ng-change="proj.search()">
         </md-input-container>
     </div>
     <div flex="40">  
         <md-menu>
             <md-button ng-click="$mdOpenMenu($event)">
-                RECENT
+                {{proj.dateValue}}
             </md-button>
             <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+                <md-menu-item ng-repeat="item in proj.date">
+                    <md-button  class="search-menu-button" ng-click="proj.orderbyDate(item)">
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
             </md-menu-content>
         </md-menu>
         <md-menu>
             <md-button ng-click="$mdOpenMenu($event)">
-                ALL TYPES
+                {{proj.typeValue}}
             </md-button>
             <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+                <md-menu-item ng-repeat="item in proj.type">
+                     <md-button  class="search-menu-button" ng-click="proj.orderbyType(item, true)">
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
             </md-menu-content>
         </md-menu>
         <md-menu>
             <md-button ng-click="$mdOpenMenu($event)">
-                ALL COLLABORATORS
+                {{proj.collaboratorsValue}}
             </md-button>
             <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in [1, 2, 3]">фывфыв</md-menu-item>
+                <md-menu-item ng-repeat="item in proj.collaborators">
+                    <md-button  class="search-menu-button" ng-click="proj.orderbyCollaborator(item, true)">
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
             </md-menu-content>
         </md-menu>
     </div>
   </section>
-  
-  <section class="projects" layout="row" layout-align="space-around center" layout-wrap>
+
+  <section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
     <md-card flex="30" ng-repeat="project in proj.projects">
-        <img ng-src="{{project.img}}" class="md-card-image" alt="">
-        <div>  
-           {{project.name}} 
-           {{project.owner}} 
-           {{project.update}} 
+        <img ng-src="{{project.img}}" class="md-card-image card-image" alt="">
+        <div layout="row" layout-align="center center">
+            <div flex="85" layout="row" layout-align="start center" layout-wrap>  
+                <h2 flex="70">{{project.name}}</h2> 
+                <div flex="45" class="projects-time-label">LAST UPDATE:</div>
+                <div flex="35" class="projects-time">{{project.update | date:'HH:mm dd.MM'}} </div>
+            </div> 
+            <div flex="15">  
+                <img ng-src="/assets/images/projects/user_icon.jpg" class="md-card-image" alt="">
+            </div> 
         </div> 
     </md-card>
   </section>
+  
