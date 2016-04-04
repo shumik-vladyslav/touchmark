@@ -1,19 +1,25 @@
-<md-toolbar layout="row" layout-align="center center">
-
+<md-toolbar layout="row" layout-align="center center" md-theme="{{navbar.theme()}}" class="navbar">
+  <span flex="5"></span>
   <a href="/" class="logo" layout="row" layout-align="center center">
-    <img ng-src="/assets/images/main/logo.jpg" alt="">
+    <img ng-src="/assets/images/logo.png" alt="">
+    desmark
   </a>
-
+  <span flex="5"></span>
   <section layout="row" layout-align="left center" flex>
-    <md-button href="#/pricing">PRICING</md-button>
-    <md-button href="#/about">ABOUT US</md-button>
-    <md-button href="#/showcase">SHOWCASE</md-button>
-    <md-button href="#/support">ONLINE SUPPORT</md-button>
-    <md-button href="#/uikit">UI Kit</md-button>
+    <md-button ng-repeat="menu in navbar.menu()" ui-sref="{{menu.link}}">{{menu.title}}</md-button>
   </section>
-
-  <section layout="row" layout-align="center right">
-  	<md-button ng-click="navbar.signIn($event)">Sign in</md-button>
+  <section layout="row" layout-align="center right" ng-if="!navbar.isAuthorized()">
+    <md-button ng-click="navbar.signIn($event)">Sign in</md-button>
   	<md-button ng-click="navbar.signUp($event)">Sign up</md-button>
   </section>
+  <section layout="row" layout-align="center right" ng-if="navbar.isAuthorized()">
+    <md-button ng-click="">
+      <md-icon></md-icon>
+    </md-button>
+    <md-button class="md-icon" ng-click="">
+      <md-icon md-svg-icon="social:notifications"></md-icon>
+    </md-button>
+    <md-button ng-click="">{{navbar.userInfo().email}}</md-button>
+  </section>
+  <span flex="5"></span>
 </md-toolbar>

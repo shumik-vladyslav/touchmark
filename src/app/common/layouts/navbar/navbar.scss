@@ -1,20 +1,23 @@
-.navbar-text{
-  color: white;
-}
+.navbar {
+	.logo {
+		text-decoration: none;
+		font-family: Raleway Extra Bold;
+		color: #004759;
+		font-size: 1.4em;
 
-md-toolbar .md-button {
-  background-color: white;
-  color: #004759;
-  font-family: Raleway Semibold;
-  font-size: 13px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-md-toolbar.md-default-theme:not(.md-menu-toolbar) .md-button:not(.md-raised), md-toolbar:not(.md-menu-toolbar) .md-button:not(.md-raised) {
-    color: #004759;
-}
-
-md-toolbar button.md-button:not([disabled]):hover {
-     background-color: rgba(158, 158, 158, 0.2);
+		img {
+			margin-right: 5px;
+		}
+	}
+	.md-button {
+		font-family: Raleway Semibold;
+		font-size: .6em;
+	}
+	.md-button:not(.md-raised) {
+		color: #004759;
+	}
+	
+	&.md-navAuth-theme .logo {
+		color: #fff;
+	}
 }

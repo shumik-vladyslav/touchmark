@@ -8,5 +8,5 @@ var tasks = require('./icons.json');
 
 gulp.task('icons', function() {
     return icons({tasks: tasks})
-        .pipe(gulp.dest('./icons/'));
+        .pipe(gulp.dest('./dist/assets/icons/'));
 });

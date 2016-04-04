@@ -1,8 +1,8 @@
 [
   {
-    "sizes": [24, 48],
-    "ids": ["blue"],
-    "fills": ["#005DAA"],
+    "sizes": [24],
+    "ids": ["ic"],
+    "fills": [""],
     "icons": [
       "action/account_circle",
       "action/shopping_basket",
@@ -14,7 +14,10 @@
       "navigation/close",
       "navigation/menu",
       "content/add",
-      "content/remove"
+      "content/remove",
+      "social/notifications",
+      "social/notifications_on",
+      "social/notifications_none"
     ]
   }
 ]

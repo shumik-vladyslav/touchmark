@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('touchMark')
+    .module('app')
     .run(runBlock);
 
   /** @ngInject */

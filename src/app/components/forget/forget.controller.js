@@ -15,7 +15,7 @@
 		function submit() {
 			var password = AuthService.rememberPassword(vm.email);
 			if(password) {
-		    	toastr.info(password, 'Forget');
+				toastr.info(password, 'Forget');
 				$mdDialog.hide();	
 			} else {
 				toastr.error('User not found', 'Forget');
