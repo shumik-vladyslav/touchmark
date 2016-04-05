@@ -17,7 +17,8 @@
                 'Apple Watch', 
                 'Android Watch'];
                 
-     var date = ['Recent', 'Alphanumeric'];
+     var date = [{value: 'Recent', param: 'update'},
+                 {value: 'Alphanumeric', param: 'name'}];
      
      var collaborators = ['ALL COLLABORATORS'];
       
@@ -67,67 +68,59 @@
             });
     }
     
-    function orderbyDate(params) {
-        vm.dateValue = params;
+    function orderbyDate(self, value, param, dataValue, dataGlobal, data) {
+        self[dataValue] = value;
         
-        if(params === 'Recent'){
-            vm.projects = _.sortBy(vm.projects, function(o) { return o.update; });
-        }
+        self[data] = _.sortBy(self[data], function(o) { return o[param]; });
         
-        if(params === 'Alphanumeric'){
-            vm.projects = _.sortBy(vm.projects, function(o) { return o.name; });
-        }
-        
-        vm.data = vm.projects;
+        self[dataGlobal] = self[data];
     }
     
-    function orderbyType(params, first) {
-        vm.typeValue = params;
+    function orderbyType(self, value, param, dataValue, dataGlobal, data, first) {
+        self[dataValue] = param;
         
-        if(params === 'ALL TYPES' && vm.collaboratorsValue !== 'ALL COLLABORATORS'){
-            vm.projects = vm.data;
-            orderbyCollaborator(vm.collaboratorsValue, false);
-            return;
-        }else if(params === 'ALL TYPES'){
-            vm.projects = vm.data;
-            return;
-        }
-        
-        if(first){
-            vm.projects = vm.data;
-            orderbyCollaborator(vm.collaboratorsValue, false);
+        if(param === 'ALL TYPES' || first){
+            self[data] = self[dataGlobal];
+            
+            if(self.collaboratorsValue !== 'ALL COLLABORATORS' || first){
+                orderbyCollaborator(self, self['collaboratorsValue'], self['collaboratorsValue'], 'collaboratorsValue', dataGlobal, data, false);
+            }
+            if(!first){
+                return;
+            }
         }
         
         search(true);
         
-        vm.projects = _.filter(vm.projects, function(o) { return o.type === params; });
+        
+        
+        self[data] = _.filter(self[data], function(o) { return o.type === param; });
     }
     
-    function orderbyCollaborator(params, first) {
-        vm.collaboratorsValue = params;
+    function orderbyCollaborator(self, value, param, dataValue, dataGlobal, data, first) {
         var arr = [];
+        self[dataValue] = param;
         
-        if(vm.typeValue !== 'ALL TYPES' && params === 'ALL COLLABORATORS'){
-            vm.projects = vm.data;
-            orderbyType(vm.typeValue, false);
-            return;
-        }else if(params === 'ALL COLLABORATORS'){
-            vm.projects = vm.data;
-            return;
-        }
-        
-        if(first){
-            vm.projects = vm.data;
-            orderbyType(vm.typeValue, false);
+        if(param === 'ALL COLLABORATORS' || first){
+            self[data] = self[dataGlobal];
+            
+            if(self.typeValue !== 'ALL TYPES' || first){
+                orderbyType(self, self['typeValue'], self['typeValue'], 'typeValue', dataGlobal, data, false);
+            }
+            if(!first){
+                return;
+            }
         }
         
         search(true);
         
-        for (var key in vm.projects) {
-            if (vm.projects.hasOwnProperty(key)) {
-                var element = vm.projects[key];
+        
+        
+        for (var key in self[data]) {
+            if (self[data].hasOwnProperty(key)) {
+                var element = self[data][key];
                 
-                var index = _.indexOf(element.collaborators, params);
+                var index = _.indexOf(element.collaborators, param);
                 
                 if(~index){
                     arr.push(element);
@@ -135,7 +128,7 @@
             }
         }
         
-        vm.projects = arr;
+        self[data] = arr;
         
     }
    

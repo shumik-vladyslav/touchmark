@@ -24,8 +24,8 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-repeat="item in proj.date">
-                    <md-button  class="search-menu-button" ng-click="proj.orderbyDate(item)">
-                        {{item}}
+                    <md-button  class="search-menu-button" ng-click="proj.orderbyDate(proj, item.value, item.param, 'dateValue', 'data', 'projects')">
+                        {{item.value}}
                     </md-button>
                 </md-menu-item>
             </md-menu-content>
@@ -36,7 +36,7 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-repeat="item in proj.type">
-                     <md-button  class="search-menu-button" ng-click="proj.orderbyType(item, true)">
+                     <md-button  class="search-menu-button" ng-click="proj.orderbyType(proj, item, item, 'typeValue', 'data', 'projects', true)">
                         {{item}}
                     </md-button>
                 </md-menu-item>
@@ -48,7 +48,7 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-repeat="item in proj.collaborators">
-                    <md-button  class="search-menu-button" ng-click="proj.orderbyCollaborator(item, true)">
+                    <md-button  class="search-menu-button" ng-click="proj.orderbyCollaborator(proj, item, item, 'collaboratorsValue', 'data', 'projects', true)">
                         {{item}}
                     </md-button>
                 </md-menu-item>
