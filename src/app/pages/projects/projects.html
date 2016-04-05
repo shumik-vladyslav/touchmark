@@ -1,9 +1,22 @@
  <section class="search-section" layout="row" layout-align="left center" flex>
-    <div flex="60">
-         <md-input-container >
-            <input ng-model="proj.searchValue" type="text" placeholder="Search" ng-change="proj.search()">
+     
+    <div flex="60" class="search-project" layout="row" layout-align="center center">
+         <div flex="5">
+             <a onclick="document.getElementById('searchInput').focus(); return false;">
+                <img  ng-src="/assets/images/projects/search_icon.jpg" class="md-card-image" alt="">
+             </a>
+         </div>
+         <md-input-container flex="60">
+            <input id="searchInput" ng-model="proj.searchValue" type="text" ng-change="proj.search()">
+            <label ng-if="!proj.searchValue">Search</label>
         </md-input-container>
+           <div class="add-button">
+         <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
+            <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
+        </md-button>
     </div>
+    </div>
+
     <div flex="40">  
         <md-menu>
             <md-button ng-click="$mdOpenMenu($event)">
@@ -59,4 +72,6 @@
         </div> 
     </md-card>
   </section>
+  
+ 
   

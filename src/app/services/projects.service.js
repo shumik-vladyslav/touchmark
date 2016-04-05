@@ -6,7 +6,7 @@
 		.factory('ProjectsService', ProjectsService);
 
 	/** @ngInject */
-	function ProjectsService() {
+	function ProjectsService($mdDialog, $document) {
 		var currentUser = {};
 		var projects = [
             {
@@ -65,7 +65,9 @@
 		];
 		var service = {
 			getProjects: getProjects,
-            getUniqueСollaborators: getUniqueСollaborators
+            getUniqueСollaborators: getUniqueСollaborators,
+            addProject: addProject,
+            addProjectModal: addProjectModal
 			
 		};
 
@@ -89,6 +91,28 @@
                 }
             }
 			return _.uniq(collaborators);
+		}
+        
+        function addProject(proj){
+            projects.push(proj);
+        }
+        
+        function addProjectModal(ev, self) {
+            
+			$mdDialog.show({
+				controller: 'AddProjectController',
+				controllerAs:'addProj',
+				templateUrl: 'app/components/addProject/addProject.modal.html',
+				parent: angular.element($document.body),
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+                self.refreshData();
+			}, function() {
+
+			});
 		}
 	}
 })();
