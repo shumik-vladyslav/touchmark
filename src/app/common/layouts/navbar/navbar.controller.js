@@ -12,9 +12,14 @@
     vm.signIn = AuthService.signIn;
     vm.signUp = AuthService.signUp;
     vm.menu = NavService.navMenu;
-    vm.logOut = AuthService.logOut;
+    vm.logOut = logOut;
     vm.isAuthorized = AuthService.isAuthorized;
     vm.userInfo = AuthService.getUserInfo;
+
+    function logOut() {
+      AuthService.logOut();
+      theme();
+    }
 
     function theme() {
       if(AuthService.isAuthorized()) {
