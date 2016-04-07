@@ -6,7 +6,7 @@
     .controller('ProjectsController', ProjectsController);
     
     
-    
+    // не надо здесь объявлять переменные, перенесы в сервис 
     var type = ['ALL TYPES',
                 'Desktop(web)', 
                 'Mobile devices', 
@@ -24,8 +24,8 @@
   /** @ngInject */
   function ProjectsController(ProjectsService) {
      var vm = this;
-     var _ = window._;
-     this.collaboratorsValue = 'ALL COLLABORATORS';
+     var _ = window._; // используй $window вместо window
+     this.collaboratorsValue = 'ALL COLLABORATORS'; // this уже в переменной vm, используй его
      this.dateValue = 'Recent';
      this.typeValue = 'ALL TYPES';
      this.searchValue = '';
@@ -36,13 +36,13 @@
      this.projects = ProjectsService.getProjects();
      this.data = ProjectsService.getProjects();
      this.addProjectModal = ProjectsService.addProjectModal;
-     this.refreshData = refreshData;
+     this.refreshData = refreshData; // зачем это нужно?
   
-     function refreshData() {
+     function refreshData() { // зачем это нужно?
         vm.projects = ProjectsService.getProjects();
      }
   
-     this.arrSetti =  [
+     this.arrSetti =  [ // зачем она здесь, а не в сервисе
         {
             scope: vm,
             itemValue: 'value',

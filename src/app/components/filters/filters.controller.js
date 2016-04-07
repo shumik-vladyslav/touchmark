@@ -7,15 +7,15 @@
 
 	/** @ngInject */
 	function FiltersController($scope) {
-        
+        // вместо window надо использовать $window подключив в DI
         var _ = window._;
-        
+        // если не используешь $on, $emit, $broadcast, $watch то не надо подключать $scope, вместо него используй vm
         $scope.searchValue = '';
         
         $scope.orderby = orderby;
         
         $scope.search = search;
-        
+        // луше создай функцию activate и добавь этот цикл внутр него и здесь вызивай
         for (var key in $scope.settings) {
             if ($scope.settings.hasOwnProperty(key)) {
                 var element = $scope.settings[key];

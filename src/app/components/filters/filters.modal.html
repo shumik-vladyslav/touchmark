@@ -2,11 +2,14 @@
      
     <div flex="60" class="search-project" layout="row" layout-align="center center">
          <div flex="5">
+         <!-- зачем используеш JS метод onclick -->
              <a onclick="document.getElementById('searchInput').focus(); return false;">
+             <!-- и обращай внимание на пробелы <img  ng-src= -->
                 <img  ng-src="/assets/images/projects/search_icon.jpg" class="md-card-image" alt="">
              </a>
          </div>
          <md-input-container flex="60">
+         <!-- луше избегай от создание id -->
             <input id="searchInput" ng-model="searchValue" type="text" ng-change="search()">
             <label ng-if="!searchValue">Search</label>
         </md-input-container>

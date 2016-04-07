@@ -20,7 +20,7 @@
                 'Android Phone', 
                 'Android Tabled',
                 'Apple Watch', 
-                'Android Watch'];
+                'Android Watch']; // зачем она здесь?
         
         
         function selectType(params) {
