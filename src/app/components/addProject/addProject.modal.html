@@ -18,18 +18,20 @@
 						<div ng-message="required">This is required.</div>
 					</div>
 				</md-input-container>
-				<md-menu>
-                    <md-button ng-click="$mdOpenMenu($event)">
-                        {{addProj.typeValue}}
-                    </md-button>
-                    <md-menu-content width="4">
-                        <md-menu-item ng-repeat="item in addProj.type">
-                            <md-button  class="search-menu-button" ng-click="addProj.selectType(item)">
-                                {{item}}
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
+                <md-menu-bar>
+                    <md-menu>
+                        <a ng-click="$mdOpenMenu($event)">
+                            {{addProj.typeValue}}
+                        </a>
+                        <md-menu-content>
+                            <md-menu-item ng-repeat="item in addProj.type">
+                                <a  class="search-menu-button" ng-click="addProj.selectType(item)">
+                                    {{item}}
+                                </a>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
 			<div>
 		</md-dialog-content>
 		<md-dialog-actions>

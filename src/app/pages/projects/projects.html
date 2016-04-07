@@ -1,46 +1,11 @@
- <!--<section class="search-section" layout="row" layout-align="left center" flex>
-     
-    <div flex="60" class="search-project" layout="row" layout-align="center center">
-         <div flex="5">
-             <a onclick="document.getElementById('searchInput').focus(); return false;">
-                <img  ng-src="/assets/images/projects/search_icon.jpg" class="md-card-image" alt="">
-             </a>
-         </div>
-         <md-input-container flex="60">
-            <input id="searchInput" ng-model="proj.searchValue" type="text" ng-change="proj.search()">
-            <label ng-if="!proj.searchValue">Search</label>
-        </md-input-container>
-           <div class="add-button">
-         <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
-            <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
-        </md-button>
-    </div>
-    </div>
 
-    <div flex="40">  
-        <md-menu ng-repeat="menu in proj.arrSetti">
-            <md-button ng-click="$mdOpenMenu($event)">
-                {{menu.scope[menu.showValue]}}
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
-                    <md-button ng-if="menu.itemParam" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                        {{item.value}}
-                    </md-button>
-                    <md-button ng-if="!menu.itemParam" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                        {{item}}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
-    </div>
-  </section>-->
-         <div class="add-button">
-         <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
-            <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
-        </md-button>
-    </div>
 <filters settings="proj.arrSetti"></filters>
+
+<div class="add-button">
+    <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
+        <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
+    </md-button>
+</div>
   <section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
     <md-card flex="30" ng-repeat="project in proj.projects">
         <img ng-src="{{project.img}}" class="md-card-image card-image" alt="">

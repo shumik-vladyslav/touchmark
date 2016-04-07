@@ -14,20 +14,22 @@
     </div>
     
     <div flex="40">  
-        <md-menu ng-repeat="menu in settings">
-            <md-button ng-click="$mdOpenMenu($event)">
-                {{menu.scope[menu.showValue]}}
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
-                    <md-button ng-if="menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                        {{item.value}}
-                    </md-button>
-                    <md-button ng-if="!menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                        {{item}}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
+         <md-menu-bar>
+            <md-menu ng-repeat="menu in settings">
+                <md-button ng-click="$mdOpenMenu($event)">
+                    {{menu.scope[menu.showValue]}}
+                </md-button>
+                <md-menu-content layout="column" layout-align="space-around center">
+                    <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
+                        <a ng-if="menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            {{item.value}}
+                        </a>
+                        <a ng-if="!menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            {{item}}
+                        </a>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+         </md-menu-bar>
     </div>
   </section>
