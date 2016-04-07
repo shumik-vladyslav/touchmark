@@ -18,7 +18,23 @@
     </div>
 
     <div flex="40">  
-        <md-menu>
+        <md-menu ng-repeat="menu in proj.arrSetti">
+            <md-button ng-click="$mdOpenMenu($event)">
+                {{menu.scope[menu.showValue]}}
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
+                    <md-button ng-if="menu.itemValue" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                        {{item.value}}
+                    </md-button>
+                    <md-button ng-if="!menu.itemValue" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        
+        <!--<md-menu>
             <md-button ng-click="$mdOpenMenu($event)">
                 {{proj.dateValue}}
             </md-button>
@@ -52,7 +68,7 @@
                         {{item}}
                     </md-button>
                 </md-menu-item>
-            </md-menu-content>
+            </md-menu-content>-->
         </md-menu>
     </div>
   </section>

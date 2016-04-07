@@ -19,7 +19,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
 			{
-				name: 'Test4',
+				name: 'dDt4',
 				update: new Date("Mon Apr 11 2016 13:45:34"),
                 owner: 'user',
                 collaborators: ['user', 'user2'],
@@ -28,7 +28,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
-				name: 'Test2',
+				name: 'Aaafst2',
 				update: new Date("Mon Apr 15 2016 13:45:34"),
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3'],
@@ -37,7 +37,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
-				name: 'Test3',
+				name: 'St3',
 				update: new Date("Mon Apr 04 2016 12:45:34"),
                 owner: 'user2',
                 collaborators: ['user', 'user2', 'user3', 'user4'],
@@ -46,7 +46,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
-				name: 'Aa',
+				name: 'Aaf',
 				update: new Date("Mon Apr 04 2016 11:45:34"),
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3', 'user4', 'user5'],
