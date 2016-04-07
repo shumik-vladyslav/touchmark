@@ -1,4 +1,4 @@
- <section class="search-section" layout="row" layout-align="left center" flex>
+ <!--<section class="search-section" layout="row" layout-align="left center" flex>
      
     <div flex="60" class="search-project" layout="row" layout-align="center center">
          <div flex="5">
@@ -24,55 +24,23 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
-                    <md-button ng-if="menu.itemValue" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                    <md-button ng-if="menu.itemParam" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
                         {{item.value}}
                     </md-button>
-                    <md-button ng-if="!menu.itemValue" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, item, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                    <md-button ng-if="!menu.itemParam" class="search-menu-button" ng-click="menu.scope.orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
                         {{item}}
                     </md-button>
                 </md-menu-item>
             </md-menu-content>
-        </md-menu>
-        
-        <!--<md-menu>
-            <md-button ng-click="$mdOpenMenu($event)">
-                {{proj.dateValue}}
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in proj.date">
-                    <md-button  class="search-menu-button" ng-click="proj.orderbyDate(proj, item.value, item.param, 'dateValue', 'data', 'projects')">
-                        {{item.value}}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
-        <md-menu>
-            <md-button ng-click="$mdOpenMenu($event)">
-                {{proj.typeValue}}
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in proj.type">
-                     <md-button  class="search-menu-button" ng-click="proj.orderbyType(proj, item, item, 'typeValue', 'data', 'projects', true)">
-                        {{item}}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
-        <md-menu>
-            <md-button ng-click="$mdOpenMenu($event)">
-                {{proj.collaboratorsValue}}
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item ng-repeat="item in proj.collaborators">
-                    <md-button  class="search-menu-button" ng-click="proj.orderbyCollaborator(proj, item, item, 'collaboratorsValue', 'data', 'projects', true)">
-                        {{item}}
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>-->
         </md-menu>
     </div>
-  </section>
-
+  </section>-->
+         <div class="add-button">
+         <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
+            <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
+        </md-button>
+    </div>
+<filters settings="proj.arrSetti"></filters>
   <section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
     <md-card flex="30" ng-repeat="project in proj.projects">
         <img ng-src="{{project.img}}" class="md-card-image card-image" alt="">
