@@ -1,10 +1,9 @@
-/* global malarkey:false, moment:false */
+/* global moment:false */
 (function() {
   'use strict';
 
   angular
-    .module('touchMark')
-    .constant('malarkey', malarkey)
-    .constant('moment', moment)
-    .constant('_', window._);
+    .module('app')
+    .constant('moment', moment);
+
 })();

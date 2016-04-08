@@ -12,7 +12,8 @@
 				'restangular', 
 				'ui.router', 
 				'ngMaterial', 
-				'toastr'
+				'toastr',
+				'ngStorage'
 			]
 		);
 
