@@ -3,12 +3,11 @@
 
 	angular
 		.module('app')
-		.controller('FiltersController', FiltersController);
+		.controller('FilterBarController', FilterBarController);
 
 	/** @ngInject */
-	function FiltersController($scope) {
-        // вместо window надо использовать $window подключив в DI
-        var _ = window._;
+	function FilterBarController($scope, $window) {
+        var _ = $window._;
         
         $scope.orderby = orderby;
         

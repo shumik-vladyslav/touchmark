@@ -8,7 +8,5 @@
 	/** @ngInject */
 	function CardController($scope) {
         
-        var _ = window._;
-        
 	}
 })();

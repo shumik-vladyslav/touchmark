@@ -9,7 +9,7 @@
   function card() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/components/card/card.modal.html',
+      templateUrl: 'app/components/card/card.html',
       controller: 'CardController',
       controllerAs: 'card',
       scope: {
