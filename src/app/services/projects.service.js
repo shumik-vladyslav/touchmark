@@ -11,9 +11,9 @@
 		var projects = [
             {
 				name: 'D-D Play',
-				update: new Date("Mon Apr 04 2016 13:45:34"),
+				update: new Date("Mon Apr 04 2016 13:45:34"), // используй moment, она уже подключена
                 owner: 'user',
-                collaborators: ['user', 'user2'],
+                collaborators: ['user', 'user2'], // надо [{key: value, key2: value2}, ...] будет хранить имя, аватарку
                 type: 'iPad',
                 
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
@@ -109,7 +109,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-                self.refreshData();
+                self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо делать в этом сервисе
 			}, function() {
 
 			});
