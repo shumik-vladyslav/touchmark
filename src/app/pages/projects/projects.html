@@ -7,19 +7,7 @@
     </md-button>
 </div>
   <section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
-    <md-card flex="30" ng-repeat="project in proj.projects">
-        <img ng-src="{{project.img}}" class="md-card-image card-image" alt="">
-        <div layout="row" layout-align="center center">
-            <div flex="85" layout="row" layout-align="start center" layout-wrap>  
-                <h2 flex="70">{{project.name}}</h2> 
-                <div flex="45" class="projects-time-label">LAST UPDATE:</div>
-                <div flex="35" class="projects-time">{{project.update | date:'HH:mm dd.MM'}} </div>
-            </div> 
-            <div flex="15">  
-                <img ng-src="/assets/images/projects/user_icon.jpg" class="md-card-image" alt="">
-            </div> 
-        </div> 
-    </md-card>
+      <card  flex="33" name="project.name" time="project.update" img="project.img" ng-repeat="project in proj.projects"></card>
   </section>
   
  
