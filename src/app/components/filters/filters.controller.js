@@ -10,46 +10,7 @@
         
         var _ = window._;
         
-        $scope.searchValue = '';
-        
         $scope.orderby = orderby;
-        
-        $scope.search = search;
-        
-        for (var key in $scope.settings) {
-            if ($scope.settings.hasOwnProperty(key)) {
-                var element = $scope.settings[key];
-                if(element.functionType === 'orderbyDate'){
-                    $scope.orderby(element.scope, element.scope[element.showValue], element.showParam, element.showValue, element.keyGlobalData, element.keyData, false, element.functionType, element.defaultParam);
-                }
-            }
-        }
-        
-	    function search(update) {
-            if(!update){
-                $scope.settings[0].scope[$scope.settings[0].keyData] = $scope.settings[0].scope[$scope.settings[0].keyGlobalData];
-                for (var key in $scope.settings) {
-                    if ($scope.settings.hasOwnProperty(key)) {
-                        var element = $scope.settings[key];
-                        if(element.scope[element.showValue] !== element.defaultParam){
-                            var showValue = element.functionType === 'orderbyCollaborator' ? element.itemValue : element.scope[element.showValue];
-                            
-                            orderby(element.scope, showValue, element.scope[element.showValue], element.showValue, element.keyGlobalData, element.keyData, false, element.functionType, element.defaultParam);
-                        }
-                    }
-                }
-                
-            }
-            
-            $scope.settings[0].scope[$scope.settings[0].keyData] = _.filter($scope.settings[0].scope[$scope.settings[0].keyData], function(o) { 
-                var name = o.name.toLowerCase();
-                var value = $scope.searchValue.toLowerCase();
-                var index = name.indexOf(value);
-                
-                return ~index; 
-                });
-                
-        }
         
         function orderby(self, value, param, dataValue, dataGlobal, data, first, functionType, defaultParam) {
             self[dataValue] = param;
@@ -80,8 +41,6 @@
                     return;
                 }
             }
-            
-            search(true);
             
             switch (functionType) {
                 case 'orderbyType':

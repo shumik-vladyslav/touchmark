@@ -28,7 +28,6 @@
      this.collaboratorsValue = 'ALL COLLABORATORS';
      this.dateValue = 'Recent';
      this.typeValue = 'ALL TYPES';
-     this.searchValue = '';
      collaborators = _.concat(collaborators, ProjectsService.getUniqueСollaborators());
      this.collaborators = collaborators;
      this.date = date;

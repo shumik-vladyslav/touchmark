@@ -13,7 +13,8 @@
       controller: 'FiltersController',
       controllerAs: 'filters',
       scope: {
-            settings: '='
+            settings: '=',
+            search: '='
       },
     };
 
