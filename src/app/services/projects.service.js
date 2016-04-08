@@ -7,11 +7,48 @@
 
 	/** @ngInject */
 	function ProjectsService($mdDialog, $document) {
-		var currentUser = {};
+		var types = [
+			{
+				key: 'all',
+				value: 'All types'
+			},
+			{
+				key: 'desktop',
+				value: 'Desktop(web)'
+			},
+			{
+				key: 'mobile',
+				value: 'Mobile devices'
+			},
+			{
+				key: 'iPhone',
+				value: 'iPhone'
+			},
+			{
+				key: 'iPad',
+				value: 'iPad'
+			},
+			{
+				key: 'android',
+				value: 'Android Phone'
+			},
+			{
+				key: 'androidTablet',
+				value: 'Android Tablet'
+			},
+			{
+				key: 'appleWatch',
+				value: 'Apple Watch'
+			},
+			{
+				key: 'androidWatch',
+				value: 'Android Watch'
+			}
+		];
 		var projects = [
             {
 				name: 'D-D Play',
-				update: new Date("Mon Apr 04 2016 13:45:34"), // используй moment, она уже подключена
+				update: 1460094322, // используй moment, она уже подключена
                 owner: 'user',
                 collaborators: ['user', 'user2'], // надо [{key: value, key2: value2}, ...] будет хранить имя, аватарку
                 type: 'iPad',
@@ -20,7 +57,7 @@
 			},
 			{
 				name: 'dDt4',
-				update: new Date("Mon Apr 11 2016 13:45:34"),
+				update: 1460091112,
                 owner: 'user',
                 collaborators: ['user', 'user2'],
                 type: 'Android Phone',
@@ -29,7 +66,7 @@
 			},
             {
 				name: 'Aaafst2',
-				update: new Date("Mon Apr 15 2016 13:45:34"),
+				update: 1460094442,
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3'],
                 type: 'iPad',
@@ -38,7 +75,7 @@
 			},
             {
 				name: 'St3',
-				update: new Date("Mon Apr 04 2016 12:45:34"),
+				update: 1460094022,
                 owner: 'user2',
                 collaborators: ['user', 'user2', 'user3', 'user4'],
                 type: 'Android Watch',
@@ -47,7 +84,7 @@
 			},
             {
 				name: 'Aaf',
-				update: new Date("Mon Apr 04 2016 11:45:34"),
+				update: 1460092532,
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3', 'user4', 'user5'],
                 type: 'Android Watch',
@@ -56,7 +93,7 @@
 			},
             {
 				name: 'aa',
-				update: new Date(),
+				update: 1460094002,
                 owner: 'user2',
                 type: 'Android Watch',
                 collaborators: ['user2', 'user3', 'user4', 'user5', 'user6'],
@@ -64,6 +101,7 @@
 			},
 		];
 		var service = {
+			getTypes: getTypes,
 			getProjects: getProjects,
             getUniqueСollaborators: getUniqueСollaborators,
             addProject: addProject,
@@ -73,8 +111,11 @@
 
 		return service;
 
+		function getTypes() {
+			return types;
+		}
+
 		function getProjects() {
-			
 			return projects;
 		}
 
@@ -97,8 +138,7 @@
             projects.push(proj);
         }
         
-        function addProjectModal(ev, self) {
-            
+        function addProjectModal(ev) {
 			$mdDialog.show({
 				controller: 'AddProjectController',
 				controllerAs:'addProj',
@@ -109,7 +149,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-                self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо делать в этом сервисе
+                // self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо делать в этом сервисе
 			}, function() {
 
 			});

@@ -1,23 +1,13 @@
  <section class="search-section" layout="row" layout-align="left center" flex>
-     
-    <div flex="60" class="search-project" layout="row" layout-align="center center">
-         <div flex="5">
-         <!-- зачем используеш JS метод onclick -->
-             <a onclick="document.getElementById('searchInput').focus(); return false;">
-                 
-                <img ng-src="/assets/images/projects/search_icon.jpg" class="md-card-image" alt="">
-             </a>
-         </div>
-         <md-input-container flex="60">
-         <!-- луше избегай от создание id -->
-            <input id="searchInput" ng-model="search" type="text">
-            <label ng-if="!search">Search</label>
-
+    <div flex="60" layout="row" layout-align="center center">
+        <md-input-container class="md-icon-float md-block">
+            <!-- Use floating label instead of placeholder -->
+            <label>Search</label>
+            <md-icon md-svg-src="img/icons/ic_person_24px.svg"></md-icon>
+            <input ng-model="user.name" type="text">
         </md-input-container>
-    
     </div>
-    
-    <div flex="40">  
+    <div flex="40">
          <md-menu-bar>
             <md-menu ng-repeat="menu in settings">
                 <md-button ng-click="$mdOpenMenu($event)">
