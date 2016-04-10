@@ -6,7 +6,7 @@
 		.factory('AuthService', AuthService);
 
 	/** @ngInject */
-	function AuthService($mdDialog, $document, toastr, $localStorage) {
+	function AuthService($mdDialog, $document, toastr, $localStorage, $state) {
 		var users = [
 			{
 				email: 'user1@mail.com',
@@ -84,7 +84,9 @@
 		}
 
 		function logOut() {
-			return $localStorage.reset();
+			// delete $localStorage.user;
+			$localStorage.user = {};
+			$state.go('main.home');
 		}
 
 		function registerUser(user) {

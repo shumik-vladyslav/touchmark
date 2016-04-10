@@ -1,13 +1,16 @@
-<md-card>
-    <img ng-src="{{card.info.img}}" class="md-card-image card-image" alt="">
-    <div layout="row" layout-align="center center">
-        <div flex="85" layout="row" layout-align="start center" layout-wrap>  
-            <h2 flex="70">{{card.info.name}}</h2> 
-            <div flex="45" class="projects-time-label">LAST UPDATE:</div>
-            <div flex="35" class="projects-time">{{card.info.update | date:'HH:mm dd.MM'}} </div>
-        </div> 
-        <div flex="15">
-            <img ng-src="/assets/images/projects/user_icon.jpg" class="md-card-image" alt="">
-        </div> 
-    </div> 
+<md-card class="card">
+    <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
+    <div layout="row" layout-align="center center" layout-padding>
+        <div flex layout="column" layout-align="center start">
+            <h5 class="title">{{info.name}}</h5>
+            <div class="projects-time-label">LAST UPDATE: 
+                <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
+            </div>
+        </div>
+        <div>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
+                <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
+            </md-button>
+        </div>
+    </div>
 </md-card>
