@@ -15,9 +15,9 @@
         </div>
         <div flex="20">
             <p>FOLLOW US:</p>
-            <a ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank">
-                <img flex ng-src="{{social.image}}">
-            </a>
+            <md-button class="md-icon-button" ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
+              <md-icon md-svg-src="{{social.image}}"></md-icon>
+            </md-button>
         </div>
         
     </div>

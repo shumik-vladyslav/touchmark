@@ -13,11 +13,8 @@
   	<md-button ng-click="navbar.signUp($event)">Sign up</md-button>
   </section>
   <section layout="row" layout-align="center right" ng-if="navbar.isAuthorized()">
-    <md-button ng-click="">
-      <md-icon></md-icon>
-    </md-button>
-    <md-button class="md-icon" ng-click="">
-      <md-icon md-svg-icon="social:notifications"></md-icon>
+    <md-button class="md-icon-button" ng-click="" aria-label="Notifications">
+      <md-icon md-svg-src="assets/icons/notification.svg"></md-icon>
     </md-button>
     <md-button ng-click="">{{navbar.userInfo().email}}</md-button>
     <md-button ng-click="navbar.logout()">Log out</md-button>
