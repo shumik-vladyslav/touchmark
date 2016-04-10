@@ -146,16 +146,24 @@
 
 		var socials = [
 			{
-				image: '/assets/images/main/youtube.jpg',
-				link: '/'
+				image: '/assets/icons/youtube.svg',
+				link: '/',
+				label: 'YouTube'
 			},
 			{
-				image: '/assets/images/main/facebook.jpg',
-				link: '/'
+				image: '/assets/icons/fb.svg',
+				link: '/',
+				label: 'Facebook'
 			},
 			{
-				image: '/assets/images/main/linked.jpg',
-				link: '/'
+				image: '/assets/icons/linkedin.svg',
+				link: '/',
+				label: 'LinkedIn'
+			},
+			{
+				image: '/assets/icons/twitter.svg',
+				link: '/',
+				label: 'Twitter'
 			}
 		];
 
