@@ -1,13 +1,7 @@
 
-<filter-bar settings="proj.arrSetti" search='searchValue'></filter-bar>
-
-<div class="add-button">
-    <md-button ng-click="proj.addProjectModal($event, proj)" aria-label="comment" class="circle-button md-icon-button-add">
-        <md-icon md-svg-src="/assets/images/main/ic_add.svg"></md-icon>
-    </md-button>
-</div>
+<filter-bar settings="proj.arrSetti" search="proj.searchValue" add="proj.add"></filter-bar>
 <section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
-    <card flex="33" info="project" name="project.name" time="project.update" img="project.img" ng-repeat="project in proj.projects | filter:{name: searchValue}"></card>
+    <card flex="33" info="project" name="project.name" time="project.update" img="project.img" ng-repeat="project in proj.projects | filter:{name: proj.searchValue}"></card>
 </section>
   
  

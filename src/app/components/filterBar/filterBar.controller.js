@@ -6,79 +6,79 @@
 		.controller('FilterBarController', FilterBarController);
 
 	/** @ngInject */
-	function FilterBarController($scope, $window) {
-        // var _ = $window._;
+	function FilterBarController($scope, $window) { 
+        var _ = $window._;
         
-        // $scope.orderby = orderby;
+        $scope.orderby = orderby;
         
-        // function orderby(self, value, param, dataValue, dataGlobal, data, first, functionType, defaultParam) {
-        //     self[dataValue] = param;
-        //     if(param === defaultParam || first){
+        function orderby(self, value, param, dataValue, dataGlobal, data, first, functionType, defaultParam) {
+            self[dataValue] = param;
+            if(param === defaultParam || first){
                 
-        //         self[data] = self[dataGlobal];
+                self[data] = self[dataGlobal];
                 
-        //         for (var key in $scope.settings) {
-        //             if ($scope.settings.hasOwnProperty(key)) {
-        //                 var element = $scope.settings[key];
+                for (var key in $scope.settings) {
+                    if ($scope.settings.hasOwnProperty(key)) {
+                        var element = $scope.settings[key];
                         
-        //                 if(defaultParam === element.defaultParam){
-        //                     continue;
-        //                 }
+                        if(defaultParam === element.defaultParam){
+                            continue;
+                        }
                         
-        //                 if(self[element.showValue] !== element.defaultParam || first && functionType !== 'orderbyDate'){
+                        if(self[element.showValue] !== element.defaultParam || first && functionType !== 'orderbyDate'){
                             
-        //                     var showValue = element.functionType === 'orderbyCollaborator' ? 
-        //                                         element.itemValue : self[element.showValue];
+                            var showValue = element.functionType === 'orderbyCollaborator' ? 
+                                                element.itemValue : self[element.showValue];
                         
-        //                     orderby(self, showValue, self[element.showValue], element.showValue, dataGlobal, data, false, element.functionType, element.defaultParam);
-        //                 }
-        //             }
-        //         }
+                            orderby(self, showValue, self[element.showValue], element.showValue, dataGlobal, data, false, element.functionType, element.defaultParam);
+                        }
+                    }
+                }
                 
-        //         if((param === defaultParam || !first) && functionType !== 'orderbyDate'){
+                if((param === defaultParam || !first) && functionType !== 'orderbyDate'){
                     
-        //             return;
-        //         }
-        //     }
+                    return;
+                }
+            }
             
-        //     switch (functionType) {
-        //         case 'orderbyType':
+            switch (functionType) {
+                case 'orderbyType':
                 
-        //             self[data] = _.filter(self[data], function(o) { return o.type === param; });
+                    self[data] = _.filter(self[data], function(o) { return o.type === param; });
                     
-        //             break;
+                    break;
                     
-        //         case 'orderbyDate':
-        //             self[dataValue] = value;
+                case 'orderbyDate':
+                    self[dataValue] = value;
             
-        //             self[data] = _.sortBy(self[data], function(o) { return o[param]; });
+                    self[data] = _.sortBy(self[data], function(o) { return o[param]; });
                     
-        //             if(self[dataGlobal].length === self[data].length){
-        //                 self[dataGlobal] = self[data];
-        //             }
-        //             break;
+                    if(self[dataGlobal].length === self[data].length){
+                        self[dataGlobal] = self[data];
+                    }
+                    break;
                     
-        //         case 'orderbyCollaborator':
-        //         var arr = [];
+                case 'orderbyCollaborator':
+                var arr = [];
                 
-        //         for (var keySort in self[data]) {
-        //                 if (self[data].hasOwnProperty(keySort)) {
-        //                     var elementSort = self[data][keySort];
+                for (var keySort in self[data]) {
+                        if (self[data].hasOwnProperty(keySort)) {
+                            var elementSort = self[data][keySort];
                             
-        //                     var index = _.indexOf(elementSort[value], param);
+                            var index = _.indexOf(elementSort[value], param);
                             
-        //                     if(~index){
-        //                         arr.push(elementSort);
-        //                     }
-        //                 }
-        //             }
+                            if(~index){
+                                arr.push(elementSort);
+                            }
+                        }
+                    }
                     
-        //             self[data] = arr;
+                    self[data] = arr;
                 
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        // }
-	}
+                    break;
+                default:
+                    break;
+            }
+        }
+        }
 })();

@@ -14,7 +14,8 @@
       controllerAs: 'filters',
       scope: {
             settings: '=',
-            search: '='
+            search: '=',
+            add: '='
       },
     };
 

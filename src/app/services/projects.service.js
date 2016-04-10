@@ -52,7 +52,6 @@
                 owner: 'user',
                 collaborators: ['user', 'user2'], // надо [{key: value, key2: value2}, ...] будет хранить имя, аватарку
                 type: 'iPad',
-                
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
 			{
@@ -61,7 +60,6 @@
                 owner: 'user',
                 collaborators: ['user', 'user2'],
                 type: 'Android Phone',
-                
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
@@ -70,7 +68,6 @@
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3'],
                 type: 'iPad',
-                
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
@@ -79,7 +76,6 @@
                 owner: 'user2',
                 collaborators: ['user', 'user2', 'user3', 'user4'],
                 type: 'Android Watch',
-                
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
@@ -88,7 +84,6 @@
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3', 'user4', 'user5'],
                 type: 'Android Watch',
-                
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
@@ -106,7 +101,6 @@
             getUniqueСollaborators: getUniqueСollaborators,
             addProject: addProject,
             addProjectModal: addProjectModal
-			
 		};
 
 		return service;

@@ -10,30 +10,69 @@
      
      var collaborators = ['ALL COLLABORATORS'];
       
+    var type = ['All types','Desktop(web)','Mobile devices','iPhone','iPad','Android Phone','Android Tablet','Apple Watch','Android Watch'];
   /** @ngInject */
   function ProjectsController(ProjectsService) {
-     var vm = this;
-     vm.types = ProjectsService.getTypes();
-     vm.size = {
-        df: 33
-     };
+    var vm = this;
+    vm.types = ProjectsService.getTypes();
+    vm.add = {
+        title: 'Add Project',
+        click: ProjectsService.addProjectModal
+    };
+    vm.settings = {
+        add: {
+            title: 'Add Project',
+            click: ProjectsService.addProjectModal
+        },
+        items: [
+            {
+                name: 'orderBy',
+                value: '',
+                items: [
+                    {
+                        name: 'update',
+                        value: 'Recent'
+                    },
+                    {
+                        name: 'name',
+                        value: 'Alphanumeric'
+                    }
+                ]
+            },
+            {
+                name: 'filter',
+                value: '',
+                items: [
+                    {
+                        name: 'update',
+                        value: 'Recent'
+                    },
+                    {
+                        name: 'name',
+                        value: 'Alphanumeric'
+                    }
+                ]
+            },
+        ]
+    };
      var _ = window._; // используй $window вместо window
-     this.collaboratorsValue = 'ALL COLLABORATORS'; // this уже в переменной vm, используй его
-     this.dateValue = 'Recent';
-     this.typeValue = 'ALL TYPES';
+     vm.collaboratorsValue = 'ALL COLLABORATORS'; // this уже в переменной vm, используй его
+     vm.dateValue = 'Recent';
+     vm.typeValue = 'ALL TYPES';
      collaborators = _.concat(collaborators, ProjectsService.getUniqueСollaborators());
-     this.collaborators = collaborators;
-     this.date = date;
-     this.projects = ProjectsService.getProjects();
-     this.data = ProjectsService.getProjects();
-     this.addProjectModal = ProjectsService.addProjectModal;
-     this.refreshData = refreshData; // зачем это нужно?
+     vm.collaborators = collaborators;
+     vm.date = date;
+     vm.type = type;
+     vm.projects = ProjectsService.getProjects();
+     vm.data = ProjectsService.getProjects();
+     // this.addProjectModal = ProjectsService.addProjectModal;
+     vm.refreshData = refreshData; // зачем это нужно?
   
      function refreshData() { // зачем это нужно?
         vm.projects = ProjectsService.getProjects();
      }
   
-     this.arrSetti =  [ // зачем она здесь, а не в сервисе
+     vm.arrSetti =  [ // зачем она здесь, а не в сервисе
         {
             scope: vm,
             itemValue: 'value',
