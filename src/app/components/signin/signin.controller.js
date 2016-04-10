@@ -15,9 +15,9 @@
 		vm.submit = submit;
 		vm.demoUser = AuthService.demoUser;
 		
-		function submit() {
+		function submit(ev) {
 			if(AuthService.checkUserExist(vm.user)) {
-				$mdDialog.hide();
+				$mdDialog.hide(ev);
 			}
 		}
 	}

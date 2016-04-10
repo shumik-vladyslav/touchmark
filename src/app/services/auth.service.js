@@ -10,11 +10,11 @@
 		var users = [
 			{
 				email: 'user1@mail.com',
-				password: 'user1'
+				password: 'User1'
 			},
 			{
 				email: 'user2@mail.com',
-				password: 'user2'
+				password: 'User2'
 			}
 		];
 		var service = {
@@ -95,7 +95,7 @@
 		}
 
 		function registerUser(user) {
-			if(userExist(user)) {
+			if(!userExist(user)) {
 				users.push(user);
 				toastr.success('Successfully', 'Sign Up');
 				return true;
