@@ -73,7 +73,7 @@
 		function rememberPassword(email) {
 			var result = false;
 			for(var i=0;i<users.length;i++){
-				if(users[i].email===email) {
+				if(users[i].email === email) {
 					result = users[i].password;
 				}
 			}

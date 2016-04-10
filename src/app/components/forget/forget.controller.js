@@ -8,15 +8,16 @@
 	/** @ngInject */
 	function ForgetController($mdDialog, AuthService, toastr) {
 		var vm = this;
+		vm.user = {};
 		vm.hide =  $mdDialog.hide;
 		vm.cancel = $mdDialog.cancel;
 		vm.submit = submit;
 
-		function submit() {
-			var password = AuthService.rememberPassword(vm.email);
+		function submit(ev) {
+			var password = AuthService.rememberPassword(vm.user.email);
 			if(password) {
-				toastr.info(password, 'Forget');
-				$mdDialog.hide();	
+				toastr.info(password, 'Your password!');
+				$mdDialog.hide(ev);	
 			} else {
 				toastr.error('User not found', 'Forget');
 			}
