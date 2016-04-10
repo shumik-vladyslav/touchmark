@@ -26,10 +26,15 @@
 			registerUser: registerUser,
 			isAuthorized: isAuthorized,
 			getUserInfo: getUserInfo,
-			logOut: logOut
+			logOut: logOut,
+			demoUser: demoUser
 		};
 
 		return service;
+
+		function demoUser() {
+			return users[0];
+		}
 
 		function isAuthorized() {
 			if(angular.isDefined($localStorage.user) && angular.isDefined($localStorage.user.email)) {

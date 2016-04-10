@@ -13,6 +13,7 @@
 		vm.hide = $mdDialog.hide;
 		vm.cancel = $mdDialog.cancel;
 		vm.submit = submit;
+		vm.demoUser = AuthService.demoUser;
 		
 		function submit() {
 			if(AuthService.checkUserExist(vm.user)) {
