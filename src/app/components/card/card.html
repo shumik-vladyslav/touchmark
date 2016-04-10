@@ -1,12 +1,12 @@
- <md-card>
-    <img ng-src="{{img}}" class="md-card-image card-image" alt="">
+<md-card>
+    <img ng-src="{{card.info.img}}" class="md-card-image card-image" alt="">
     <div layout="row" layout-align="center center">
         <div flex="85" layout="row" layout-align="start center" layout-wrap>  
-            <h2 flex="70">{{name}}</h2> 
+            <h2 flex="70">{{card.info.name}}</h2> 
             <div flex="45" class="projects-time-label">LAST UPDATE:</div>
-            <div flex="35" class="projects-time">{{time | date:'HH:mm dd.MM'}} </div>
+            <div flex="35" class="projects-time">{{card.info.update | date:'HH:mm dd.MM'}} </div>
         </div> 
-        <div flex="15">  
+        <div flex="15">
             <img ng-src="/assets/images/projects/user_icon.jpg" class="md-card-image" alt="">
         </div> 
     </div> 

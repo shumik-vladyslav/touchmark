@@ -13,10 +13,9 @@
       controller: 'CardController',
       controllerAs: 'card',
       scope: {
-            name: '=',
-            time: '=',
-            img: '=',
-      },
+        info: '=',
+        size: '='
+      }
     };
 
     return directive;

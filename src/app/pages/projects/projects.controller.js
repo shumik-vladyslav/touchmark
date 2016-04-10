@@ -14,6 +14,9 @@
   function ProjectsController(ProjectsService) {
      var vm = this;
      vm.types = ProjectsService.getTypes();
+     vm.size = {
+        df: 33
+     };
      var _ = window._; // используй $window вместо window
      this.collaboratorsValue = 'ALL COLLABORATORS'; // this уже в переменной vm, используй его
      this.dateValue = 'Recent';

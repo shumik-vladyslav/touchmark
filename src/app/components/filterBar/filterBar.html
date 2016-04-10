@@ -8,7 +8,7 @@
         </md-input-container>
     </div>
     <div flex="40">
-         <md-menu-bar>
+        <md-menu-bar>
             <md-menu ng-repeat="menu in settings">
                 <md-button ng-click="$mdOpenMenu($event)">
                     {{menu.scope[menu.showValue]}}
@@ -16,14 +16,14 @@
                 <md-menu-content layout="column" layout-align="space-around center">
                     <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
                         <a ng-if="menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                            {{item.value}}
+                        {{item.value}}
                         </a>
                         <a ng-if="!menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
-                            {{item}}
+                        {{item}}
                         </a>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
-         </md-menu-bar>
+        </md-menu-bar>
     </div>
   </section>

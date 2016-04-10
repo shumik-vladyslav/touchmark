@@ -84,7 +84,7 @@
 		}
 
 		function logOut() {
-			delete $localStorage.user;
+			return $localStorage.reset();
 		}
 
 		function registerUser(user) {
