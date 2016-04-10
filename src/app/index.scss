@@ -122,53 +122,16 @@
 
 }
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'),
-       local('MaterialIcons-Regular'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
-}
-
 $primary-color: #006A85;
 
 $primary-dark-color: #004759;
 
 $primary-light-color: #7fa3ac;
 
-$family-realeway-semibold: "Realeway Semibold";
-
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-}
+$family-Raleway-semibold: "Raleway Semibold";
 
 html {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Raleway', serif;
 }
 
 [layout=row] {
@@ -176,44 +139,50 @@ html {
 }
 
 h1{
-  font-family: 'Realeway Light';
+  font-family: 'Raleway Light';
   font-weight: lighter;
   color: $primary-color;
   font-size: 60px;
+  margin: 0 0 10px;
 }
 
 h2{
-  font-family: 'Realeway Bold';
+  font-family: 'Raleway Bold';
   color: $primary-dark-color;
   font-size: 50px;
+  margin: 0 0 10px;
 }
 
 h3{
-  font-family: 'Realeway Regular';
+  font-family: 'Raleway Regular';
   font-weight: lighter;
   color: $primary-color;
   font-size: 40px;
+  margin: 0 0 10px;
 }
 
 h4{
-  font-family: 'Realeway Medium';
+  font-family: 'Raleway Medium';
   font-weight: lighter;
   color: $primary-color;
   font-size: 30px;
+  margin: 0 0 10px;
 }
 
 h5{
-  font-family: $family-realeway-semibold;
+  font-family: $family-Raleway-semibold;
   font-weight: lighter;
   color: $primary-color;
   font-size: 20px;
+  margin: 0 0 10px;
 }
 
 h6{
-  font-family: $family-realeway-semibold;
+  font-family: $family-Raleway-semibold;
   font-weight: lighter;
   color: $primary-light-color;
   font-size: 15px;
+  margin: 0 0 10px;
 }
 
 .browsehappy {
@@ -249,7 +218,7 @@ md-radio-button {
     
     
     div.md-label {
-        font-family: $family-realeway-semibold;
+        font-family: $family-Raleway-semibold;
         color: $primary-color;
     }
     
@@ -259,7 +228,7 @@ md-radio-button {
 md-checkbox {
     
     .md-label{
-        font-family: $family-realeway-semibold;
+        font-family: $family-Raleway-semibold;
         color: $primary-color
     }
     
@@ -279,7 +248,7 @@ div.md-open-menu-container md-menu-content {
     md-menu-item{
         
         color: $primary-light-color;
-        font-family: $family-realeway-semibold;
+        font-family: $family-Raleway-semibold;
         padding: 0 16px;
     }
     
@@ -292,7 +261,7 @@ div.md-open-menu-container md-menu-content {
 //button
 // .md-button {
 //   color: white;
-//   font-family: $family-realeway-semibold;
+//   font-family: $family-Raleway-semibold;
 //   font-size: 13px;
 //   padding: 5px 26px;
 //   text-align: center;
@@ -327,7 +296,7 @@ div.md-open-menu-container md-menu-content {
 md-input-container label,
 md-input-container .md-input.ng-invalid.ng-dirty{
     color: $primary-light-color;
-    font-family: $family-realeway-semibold;
+    font-family: $family-Raleway-semibold;
     padding: 5px 26px;
 }
 
@@ -337,7 +306,7 @@ md-input-container.md-input-invalid label {
 
 md-input-container .md-input{
     color: $primary-dark-color;
-    font-family: $family-realeway-semibold;
+    font-family: $family-Raleway-semibold;
     padding: 5px 26px;
     
 }
@@ -349,7 +318,6 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 md-input-container.md-input-focused label:not(.md-no-float){
     color: $primary-light-color;
     padding: 5px 26px;
-    
 }
 
 //md-card

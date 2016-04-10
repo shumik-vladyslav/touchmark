@@ -13,9 +13,11 @@
 		vm.cancel = $mdDialog.cancel;
 		vm.submit = submit;
 
-		function submit() {
+		function submit(ev) {
 			if(AuthService.registerUser(vm.user)) {
-				$mdDialog.hide();	
+				if(AuthService.checkUserExist(vm.user)) {
+					$mdDialog.hide(ev);
+				}
 			}
 		}
 	}

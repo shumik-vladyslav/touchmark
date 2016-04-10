@@ -1,0 +1,41 @@
+<md-dialog aria-label="Add Project dialog">
+	<form name="form" ng-submit="form.$valid && addProj.submit($event)" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Create new prototype</h2>
+				<span flex></span>
+				<md-button type="button" class="md-icon-button" ng-click="addProj.cancel($event)">
+					<md-icon md-svg-icon="content:clear" aria-label="close"></md-icon>
+				</md-button>
+			</div>
+    	</md-toolbar>
+		<md-dialog-content>
+			<div layout-padding>
+				<md-input-container class="md-block">
+					<label>Prototype name</label>
+					<input required type="text" name="name" ng-model="addProj.project.name">
+					<div ng-messages="form.email.$error">
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+                <md-menu-bar>
+                    <md-menu>
+                        <a ng-click="$mdOpenMenu($event)">
+                            {{addProj.typeValue}}
+                        </a>
+                        <md-menu-content>
+                            <md-menu-item ng-repeat="item in addProj.type">
+                                <a  class="search-menu-button" ng-click="addProj.selectType(item)">
+                                    {{item}}
+                                </a>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
+			<div>
+		</md-dialog-content>
+		<md-dialog-actions>
+			<md-button type="submit" class="md-primary md-raised">Create prototype</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

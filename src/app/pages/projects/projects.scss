@@ -1,0 +1,94 @@
+.search-section{
+    background:  #6bc9d2;
+}
+
+.search-section .search-project md-input-container {
+    input{
+        border-width: 0 0 0 0;
+        height: 60px;
+        padding-top: 30px;
+        padding-left: 10px;
+        
+    }
+    label{
+        color: white;
+        font-size: 23px;
+        padding: 0 10px;
+        bottom: 60px;
+    }
+}
+
+.search-section .search-project md-input-container.md-input-focused label:not(.md-no-float){
+    color: #6bc9d2;
+}
+
+.search-section .md-button,
+.md-open-menu-container .md-button{
+  background-color: #6bc9d2;
+  color: white;
+  font-family: $family-realeway-semibold;
+  font-size: 13px;
+  padding: 5px 26px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.search-section button.md-button:not([disabled]):hover,
+.md-open-menu-container button.md-button:not([disabled]):hover
+ {
+    background-color: #6bc9d2; 
+}
+
+.search-section button.md-button:not([disabled]):active,
+.md-open-menu-container button.md-button:not([disabled]):active
+ {
+    background-color: #6bc9d2; 
+}
+
+.all-projects{
+    padding: 100px 100px 100px 100px;
+}
+
+// .all-projects md-card{
+//     width: auto;
+// }  
+
+// .all-projects md-card h2{
+//     font-size: 35px;
+//     margin: 10px;
+// }  
+  
+// .all-projects md-card div{
+//     padding: 10px;
+// }
+
+// .all-projects .card-image{
+//     height: 250px;
+// }
+
+// .all-projects md-card div img{
+//     width: auto;
+//     padding-right: 20px;
+// }
+
+// .add-button{
+//     position: absolute;
+    
+//     .circle-button{
+//         background-color: #ff0040;
+//         padding: 0 0; 
+//     }
+    
+//     button.md-button:not([disabled]):hover {
+//         background-color: #d90036; 
+//     }
+
+//     button.md-button:not([disabled]):active {
+//         background-color: #bf0030; 
+//     }
+    
+//     .md-icon-button-add {
+//         margin-top: 90px;
+//         margin-left: 620px;
+//     }
+// }

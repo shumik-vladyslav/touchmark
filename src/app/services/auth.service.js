@@ -6,15 +6,15 @@
 		.factory('AuthService', AuthService);
 
 	/** @ngInject */
-	function AuthService($mdDialog, $document, toastr, $localStorage) {
+	function AuthService($mdDialog, $document, toastr, $localStorage, $state) {
 		var users = [
 			{
 				email: 'user1@mail.com',
-				password: 'user1'
+				password: 'User1'
 			},
 			{
 				email: 'user2@mail.com',
-				password: 'user2'
+				password: 'User2'
 			}
 		];
 		var service = {
@@ -26,10 +26,15 @@
 			registerUser: registerUser,
 			isAuthorized: isAuthorized,
 			getUserInfo: getUserInfo,
-			logOut: logOut
+			logOut: logOut,
+			demoUser: demoUser
 		};
 
 		return service;
+
+		function demoUser() {
+			return users[0];
+		}
 
 		function isAuthorized() {
 			if(angular.isDefined($localStorage.user) && angular.isDefined($localStorage.user.email)) {
@@ -58,6 +63,7 @@
 			if(userExist(user, true)) {
 				setUser(user);
 				toastr.success(user.email, 'Welcome!');
+				$state.go('main.projects');
 				return true;
 			} else {
 				toastr.error('User not found', 'Sign In');
@@ -68,7 +74,7 @@
 		function rememberPassword(email) {
 			var result = false;
 			for(var i=0;i<users.length;i++){
-				if(users[i].email===email) {
+				if(users[i].email === email) {
 					result = users[i].password;
 				}
 			}
@@ -84,11 +90,13 @@
 		}
 
 		function logOut() {
-			delete $localStorage.user;
+			// delete $localStorage.user;
+			$localStorage.user = {};
+			$state.go('main.home');
 		}
 
 		function registerUser(user) {
-			if(userExist(user)) {
+			if(!userExist(user)) {
 				users.push(user);
 				toastr.success('Successfully', 'Sign Up');
 				return true;

@@ -1,8 +1,8 @@
-<md-dialog aria-label="Forget dialog">
+<md-dialog aria-label="Forget dialog" flex="25">
 	<form name="form" ng-submit="form.$valid && forget.submit($event)" novalidate>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
-				<h2>Sign Up</h2>
+				<h2>Forgot password?</h2>
 				<span flex></span>
 				<md-button type="button" class="md-icon-button" ng-click="forget.cancel($event)" aria-label="close">
 					<md-icon md-svg-src="assets/icons/close.svg"></md-icon>
@@ -13,15 +13,16 @@
 			<div layout-padding>
 				<md-input-container class="md-block">
 					<label>Email</label>
-					<input required type="email" name="email" ng-model="forget.user.email">
-					<div ng-messages="form.email.$error">
+					<input type="email" name="email" ng-model="forget.user.email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+					<div ng-messages="form.email.$error" multiple role="alert">
 						<div ng-message="required">This is required.</div>
+						<div ng-message="pattern">This is not valid.</div>
 					</div>
 				</md-input-container>
 			</div>
 		</md-dialog-content>
-		<md-dialog-actions>
-			<md-button type="submit" class="md-primary">Reset password</md-button>
+		<md-dialog-actions layout-align="center center">
+			<md-button type="submit" class="md-warn md-raised" ng-disabled="!form.$valid">Reset password</md-button>
 		</md-dialog-actions>
 	</form>
 </md-dialog>

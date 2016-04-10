@@ -1,0 +1,38 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+     <!-- <section class="search-section" layout="row" layout-align="left center" flex> -->
+        <span flex="5"></span>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block">
+                <label>Search</label>
+                <md-icon md-svg-src="assets/icons/search.svg"></md-icon>
+                <input ng-model="search" type="text">
+            </md-input-container>
+        </div>
+        <span flex></span>
+        <div>
+            <md-menu-bar>
+                <md-menu ng-repeat="menu in settings">
+                    <md-button ng-click="$mdOpenMenu($event)">
+                        {{menu.scope[menu.showValue]}}
+                    </md-button>
+                    <md-menu-content layout="column" layout-align="center start">
+                        <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
+                            <a ng-if="menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            {{item.value}}
+                            </a>
+                            <a ng-if="!menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            {{item}}
+                            </a>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </md-menu-bar>
+        </div>
+        <span flex="5"></span>
+      <!-- </section> -->
+    </div>
+    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-top-right">
+        <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
+    </md-button>
+  </md-toolbar>
