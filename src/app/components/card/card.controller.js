@@ -6,7 +6,7 @@
 		.controller('CardController', CardController);
 
 	/** @ngInject */
-	function CardController($scope) {
+	function CardController() {
         
 	}
 })();

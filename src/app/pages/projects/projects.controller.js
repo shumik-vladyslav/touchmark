@@ -12,7 +12,7 @@
       
     var type = ['All types','Desktop(web)','Mobile devices','iPhone','iPad','Android Phone','Android Tablet','Apple Watch','Android Watch'];
   /** @ngInject */
-  function ProjectsController(ProjectsService) {
+  function ProjectsController(ProjectsService, $window) {
     var vm = this;
     vm.types = ProjectsService.getTypes();
     vm.add = {
@@ -52,10 +52,10 @@
                         value: 'Alphanumeric'
                     }
                 ]
-            },
+            }
         ]
     };
-     var _ = window._; // используй $window вместо window
+     var _ = $window._;
      vm.collaboratorsValue = 'ALL COLLABORATORS'; // this уже в переменной vm, используй его
      vm.dateValue = 'Recent';
      vm.typeValue = 'ALL TYPES';
@@ -84,8 +84,7 @@
             repeatOption: 'date',
             functionType: 'orderbyDate',
             defaultParam: 'Recent',
-            showParam: 'update',
-            
+            showParam: 'update'
         },
         {
             scope: vm,
@@ -99,7 +98,7 @@
             functionType: 'orderbyType',
             defaultParam: 'ALL TYPES'
         },
-         {
+        {
             scope: vm,
             itemValue: 'collaborators',
             itemParam: '',
@@ -110,11 +109,7 @@
             repeatOption: 'collaborators',
             functionType: 'orderbyCollaborator',
             defaultParam: 'ALL COLLABORATORS'
-        },
-       
+        }
     ];
-    
   }
-   
-   
 })();

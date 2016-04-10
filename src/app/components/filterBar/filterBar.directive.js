@@ -13,13 +13,11 @@
       controller: 'FilterBarController',
       controllerAs: 'filters',
       scope: {
-            settings: '=',
-            search: '=',
-            add: '='
-      },
+        settings: '=',
+        search: '=',
+        add: '='
+      }
     };
-
     return directive;
   }
-
 })();

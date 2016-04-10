@@ -6,7 +6,7 @@
 		.factory('ProjectsService', ProjectsService);
 
 	/** @ngInject */
-	function ProjectsService($mdDialog, $document) {
+	function ProjectsService($mdDialog, $document, $window) {
 		var types = [
 			{
 				key: 'all',
@@ -93,7 +93,7 @@
                 type: 'Android Watch',
                 collaborators: ['user2', 'user3', 'user4', 'user5', 'user6'],
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
-			},
+			}
 		];
 		var service = {
 			getTypes: getTypes,
@@ -116,7 +116,7 @@
         function getUniqueСollaborators() {
             var collaborators = [];
             
-            var _ = window._;
+            var _ = $window._;
             
 			for (var key in projects) {
                 if (projects.hasOwnProperty(key)) {

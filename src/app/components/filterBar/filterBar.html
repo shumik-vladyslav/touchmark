@@ -18,10 +18,10 @@
                     </md-button>
                     <md-menu-content layout="column" layout-align="center start">
                         <md-menu-item ng-repeat="item in menu.scope[menu.repeatOption]">
-                            <a ng-if="menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            <a ng-if="menu.itemParam" class="search-menu-button" ng-click="filters.orderby(menu.scope, item[menu.itemValue], item[menu.itemParam], menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
                             {{item.value}}
                             </a>
-                            <a ng-if="!menu.itemParam" class="search-menu-button" ng-click="orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
+                            <a ng-if="!menu.itemParam" class="search-menu-button" ng-click="filters.orderby(menu.scope, menu.itemValue, item, menu.showValue, menu.keyGlobalData, menu.keyData, menu.firstFlag, menu.functionType, menu.defaultParam)">
                             {{item}}
                             </a>
                         </md-menu-item>

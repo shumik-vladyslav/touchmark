@@ -24,16 +24,15 @@
         
         
         function selectType(params) {
-		    vm.typeValue = params;
-		    vm.project.type = params;
+			vm.typeValue = params;
+			vm.project.type = params;
         }
         
 		function submit() {
-                console.log(vm.project.name,vm.typeValue);
-                console.log(vm.typeValue !== 'Select type' || vm.project.name);
+                // console.log(vm.project.name,vm.typeValue);
+                // console.log(vm.typeValue !== 'Select type' || vm.project.name);
             
 			if(vm.typeValue !== 'Select type' && vm.project.name ) {
-                console.log(23,vm.project);
                 vm.project.update = new Date();
                 ProjectsService.addProject(vm.project);
 				$mdDialog.hide();

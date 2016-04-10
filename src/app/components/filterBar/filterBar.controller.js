@@ -8,8 +8,9 @@
 	/** @ngInject */
 	function FilterBarController($scope, $window) { 
         var _ = $window._;
+        var vm = this;
         
-        $scope.orderby = orderby;
+        vm.orderby = orderby;
         
         function orderby(self, value, param, dataValue, dataGlobal, data, first, functionType, defaultParam) {
             self[dataValue] = param;
