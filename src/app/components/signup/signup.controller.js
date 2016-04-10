@@ -15,7 +15,9 @@
 
 		function submit(ev) {
 			if(AuthService.registerUser(vm.user)) {
-				$mdDialog.hide(ev);	
+				if(AuthService.checkUserExist(vm.user)) {
+					$mdDialog.hide(ev);
+				}
 			}
 		}
 	}

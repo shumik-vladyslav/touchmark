@@ -63,6 +63,7 @@
 			if(userExist(user, true)) {
 				setUser(user);
 				toastr.success(user.email, 'Welcome!');
+				$state.go('main.projects');
 				return true;
 			} else {
 				toastr.error('User not found', 'Sign In');
