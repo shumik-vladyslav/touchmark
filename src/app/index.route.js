@@ -20,7 +20,9 @@
       })
       .state('main.pricing', {
         url: '/pricing',
-        templateUrl: 'app/pages/pricing/pricing.html'
+        templateUrl: 'app/pages/pricing/pricing.html',
+        controller: 'PricingController',
+        controllerAs: 'pric'
       })
       .state('main.about', {
         url: '/about',

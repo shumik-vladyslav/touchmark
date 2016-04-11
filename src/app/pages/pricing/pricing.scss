@@ -1,0 +1,42 @@
+.pricings{
+    width: 100%;
+    height: 700px; 
+}
+
+.pricing-label{
+    width: 100%;
+    height: 200px; 
+    h1{
+        padding-left: 100px 
+    }
+}
+
+.pricings .pricing-repeat{
+    height: 70%;
+    background: linear-gradient(to bottom, rgb(107, 201, 210) 70%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%, rgb(107, 201, 210) 100%);
+    md-card{
+        height: 350px;
+        margin: 0px;
+        h3{
+            font-size: 60px;
+            font-weight: 700;
+        } 
+        h3:first-letter {
+            font-size: 50px;
+            font-weight: 100;
+        }
+        h6{
+            color: #88b9c6;
+        }
+    }
+}
+
+.pricings .pricing-repeat .card .card-top{
+    font-family: 'Raleway Light';
+    background: #006a85;
+    color: white;
+    text-align:  center;
+    width: 60%;
+    font-size: 11px;
+    padding-top: 10px;
+}

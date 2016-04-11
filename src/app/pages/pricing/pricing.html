@@ -1,1 +1,20 @@
-pricing
+<section class="pricings">
+    <div class="pricing-label" layout="column" layout-align="end">
+        <h1>Choose a subscription to start</h1>
+    </div>
+    <div layout="row" layout-align="center center" class="pricing-repeat">
+        <md-card class="card" flex="15" ng-repeat="item in pric.pricings" layout="column" layout-align="start center" style="height: {{item.height}}">
+            <div flex='10' ng-class="item.top ? 'card-top':''">{{item.top}}</div>
+            <h5 flex='5'>{{item.title}}</h5>
+            <h6 flex='20'>{{item.quantity}}</h6>
+            <h3 flex='15'>${{item.price}}</h3>
+            <h6 flex='20'>per month</h6>
+            <div flex='20'>
+                <md-button type="button" ng-click="">
+                    GET STARTED - ${{item.price}}
+                </md-button>
+                
+            </div>
+        </md-card>
+    </div>
+</section>
