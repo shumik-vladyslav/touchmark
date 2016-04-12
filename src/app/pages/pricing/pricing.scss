@@ -29,6 +29,12 @@
             color: #88b9c6;
         }
     }
+    md-card:nth-child(3){
+        z-index: 3;
+    }
+    md-card:nth-child(4){
+        z-index: 2;
+    }
 }
 
 .pricings .pricing-repeat .card .card-top{
