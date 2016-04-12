@@ -55,92 +55,24 @@
 		
 		var footerMenu = [
 			{
-				header: 'Learn More',
-				menus: [
-					{
-						title: 'Tour',
-						link: 'main.home'
-					},
-					{
-						title: 'Customers',
-						link: 'main.home'
-					},
-					{
-						title: 'New Features',
-						link: 'main.home'
-					},
-					{
-						title: 'Education',
-						link: 'main.home'
-					}
-				]
+				title: 'Pricing',
+				link: 'main.pricing'
 			},
 			{
-				header: 'About',
-				menus: [
-					{
-						title: 'Company',
-						link: 'main.home'
-					},
-					{
-						title: 'Media Kit',
-						link: 'main.home'
-					},
-					{
-						title: 'Jobs',
-						link: 'main.home'
-					},
-					{
-						title: 'Blog',
-						link: 'main.home'
-					}
-				]
+				title: 'About Us',
+				link: 'main.about'
 			},
 			{
-				header: 'Support',
-				menus: [
-					{
-						title: 'Help Center',
-						link: 'main.home'
-					},
-					{
-						title: 'Schedule a Demo',
-						link: 'main.home'
-					},
-					{
-						title: 'Terms of Service',
-						link: 'main.home'
-					},
-					{
-						title: 'Securety',
-						link: 'main.home'
-					},
-					{
-						title: 'Privacy Policy',
-						link: 'main.home'
-					}
-				]
+				title: 'Contact us',
+				link: 'main.showcase'
 			},
 			{
-				header: 'Extras',
-				menus: [
-					{
-						title: 'Marketplace',
-						link: 'main.home'
-					},
-					{
-						title: 'Design Disruptors',
-						link: 'main.home'
-					},
-					{
-						title: 'Sync (Mac)',
-						link: 'main.home'
-					},
-					{
-						title: 'Free T-Shirt',
-						link: 'main.home'
-					}
-				]
+				title: 'Privacy Policy',
+				link: 'main.support'
+			},
+			{
+				title: 'Terms of use',
+				link: 'main.uikit'
 			}
 		];
 
@@ -156,7 +88,7 @@
 				label: 'Facebook'
 			},
 			{
-				image: '/assets/icons/linkedin.svg',
+				image: '/assets/icons/linkedin.svg',        
 				link: '/',
 				label: 'LinkedIn'
 			},
