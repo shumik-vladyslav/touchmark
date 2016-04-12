@@ -1,0 +1,34 @@
+<md-bottom-sheet class="bottom-sheet" layout="column">
+  <div layout="row" layout-align="center center">
+    <h5>Screen selected({{bott.socials.length}})</h5>
+    <md-button ng-repeat="social in bott.socials" class="md-icon-button" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
+        <md-icon md-svg-src="{{social.image}}"></md-icon>
+    </md-button>
+  </div>
+  
+  <md-menu-bar>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              ...
+            </button>
+            <md-menu-content>
+      
+              <md-menu-item ng-repeat="item in bott.sheetValue">
+                <a ng-if="item.action">{{item.key}}</a>
+                
+                <md-menu ng-if="!item.action">
+                  <a class="first-links" ng-click="$mdOpenMenu()">{{item.key}}</a>
+                  <md-menu-content>
+                    <md-menu-item  ng-repeat="value in item.value">
+                        <a>{{value.key}}</a>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+              
+            </md-menu-content>
+          </md-menu>
+         
+        </md-menu-bar>
+        		 
+</md-bottom-sheet>

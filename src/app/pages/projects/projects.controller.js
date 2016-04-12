@@ -12,8 +12,9 @@
       
     var type = ['All types','Desktop(web)','Mobile devices','iPhone','iPad','Android Phone','Android Tablet','Apple Watch','Android Watch'];
   /** @ngInject */
-  function ProjectsController(ProjectsService, $window) {
+  function ProjectsController(ProjectsService, BottomSheetService, $window) {
     var vm = this;
+    vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.types = ProjectsService.getTypes();
     vm.add = {
         title: 'Add Project',
