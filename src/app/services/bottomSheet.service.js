@@ -48,15 +48,7 @@
             templateUrl: 'app/components/bottomSheet/bottomSheet.html',
             controller: 'BottomSheetController',
 			controllerAs:'bott',
-            clickOutsideToClose: false
-            }).then(function(clickedItem) {
-            $mdToast.show(
-                    $mdToast.simple()
-                    .textContent(clickedItem['name'] + ' clicked!')
-                    .position('top right')
-                    .hideDelay(1500)
-                );
-            });
+            clickOutsideToClose: false});
         }
 	}
 })();
