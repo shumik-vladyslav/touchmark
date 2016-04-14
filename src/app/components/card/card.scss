@@ -1,18 +1,60 @@
 .card {
-	.title {
-		font-family: 'Realeway';
-	    font-size: 1.5em;
-	    color: #004759;
+	border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+	cursor: pointer;
+	&:focus {
+	    outline: none;
 	}
-	.projects-time{
-	    font-weight: 700;
-	    color: #004759;
-	    font-family: Raleway Semibold;
-	}
+	.hovered {
+		border-radius: 6px;
+	    overflow: hidden;
+		outline: none;
+		background-color: rgba(0, 0, 0, .6);
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
 
-	.projects-time-label{
-	    color:  #6bc9d2;
-	    font-family: Raleway ExtraBold;
+		.actions {
+			.white {
+				color: #fff;
+			}
+		}
+		.enter {
+			margin: auto;
+			background: none;
+			font-size: 1.3em;
+			color: #fff;
+			.icon {
+				color: #fff;
+				width: 64px;
+				height: 64px;
+			}
+		}
+	}
+	.info {
+		background-color: #fff;
+
+		.title {
+			font-family: 'Realeway';
+		    font-size: 1.5em;
+		    color: #004759;
+		}
+
+		.projects-time{
+		    font-weight: 700;
+		    color: #004759;
+		    font-family: Raleway Semibold;
+		}
+
+		.projects-time-label{
+		    color:  #6bc9d2;
+		    font-family: Raleway ExtraBold;
+		}
 	}
 }
 

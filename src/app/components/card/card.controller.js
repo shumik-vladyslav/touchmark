@@ -7,6 +7,7 @@
 
 	/** @ngInject */
 	function CardController() {
-        
+        var vm = this;
+        vm.isHovered = false;
 	}
 })();
