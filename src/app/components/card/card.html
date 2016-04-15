@@ -1,35 +1,43 @@
-<md-card class="card md-whiteframe-7dp" ng-mouseenter="card.isHovered = true" ng-mouseleave="card.isHovered = false" md-ink-ripple="#000">
-    <div>
+<md-card class="card md-whiteframe-7dp" ng-mouseenter="card.isHovered = true" ng-mouseleave="card.isHovered = false">
+    <div class="img-block">
         <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
-        <div class="info" layout="row" layout-align="center center" layout-padding>
-            <div flex layout="column" layout-align="center start">
-                <h5 class="title">{{info.name}}</h5>
-                <div ng-if="!card.isHovered" class="projects-time-label">LAST UPDATE: 
-                    <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
-                </div>
-                <div ng-if="card.isHovered">26 Screens</div>
-            </div>
-            <div>
-                <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
-                    <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
-                </md-button>
-            </div>
-        </div>
-    </div>
-    <div ng-if="card.isHovered" class="hovered">
-        <div class="actions" flex layout="row">
-            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Check">
-                <md-icon md-svg-src="assets/icons/check.svg" class="white"></md-icon>
+        <div ng-if="card.isHovered" class="hover" layout-fill layout="column" layout-align="center center" md-ink-ripple="#000">
+            <md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
+                <md-icon md-svg-src="assets/icons/eye.svg" class="icon"></md-icon>
+                <span>View</span>
             </md-button>
-            <span flex></span>
+        </div>
+        <div class="actions left" ng-if="card.isHovered || card.checked" flex layout="row">
+            <md-button type="button" class="md-icon-button" ng-click="card.toggle()" aria-label="Check">
+                <md-icon md-svg-src="{{card.checked ? 'assets/icons/check.svg' : 'assets/icons/uncheck.svg'}}" class="white"></md-icon>
+            </md-button>
+        </div>
+        <div class="actions right" ng-if="card.isHovered" flex layout="row">
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Share">
+                <md-icon md-svg-src="assets/icons/share.svg" class="white"></md-icon>
+            </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Copy">
+                <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
+            </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Archive">
+                <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
+            </md-button>
             <md-button type="button" class="md-icon-button" ng-click="" aria-label="Delete">
                 <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
             </md-button>
         </div>
-        <div class="" layout-fill layout="column" layout-align="center center">
-            <md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
-                <md-icon md-svg-src="assets/icons/eye.svg" class="icon"></md-icon>
-                <span>View</span>
+    </div>
+    <div class="info" layout="row" layout-align="center center" layout-padding>
+        <div flex layout="column" layout-align="center start">
+            <h5 class="title">{{info.name}}</h5>
+            <div ng-if="!card.isHovered" class="projects-time-label">LAST UPDATE: 
+                <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
+            </div>
+            <div ng-if="card.isHovered" class="projects-time-label">26 Screens</div>
+        </div>
+        <div>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
+                <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
             </md-button>
         </div>
     </div>
