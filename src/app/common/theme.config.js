@@ -45,6 +45,25 @@
             'contrastDarkColors': '50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700'
         });
 
+        $mdThemingProvider.definePalette('bottomSheetThem', {
+            '50': '#8fe8ff',
+            '100': '#43d9ff',
+            '200': '#0bcdff',
+            '300': '#009bc2',
+            '400': '#0082a4',
+            '500': '#006a85',
+            '600': '#005266',
+            '700': '#003948',
+            '800': '#002129',
+            '900': '#00080b',
+            'A100': '#8fe8ff',
+            'A200': '#43d9ff',
+            'A400': '#0082a4',
+            'A700': '#003948',
+            'contrastDefaultColor': 'light',
+            'contrastDarkColors': '50 100 200 A100 A200'
+         });
+
         $mdThemingProvider.theme('default')
             .primaryPalette('white')
             .accentPalette('orange');
@@ -54,6 +73,9 @@
 
         $mdThemingProvider.theme('navAuth')
             .primaryPalette('navBack');
+            
+        $mdThemingProvider.theme('bottomSheet')
+            .primaryPalette('bottomSheetThem');
 
         $mdThemingProvider.alwaysWatchTheme(true);
     }

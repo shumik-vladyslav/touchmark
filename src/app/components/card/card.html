@@ -1,11 +1,39 @@
-<md-card class="card">
-    <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
-    <div layout="row" layout-align="center center" layout-padding>
+<md-card class="card md-whiteframe-7dp" ng-mouseenter="card.isHovered = true" ng-mouseleave="card.isHovered = false">
+    <div class="img-block">
+        <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
+        <div ng-if="card.isHovered" class="hover" layout-fill layout="column" layout-align="center center" md-ink-ripple="#000">
+            <md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
+                <md-icon md-svg-src="assets/icons/eye.svg" class="icon"></md-icon>
+                <span>View</span>
+            </md-button>
+        </div>
+        <div class="actions left" ng-if="card.isHovered || card.checked" flex layout="row">
+            <md-button type="button" class="md-icon-button" ng-click="card.toggle()" aria-label="Check">
+                <md-icon md-svg-src="{{card.checked ? 'assets/icons/check.svg' : 'assets/icons/uncheck.svg'}}" class="white"></md-icon>
+            </md-button>
+        </div>
+        <div class="actions right" ng-if="card.isHovered" flex layout="row">
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Share">
+                <md-icon md-svg-src="assets/icons/share.svg" class="white"></md-icon>
+            </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Copy">
+                <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
+            </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Archive">
+                <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
+            </md-button>
+            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Delete">
+                <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <div class="info" layout="row" layout-align="center center" layout-padding>
         <div flex layout="column" layout-align="center start">
             <h5 class="title">{{info.name}}</h5>
-            <div class="projects-time-label">LAST UPDATE: 
+            <div ng-if="!card.isHovered" class="projects-time-label">LAST UPDATE: 
                 <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
             </div>
+            <div ng-if="card.isHovered" class="projects-time-label">26 Screens</div>
         </div>
         <div>
             <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
@@ -14,3 +42,35 @@
         </div>
     </div>
 </md-card>
+<!-- <md-card class="card grid hvr-sweep-to-right">
+    <figure class="effect-julia">
+    
+        <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
+        <div layout="row" layout-align="center center" layout-padding>
+            <div flex layout="column" layout-align="center start">
+                <h5 class="title">{{info.name}}</h5>
+                <div class="projects-time-label">LAST UPDATE: 
+                    <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
+                </div>
+            </div>
+            <div>
+                <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
+                    <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <figcaption>
+            <div>
+                <div class="figcaption-center">
+                      <md-button type="button" class="md-icon-button" ng-click="console.log(23);" aria-label="Owner">
+                        <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
+                    </md-button>
+                    <h6>VIEW SCREEN</h6>
+                </div>
+                
+            </div>
+        </figcaption>				
+        
+    </figure>
+    
+</md-card> -->

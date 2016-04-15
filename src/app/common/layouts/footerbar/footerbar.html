@@ -4,20 +4,18 @@
         <div flex="20" class="footer-logo">
             <img flex ng-src="/assets/images/main/logo_footer.jpg">
         </div>
-        
-        <div flex="15" ng-repeat="col in footerbar.cols">
-            <p>{{col.header}}</p>
-            <ul layout="column" layout-align="space-around">
-                <li ng-repeat="menu in col.menus">
-                    <a ui-sref="{{menu.link}}">{{menu.title}}</a>
-                </li>
-            </ul>
-        </div>
-        <div flex="20">
-            <p>FOLLOW US:</p>
-            <md-button class="md-icon-button" ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
-              <md-icon md-svg-src="{{social.image}}"></md-icon>
-            </md-button>
+        <div flex="80" layout="column" layout-align="center center">
+            <div class="footer-link" layout="row" layout-align="space-around center">
+                <p flex="20"  ng-repeat="col in footerbar.cols">
+                    <a ui-sref="{{col.link}}">{{col.title}}</a>
+                </p>
+            </div>
+            <div class="footer-socials">
+                <p>FOLLOW US:</p>
+                <md-button class="md-icon-button" ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
+                <md-icon md-svg-src="{{social.image}}"></md-icon>
+                </md-button>
+            </div>
         </div>
         
     </div>
