@@ -9,6 +9,7 @@
   function filterBar() {
     var directive = {
       restrict: 'E',
+      replace: true,
       templateUrl: 'app/components/filterBar/filterBar.html', 
       controller: 'FilterBarController',
       controllerAs: 'filters',
