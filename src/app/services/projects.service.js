@@ -47,6 +47,7 @@
 		];
 		var projects = [
             {
+				id: '1',
 				name: 'D-D Play',
 				update: 1460094322, // используй moment, она уже подключена
                 owner: 'user',
@@ -55,6 +56,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
 			{
+				id: '2',
 				name: 'dDt4',
 				update: 1460091112,
                 owner: 'user',
@@ -63,6 +65,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
+				id: '3',
 				name: 'Aaafst2',
 				update: 1460094442,
                 owner: 'user',
@@ -71,6 +74,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
+				id: '11',
 				name: 'St3',
 				update: 1460094022,
                 owner: 'user2',
@@ -79,6 +83,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
+				id: '12',
 				name: 'Aaf',
 				update: 1460092532,
                 owner: 'user',
@@ -87,6 +92,7 @@
                 img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
 			},
             {
+				id: '13',
 				name: 'aa',
 				update: 1460094002,
                 owner: 'user2',
@@ -100,7 +106,8 @@
 			getProjects: getProjects,
             getUniqueСollaborators: getUniqueСollaborators,
             addProject: addProject,
-            addProjectModal: addProjectModal
+            addProjectModal: addProjectModal,
+			deletedProject: deletedProject
 		};
 
 		return service;
@@ -131,6 +138,14 @@
         function addProject(proj){
             projects.push(proj);
         }
+		
+		function deletedProject(id){
+			projects.forEach(function(item, i, arr){
+				if(item.id === id){
+					arr.splice(i, 1);
+				}
+			})
+		}
         
         function addProjectModal(ev) {
 			$mdDialog.show({
