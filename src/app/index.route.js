@@ -61,6 +61,18 @@
       .state('main.learn', {
         url: '/learn',
         templateUrl: 'app/pages/learn/learn.html'
+      })
+      .state('main.contact', {
+        url: '/contact',
+        templateUrl: 'app/pages/contact/contact.html'
+      })
+      .state('main.privacy', {
+        url: '/privacy',
+        templateUrl: 'app/pages/privacy/privacy.html'
+      })
+      .state('main.terms', {
+        url: '/terms',
+        templateUrl: 'app/pages/terms/terms.html'
       });
 
     $urlRouterProvider.otherwise('/');

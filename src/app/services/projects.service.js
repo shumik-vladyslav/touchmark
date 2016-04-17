@@ -48,11 +48,12 @@
 		var projects = [
             {
 				name: 'D-D Play',
-				update: 1460094322, // используй moment, она уже подключена
+				update: 1460094322,
                 owner: 'user',
                 collaborators: ['user', 'user2'], // надо [{key: value, key2: value2}, ...] будет хранить имя, аватарку
                 type: 'iPad',
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p1.jpg',
+                screens: 18
 			},
 			{
 				name: 'dDt4',
@@ -60,7 +61,8 @@
                 owner: 'user',
                 collaborators: ['user', 'user2'],
                 type: 'Android Phone',
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p2.jpg',
+                screens: 7
 			},
             {
 				name: 'Aaafst2',
@@ -68,7 +70,8 @@
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3'],
                 type: 'iPad',
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p3.jpg',
+                screens: 42
 			},
             {
 				name: 'St3',
@@ -76,7 +79,8 @@
                 owner: 'user2',
                 collaborators: ['user', 'user2', 'user3', 'user4'],
                 type: 'Android Watch',
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p4.jpg',
+                screens: 11
 			},
             {
 				name: 'Aaf',
@@ -84,7 +88,8 @@
                 owner: 'user',
                 collaborators: ['user', 'user2', 'user3', 'user4', 'user5'],
                 type: 'Android Watch',
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p5.jpg',
+                screens: 5
 			},
             {
 				name: 'aa',
@@ -92,7 +97,8 @@
                 owner: 'user2',
                 type: 'Android Watch',
                 collaborators: ['user2', 'user3', 'user4', 'user5', 'user6'],
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p6.jpg',
+                screens: 26
 			}
 		];
 		var service = {

@@ -1,8 +1,11 @@
 
 <filter-bar settings="proj.arrSetti" search="proj.searchValue" add="proj.add"></filter-bar>
- <md-button flex="50" class="md-primary md-raised" ng-click="proj.showGridBottomSheet()">Show as Grid</md-button>
-<section class="all-projects" layout="row" layout-align="space-around center" layout-wrap>
-    <card flex="33" info="project" name="project.name" time="project.update" img="project.img" ng-repeat="project in proj.projects | filter:{name: proj.searchValue}"></card>
+<section class="projects" layout="row">
+	<span flex="5"></span>
+	<div layout="row" layout-align="center center" layout-wrap flex>
+    	<card flex="33" info="project" ng-repeat="project in proj.projects | filter:{name: proj.searchValue}"></card>
+    </div>
+    <span flex="5"></span>
 </section>
   
  
