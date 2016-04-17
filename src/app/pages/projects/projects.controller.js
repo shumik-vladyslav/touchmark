@@ -14,7 +14,6 @@
   /** @ngInject */
   function ProjectsController(ProjectsService, BottomSheetService, $window) {
     var vm = this;
-    vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.types = ProjectsService.getTypes();
     vm.add = {
         title: 'Add Project',

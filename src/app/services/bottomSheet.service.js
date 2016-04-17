@@ -10,12 +10,20 @@
         
         var vm = this;
         
+        var selectedObject = [];
+        
 		var service = {
             showBottomSheet: showBottomSheet,
-            getSheetValue: getSheetValue
+            getSheetValue: getSheetValue,
+            pushCheckedObject: pushCheckedObject,
+            selectedObject: selectedObject
 		};
 
 		return service;
+        
+        function pushCheckedObject(obj) {
+            selectedObject.push(obj);
+        }
         
         function getSheetValue() {
       
@@ -44,11 +52,20 @@
         }
         
         function showBottomSheet() {
+            
             $mdBottomSheet.show({
             templateUrl: 'app/components/bottomSheet/bottomSheet.html',
             controller: 'BottomSheetController',
 			controllerAs:'bott',
-            clickOutsideToClose: false});
+            clickOutsideToClose: false,
+            disableParentScroll : false, 
+            onRemove: function (scope, element, options) {
+                var scrollmask = document.getElementsByClassName('md-scroll-mask');
+                var backdrop = document.getElementsByTagName('md-backdrop');
+                angular.element(scrollmask).remove();
+                angular.element(backdrop).remove();
+                $mdUtil.enableScrolling();
+            }});
         }
 	}
 })();

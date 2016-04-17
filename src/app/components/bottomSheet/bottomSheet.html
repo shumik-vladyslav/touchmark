@@ -1,6 +1,6 @@
-<md-bottom-sheet class="bottom-sheet" layout="column" md-theme="bottomSheet">
+<md-bottom-sheet class="bottom-sheet" layout="column"> <!-- md-theme="bottomSheet" -->
   <div layout="row" layout-align="center center">
-    <h5>Screen selected({{bott.socials.length}})</h5>
+    <h5>Screen selected({{bott.selectedObject.length}})</h5>
     <md-button ng-repeat="social in bott.socials" class="md-icon-button" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
         <md-icon md-svg-src="{{social.image}}"></md-icon>
     </md-button>
@@ -11,6 +11,7 @@
             <button ng-click="$mdOpenMenu()">
               ...
             </button>
+            
             <md-menu-content width="4">
       
               <md-menu-item ng-repeat="item in bott.sheetValue">
