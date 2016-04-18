@@ -1,5 +1,40 @@
-
-<filter-bar settings="proj.arrSetti" search="proj.searchValue" add="proj.add"></filter-bar>
+<!-- <filter-bar settings="proj.arrSetti" search="roj.searchValue" add="proj.add"></filter-bar> -->
+<md-toolbar md-theme="filterBar" class="filterBar md-medium-tall" flex>
+    <div class="md-toolbar-tools" flex>
+        <span flex="5"></span>
+        <div>
+            <section layout="row" layout-align="center center">
+                <md-button class="groupX left">Active</md-button>
+                <md-button class="groupX right">Archived</md-button>
+            </section>
+        </div>
+        <span flex></span>
+        <md-input-container class="md-icon-float">
+            <label>Search</label>
+            <md-icon md-svg-src="assets/icons/search.svg"></md-icon>
+            <input ng-model="search" type="text">
+        </md-input-container>
+        <span flex></span>
+        <md-menu-bar>
+            <md-menu ng-repeat="menu in proj.filterConfig">
+                <md-button ng-click="$mdOpenMenu($event)">
+					{{menu.selected.value}}
+                </md-button>
+                <md-menu-content layout="column" layout-align="center start">
+                    <md-menu-item ng-repeat="item in menu.items">
+                        <a class="search-menu-button" ng-click="menu.selected = item">
+                        {{item.value}}
+                        </a>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-menu-bar>
+        <span flex="5"></span>
+    </div>
+    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-bottom-right">
+        <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
+    </md-button>
+</md-toolbar>
 <section class="projects" layout="row">
 	<span flex="5"></span>
 	<div layout="row" layout-align="center center" layout-wrap flex>

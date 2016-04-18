@@ -1,6 +1,13 @@
-<md-toolbar md-theme="filterBar" class="filterBar md-medium-tall">
-    <div class="md-toolbar-tools">
+<md-toolbar md-theme="filterBar" class="filterBar md-medium-tall" flex>
+    <div class="md-toolbar-tools" flex>
         <span flex="5"></span>
+        <div>
+            <section layout="row" layout-align="center center">
+                <md-button class="groupX left">Active</md-button>
+                <md-button class="groupX right">Archived</md-button>
+            </section>
+        </div>
+        <span flex></span>
         <md-input-container class="md-icon-float">
             <label>Search</label>
             <md-icon md-svg-src="assets/icons/search.svg"></md-icon>

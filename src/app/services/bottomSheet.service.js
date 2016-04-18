@@ -6,10 +6,7 @@
 		.factory('BottomSheetService', BottomSheetService);
 
 	/** @ngInject */
-	function BottomSheetService($mdBottomSheet, $mdToast) {
-        
-        var vm = this;
-        
+	function BottomSheetService($mdBottomSheet) {
 		var service = {
             showBottomSheet: showBottomSheet,
             getSheetValue: getSheetValue
@@ -20,24 +17,24 @@
         function getSheetValue() {
       
             var changeStatus = [
-                {key: 'DUPLICATE', action: '/'},
+                {key: 'DUPLICATE', action: '/'}
             ];
             
              var copyToPrototype = [
                 {key: 'NEW PROTOTYPE', action: '/'},
                 {key: 'PROTOTYPE 1', action: '/'},
-                {key: 'PROTOTYPE 2', action: '/'},
+                {key: 'PROTOTYPE 2', action: '/'}
             ];
             
              var moveToSection = [
-                {key: 'DUPLICATE', action: '/'},
+                {key: 'DUPLICATE', action: '/'}
             ];
             
             var arr = [
                 {key: 'DUPLICATE', action: '/'},
                 {key: 'CHANGE STATUS', value: changeStatus},
                 {key: 'COPY TO PROTOTYPE', value: copyToPrototype},
-                {key: 'MOVE TO SECTION', value: moveToSection},
+                {key: 'MOVE TO SECTION', value: moveToSection}
             ];
             
             return arr;

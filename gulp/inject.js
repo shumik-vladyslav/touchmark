@@ -1,5 +1,4 @@
 'use strict';
-
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -15,7 +14,7 @@ gulp.task('inject-reload', ['inject'], function() {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'icons', 'fonts'], function () {
+gulp.task('inject', ['scripts', 'styles', 'fonts'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/**/*.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')

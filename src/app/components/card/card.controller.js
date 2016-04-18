@@ -11,7 +11,7 @@
         vm.isHovered = false;
         vm.checked = false;
         vm.toggle = function() {
-        	vm.checked = !vm.checked;
+			vm.checked = !vm.checked;
         };
 	}
 })();

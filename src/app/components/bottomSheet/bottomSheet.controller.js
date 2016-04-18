@@ -11,8 +11,8 @@
         vm.sheetValue = BottomSheetService.getSheetValue();
         vm.socials = NavService.getSocials();
         
-        this.listItemClick = function($index) {
-            var clickedItem = this.items[$index];
+        vm.listItemClick = function($index) {
+            var clickedItem = vm.items[$index];
             $mdBottomSheet.hide(clickedItem);
         };
 	}
