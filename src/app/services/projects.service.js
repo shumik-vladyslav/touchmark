@@ -144,7 +144,7 @@
 				if(item.id === id){
 					arr.splice(i, 1);
 				}
-			})
+			});
 		}
         
         function addProjectModal(ev) {

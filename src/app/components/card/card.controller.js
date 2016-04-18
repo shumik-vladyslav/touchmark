@@ -13,14 +13,19 @@
         vm.checked = false;
         vm.toggle = function() {
        		vm.checked = !vm.checked;
-		BottomSheetService.showBottomSheet();
-		BottomSheetService.pushCheckedObject($scope.info);
+			if(vm.checked){
+				BottomSheetService.pushCheckedObject($scope.info);
+			}else{
+				BottomSheetService.deleteCheckedObject($scope.info);
+			}
+			BottomSheetService.showBottomSheet();
         };
 	
 	vm.delete = function () {
 		if (confirm('Are you sure you want to deleted project?')) {
 			ProjectsService.deletedProject($scope.info.id);
 		}
-	}
+	};
+	
 	}
 })();

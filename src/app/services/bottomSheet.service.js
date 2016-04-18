@@ -9,6 +9,7 @@
 	function BottomSheetService($mdBottomSheet, $mdToast) {
         
         var vm = this;
+        var showBottomFlag = true;
         
         var selectedObject = [];
         
@@ -16,6 +17,7 @@
             showBottomSheet: showBottomSheet,
             getSheetValue: getSheetValue,
             pushCheckedObject: pushCheckedObject,
+            deleteCheckedObject: deleteCheckedObject,
             selectedObject: selectedObject
 		};
 
@@ -23,6 +25,14 @@
         
         function pushCheckedObject(obj) {
             selectedObject.push(obj);
+        }
+        
+        function deleteCheckedObject(obj) {
+            selectedObject.forEach(function(item, i, arr){
+				if(item.id === obj.id){
+					arr.splice(i, 1);
+				}
+			});
         }
         
         function getSheetValue() {
@@ -50,22 +60,34 @@
             
             return arr;
         }
-        
         function showBottomSheet() {
+             if(!showBottomFlag && !selectedObject.length){
+                showBottomFlag = true;
+                $mdBottomSheet.hide();
+            }
             
-            $mdBottomSheet.show({
-            templateUrl: 'app/components/bottomSheet/bottomSheet.html',
-            controller: 'BottomSheetController',
-			controllerAs:'bott',
-            clickOutsideToClose: false,
-            disableParentScroll : false, 
-            onRemove: function (scope, element, options) {
-                var scrollmask = document.getElementsByClassName('md-scroll-mask');
-                var backdrop = document.getElementsByTagName('md-backdrop');
-                angular.element(scrollmask).remove();
-                angular.element(backdrop).remove();
-                $mdUtil.enableScrolling();
-            }});
+            if(showBottomFlag && selectedObject.length){
+                showBottomFlag = false;
+                $mdBottomSheet.show({
+                templateUrl: 'app/components/bottomSheet/bottomSheet.html',
+                controller: 'BottomSheetController',
+                controllerAs:'bott',
+                clickOutsideToClose: false,
+                disableParentScroll : false, 
+                onRemove: function (scope, element, options) {
+                
+                    if(!selectedObject.length){
+                        var scrollmask = document.getElementsByClassName('md-scroll-mask');
+                        var backdrop = document.getElementsByTagName('md-backdrop');
+                        angular.element(scrollmask).remove();
+                        angular.element(backdrop).remove();
+                        angular.element(element).remove();
+                    }else{
+                        $mdUtil.enableScrolling();
+                    }
+                }});
+            }
+           
         }
 	}
 })();
