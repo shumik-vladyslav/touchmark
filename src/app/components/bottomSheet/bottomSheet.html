@@ -1,37 +1,20 @@
 <md-bottom-sheet class="bottom-sheet" layout="column"> <!-- md-theme="bottomSheet" -->
   <div layout="row" layout-align="center center">
     <h5>Screen selected({{bott.selectedObject.length}})</h5>
-    <md-button ng-repeat="social in bott.socials" class="md-icon-button" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
-        <md-icon md-svg-src="{{social.image}}"></md-icon>
-    </md-button>
-  </div>
-  
-  <md-menu-bar>
-          <md-menu>
-            <button ng-click="$mdOpenMenu()">
-              ...
-            </button>
-            
-            <md-menu-content width="4">
-      
-              <md-menu-item ng-repeat="item in bott.sheetValue">
-                <a ng-if="item.action">{{item.key}}</a>
-                
-                <md-menu ng-if="!item.action">
-                  <div class="first-links">
-                      <a ng-click="$mdOpenMenu()">{{item.key}}<div>></div></a>
-                  </div>
-                  <md-menu-content width="4">
-                    <md-menu-item ng-repeat="value in item.value">
-                        <a>{{value.key}}</a>
-                    </md-menu-item>
-                  </md-menu-content>
-                </md-menu>
+     <md-button ng-repeat="item in bott.socialButton" type="button" class="md-icon-button" ng-click="item.click()" aria-label="{{item.label}}">
+         <md-icon md-svg-src="{{item.svg}}"></md-icon>
+     </md-button>
+     <md-menu-bar>
+        <md-menu>
+          <md-button type="button" class="md-icon-button" ng-click="$mdOpenMenu()">
+              <md-icon md-svg-src="assets/icons/share.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4">
+              <md-menu-item ng-repeat="value in bott.status">
+                <a ng-click="bott.update(value)">{{value}}</a>
               </md-menu-item>
-              
-            </md-menu-content>
-          </md-menu>
-         
+          </md-menu-content>
         </md-menu-bar>
-        		 
+     </md-menu>
+  </div>
 </md-bottom-sheet>

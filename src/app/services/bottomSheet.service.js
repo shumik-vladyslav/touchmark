@@ -18,6 +18,7 @@
             getSheetValue: getSheetValue,
             pushCheckedObject: pushCheckedObject,
             deleteCheckedObject: deleteCheckedObject,
+            getSocialButtonValue: getSocialButtonValue,
             selectedObject: selectedObject
 		};
 
@@ -33,6 +34,17 @@
 					arr.splice(i, 1);
 				}
 			});
+        }
+        
+        function getSocialButtonValue(param) {
+            var arr = [
+                {label: 'Share', svg: 'assets/icons/share.svg'},
+                {label: 'Copy', svg: 'assets/icons/copy.svg'},
+                {label: 'Archive', svg: 'assets/icons/archive.svg'},
+                {label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete},
+            ];
+            
+            return arr;
         }
         
         function getSheetValue() {

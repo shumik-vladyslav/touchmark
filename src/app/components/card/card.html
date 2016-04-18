@@ -13,17 +13,8 @@
             </md-button>
         </div>
         <div class="actions right" ng-if="card.isHovered" flex layout="row">
-            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Share">
-                <md-icon md-svg-src="assets/icons/share.svg" class="white"></md-icon>
-            </md-button>
-            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Copy">
-                <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
-            </md-button>
-            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Archive">
-                <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
-            </md-button>
-            <md-button type="button" class="md-icon-button" ng-click="card.delete()" aria-label="Delete">
-                <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
+            <md-button ng-repeat="item in card.socialButton" type="button" class="md-icon-button" ng-click="item.click()" aria-label="{{item.label}}">
+                <md-icon md-svg-src="{{item.svg}}" class="white"></md-icon>
             </md-button>
         </div>
     </div>
