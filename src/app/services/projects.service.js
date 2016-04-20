@@ -57,12 +57,13 @@
             {
 				id: '1',
 				name: 'D-D Play',
-				update: 1460094322, // используй moment, она уже подключена
+				update: 1460094322,
                 owner: 'user',
                 collaborators: ['user', 'user2'], // надо [{key: value, key2: value2}, ...] будет хранить имя, аватарку
                 type: 'iPad',
                 status: status.approved,
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p1.jpg',
+                screens: 18
 			},
 			{
 				id: '2',
@@ -72,7 +73,8 @@
                 collaborators: ['user', 'user2'],
                 type: 'Android Phone',
                 status: status.approved,
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p2.jpg',
+                screens: 7
 			},
             {
 				id: '3',
@@ -82,7 +84,8 @@
                 collaborators: ['user', 'user2', 'user3'],
                 type: 'iPad',
                 status: status.approved,
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p3.jpg',
+                screens: 42
 			},
             {
 				id: '11',
@@ -92,7 +95,8 @@
                 collaborators: ['user', 'user2', 'user3', 'user4'],
                 type: 'Android Watch',
                 status: status.onHold,
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p4.jpg',
+                screens: 11
 			},
             {
 				id: '12',
@@ -102,7 +106,8 @@
                 collaborators: ['user', 'user2', 'user3', 'user4', 'user5'],
                 type: 'Android Watch',
                 status: status.needsRewiev,
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p5.jpg',
+                screens: 5
 			},
             {
 				id: '13',
@@ -112,7 +117,8 @@
                 type: 'Android Watch',
                 status: status.inProgress,
                 collaborators: ['user2', 'user3', 'user4', 'user5', 'user6'],
-                img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTwQyYNh-ThInQCYVqn-N22BwgcMXC8Az_NuMjFqdLu0ydOoV29aA'
+                img: 'assets/images/projects/p6.jpg',
+                screens: 26
 			}
 		];
 		var service = {

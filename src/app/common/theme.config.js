@@ -45,7 +45,7 @@
             'contrastDarkColors': '50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700'
         });
 
-        $mdThemingProvider.definePalette('bottomSheetThem', {
+        $mdThemingProvider.definePalette('bottomSheet', {
             '50': '#8fe8ff',
             '100': '#43d9ff',
             '200': '#0bcdff',
@@ -62,7 +62,26 @@
             'A700': '#003948',
             'contrastDefaultColor': 'light',
             'contrastDarkColors': '50 100 200 A100 A200'
-         });
+        });
+
+        $mdThemingProvider.definePalette('filterBar', {
+            '50': '#cdedf0',
+            '100': '#b9e6ea',
+            '200': '#a6dee4',
+            '300': '#92d7de',
+            '400': '#7fd0d8',
+            '500': '#6bc9d2',
+            '600': '#57c2cc',
+            '700': '#44bbc6',
+            '800': '#38adb8',
+            '900': '#329ba5',
+            'A100': '#e0f4f6',
+            'A200': '#f4fbfc',
+            'A400': '#ffffff',
+            'A700': '#2c8891',
+            'contrastDefaultColor': 'light',
+            'contrastDarkColors': '50 100 200 A100 A200'
+        });
 
         $mdThemingProvider.theme('default')
             .primaryPalette('white')
@@ -75,7 +94,10 @@
             .primaryPalette('navBack');
             
         $mdThemingProvider.theme('bottomSheet')
-            .primaryPalette('bottomSheetThem');
+            .primaryPalette('bottomSheet');
+        
+        $mdThemingProvider.theme('filterBar')
+            .primaryPalette('filterBar');
 
         $mdThemingProvider.alwaysWatchTheme(true);
     }

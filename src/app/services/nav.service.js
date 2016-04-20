@@ -64,15 +64,15 @@
 			},
 			{
 				title: 'Contact us',
-				link: 'main.showcase'
+				link: 'main.contact'
 			},
 			{
 				title: 'Privacy Policy',
-				link: 'main.support'
+				link: 'main.privacy'
 			},
 			{
 				title: 'Terms of use',
-				link: 'main.uikit'
+				link: 'main.terms'
 			}
 		];
 

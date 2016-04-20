@@ -45,6 +45,34 @@
       .state('main.uikit', {
         url: '/uikit',
         templateUrl: 'app/pages/uikit/uikit.html'
+      })
+      .state('main.boards', {
+        url: '/boards',
+        templateUrl: 'app/pages/boards/boards.html'
+      })
+      .state('main.activity', {
+        url: '/activity',
+        templateUrl: 'app/pages/activity/activity.html'
+      })
+      .state('main.people', {
+        url: '/people',
+        templateUrl: 'app/pages/people/people.html'
+      })
+      .state('main.learn', {
+        url: '/learn',
+        templateUrl: 'app/pages/learn/learn.html'
+      })
+      .state('main.contact', {
+        url: '/contact',
+        templateUrl: 'app/pages/contact/contact.html'
+      })
+      .state('main.privacy', {
+        url: '/privacy',
+        templateUrl: 'app/pages/privacy/privacy.html'
+      })
+      .state('main.terms', {
+        url: '/terms',
+        templateUrl: 'app/pages/terms/terms.html'
       });
 
     $urlRouterProvider.otherwise('/');
