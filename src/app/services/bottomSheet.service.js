@@ -85,7 +85,8 @@
                 controller: 'BottomSheetController',
                 controllerAs:'bott',
                 clickOutsideToClose: false,
-                disableParentScroll : false, 
+                disableParentScroll : false,
+                disableBackdrop: true,
                 onRemove: function (scope, element, options) {
                 
                     if(!selectedObject.length){
