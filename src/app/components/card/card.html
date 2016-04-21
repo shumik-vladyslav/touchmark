@@ -13,7 +13,7 @@
             </md-button>
         </div>
         <div class="actions right" ng-if="card.isHovered" flex layout="row">
-            <md-button ng-repeat="item in card.socialButton" type="button" class="md-icon-button" ng-click="item.click()" aria-label="{{item.label}}">
+            <md-button ng-repeat="item in card.socialButton" type="button" class="md-icon-button" ng-click="item.click($event)" aria-label="{{item.label}}">
                 <md-icon md-svg-src="{{item.svg}}" class="white"></md-icon>
             </md-button>
         </div>

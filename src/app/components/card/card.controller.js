@@ -6,7 +6,7 @@
 		.controller('CardController', CardController);
 
 	/** @ngInject */
-	function CardController($scope, BottomSheetService, ProjectsService) {
+	function CardController($scope, $mdDialog, $document, BottomSheetService, ProjectsService) {
         var vm = this;
         vm.isHovered = false;
         vm.checked = false;
@@ -20,10 +20,19 @@
 			BottomSheetService.showBottomSheet();
         };
 	
-		vm.delete = function () {
-			if (confirm('Are you sure you want to deleted project?')) {
-				ProjectsService.deletedProject($scope.info.id);
-			}
+		vm.delete = function (ev) {
+			$mdDialog.show({
+					controller: 'DialogModalController',
+					controllerAs:'dialog',
+					templateUrl: 'app/components/dialog/dialog.modal.html',
+					targetEvent: ev,
+					clickOutsideToClose: true,
+					fullscreen: false
+				})
+				.then(function() {
+					ProjectsService.deletedProject($scope.info.id);
+				}, function() {
+				});
 		};
 		vm.socialButton = BottomSheetService.getSocialButtonValue(vm);
 

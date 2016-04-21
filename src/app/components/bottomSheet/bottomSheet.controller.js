@@ -6,7 +6,7 @@
 		.controller('BottomSheetController', BottomSheetController);
 
 	/** @ngInject */
-	function BottomSheetController(BottomSheetService, ProjectsService, $mdBottomSheet) {
+	function BottomSheetController(BottomSheetService, ProjectsService, $mdBottomSheet, $mdDialog) {
         var vm = this;
         vm.sheetValue = BottomSheetService.getSheetValue();
         vm.selectedObject = BottomSheetService.selectedObject;
@@ -17,17 +17,27 @@
             $mdBottomSheet.hide(clickedItem);
         };
         
-        vm.delete = function () {
-            if (confirm('Are you sure you want to deleted project?')) {
-                for (var key in vm.selectedObject) {
-                    if (vm.selectedObject.hasOwnProperty(key)) {
-                        var element = vm.selectedObject[key];
-                        ProjectsService.deletedProject(element.id);
-                        
+        vm.delete = function (ev) {
+			$mdDialog.show({
+					controller: 'DialogModalController',
+					controllerAs:'dialog',
+					templateUrl: 'app/components/dialog/dialog.modal.html',
+					targetEvent: ev,
+					clickOutsideToClose: true,
+					fullscreen: false
+				})
+				.then(function() {
+                    for (var key in vm.selectedObject) {
+                        if (vm.selectedObject.hasOwnProperty(key)) {
+                            var element = vm.selectedObject[key];
+                            ProjectsService.deletedProject(element.id);
+                            
+                        }
                     }
-                }
-                vm.selectedObject = BottomSheetService.selectedObject;
-            }
+                    vm.selectedObject = BottomSheetService.selectedObject;
+				}, function() {
+				});
+              
 	    };
         
         vm.update = function(value){
