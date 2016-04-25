@@ -11,7 +11,7 @@
         var vm = this;
         var showBottomFlag = true;
         
-        var selectedObject = [];
+        vm.selectedObject = [];
         
 		var service = {
             showBottomSheet: showBottomSheet,
@@ -19,21 +19,21 @@
             pushCheckedObject: pushCheckedObject,
             deleteCheckedObject: deleteCheckedObject,
             getSocialButtonValue: getSocialButtonValue,
-            selectedObject: selectedObject
+            getSelectedObject: getSelectedObject
 		};
 
 		return service;
         
-        function pushCheckedObject(obj) {
-            selectedObject.push(obj);
+        function getSelectedObject() {
+            return vm.selectedObject;
         }
         
-        function deleteCheckedObject(obj) {
-            selectedObject.forEach(function(item, i, arr){
-				if(item.id === obj.id){
-					arr.splice(i, 1);
-				}
-			});
+        function pushCheckedObject(obj) {
+            vm.selectedObject.push(obj);
+        }
+        
+        function deleteCheckedObject() {
+            vm.selectedObject = [];
         }
         
         function getSocialButtonValue(param) {
@@ -73,12 +73,12 @@
             return arr;
         }
         function showBottomSheet() {
-             if(!showBottomFlag && !selectedObject.length){
+             if(!showBottomFlag && !vm.selectedObject.length){
                 showBottomFlag = true;
                 $mdBottomSheet.hide();
             }
             
-            if(showBottomFlag && selectedObject.length){
+            if(showBottomFlag && vm.selectedObject.length){
                 showBottomFlag = false;
                 $mdBottomSheet.show({
                 templateUrl: 'app/components/bottomSheet/bottomSheet.html',
@@ -88,8 +88,7 @@
                 disableParentScroll : false,
                 disableBackdrop: true,
                 onRemove: function (scope, element, options) {
-                
-                    if(!selectedObject.length){
+                    if(!vm.selectedObject.length){
                         var scrollmask = document.getElementsByClassName('md-scroll-mask');
                         var backdrop = document.getElementsByTagName('md-backdrop');
                         angular.element(scrollmask).remove();

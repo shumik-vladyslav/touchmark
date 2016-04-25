@@ -9,7 +9,7 @@
 	function BottomSheetController(BottomSheetService, ProjectsService, $mdBottomSheet, $mdDialog) {
         var vm = this;
         vm.sheetValue = BottomSheetService.getSheetValue();
-        vm.selectedObject = BottomSheetService.selectedObject;
+        vm.selectedObject = BottomSheetService.getSelectedObject();
         vm.status = ProjectsService.getStatus();
         
         this.listItemClick = function($index) {
@@ -31,10 +31,13 @@
                         if (vm.selectedObject.hasOwnProperty(key)) {
                             var element = vm.selectedObject[key];
                             ProjectsService.deletedProject(element.id);
-                            
                         }
                     }
-                    vm.selectedObject = BottomSheetService.selectedObject;
+                    BottomSheetService.deleteCheckedObject();
+                    
+                    vm.selectedObject = BottomSheetService.getSelectedObject();
+                    
+                    BottomSheetService.showBottomSheet();
 				}, function() {
 				});
               
@@ -48,7 +51,7 @@
                     
                 }
             }
-            vm.selectedObject = BottomSheetService.selectedObject;
+            vm.selectedObject = BottomSheetService.getSelectedObject();
         };
         
         vm.socialButton = BottomSheetService.getSocialButtonValue(vm);
