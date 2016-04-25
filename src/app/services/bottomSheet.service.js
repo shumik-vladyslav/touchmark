@@ -89,11 +89,12 @@
                 disableBackdrop: true,
                 onRemove: function (scope, element, options) {
                     if(!vm.selectedObject.length){
-                        var scrollmask = document.getElementsByClassName('md-scroll-mask');
-                        var backdrop = document.getElementsByTagName('md-backdrop');
-                        angular.element(scrollmask).remove();
-                        angular.element(backdrop).remove();
-                        angular.element(element).remove();
+                        // var scrollmask = document.getElementsByClassName('md-scroll-mask');
+                        // var backdrop = document.getElementsByTagName('md-backdrop');
+                        // angular.element(scrollmask).remove();
+                        // angular.element(backdrop).remove();
+                        // angular.element(element).remove();
+                        $mdBottomSheet.hide();
                     }else{
                         $mdUtil.enableScrolling();
                     }
