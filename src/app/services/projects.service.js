@@ -73,10 +73,10 @@
 			},
 			{
 				type: 'filter',
-				items: getCollaborators(),
+				items: getCols(),
 				selected: {
 					key: 'all',
-					value: 'All types'
+					value: 'All collaborators'
 				}
 			}
 		];
@@ -203,7 +203,6 @@
 		var service = {
 			getTypes: getTypes,
 			getProjects: getProjects,
-			getUniqueСollaborators: getUniqueСollaborators,
 			addProject: addProject,
 			addProjectModal: addProjectModal,
 			getFilterConfig: getFilterConfig
@@ -218,45 +217,29 @@
 		function getFilterConfig() {
 			return filterConfig;
 		}
+
+		function getCols() {
+			console.log(projects);
+		}
+
 		function getProjects() {
 			return projects;
 		}
+		// function getUniqueСollaborators() {
+		// 	var collaborators = [];
 
-		function getUniqueСollaborators() {
-			var collaborators = [];
+		// 	var _ = $window._;
 
-			var _ = $window._;
+		// 	for (var key in projects) {
+		// 		if (projects.hasOwnProperty(key)) {
+		// 			var element = projects[key];
 
-			for (var key in projects) {
-				if (projects.hasOwnProperty(key)) {
-					var element = projects[key];
+		// 			collaborators = _.concat(collaborators, element.collaborators);
+		// 		}
+		// 	}
+		// 	return _.uniq(collaborators);
+		// }
 
-					collaborators = _.concat(collaborators, element.collaborators);
-				}
-			}
-			return _.uniq(collaborators);
-		}
-
-		function getCollaborators() {
-			var _ = $window._;
-			var items = [
-				{
-					key: 'all',
-					value: 'All collaborators'
-				}
-			];
-			for (var key in projects) {
-				if (projects.hasOwnProperty(key)) {
-					for (var col in projects[key].collaborators) {
-						if (projects[key].collaborators.hasOwnProperty(col)) {
-							items.push(projects[key].collaborators[col]);
-						}
-					}
-				}
-			}
-			// console.log(_.uniqBy(projects, 'collaborators'));
-			return _.uniqBy(projects, 'collaborators');
-		}
 		function addProject(proj){
 			projects.push(proj);
 		}

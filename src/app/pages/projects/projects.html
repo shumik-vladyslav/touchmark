@@ -1,18 +1,18 @@
 <!-- <filter-bar settings="proj.arrSetti" search="roj.searchValue" add="proj.add"></filter-bar> -->
-<md-toolbar md-theme="filterBar" class="filterBar md-medium-tall" flex>
+<md-toolbar md-theme="filterBar" class="filterBar" flex>
     <div class="md-toolbar-tools" flex>
         <span flex="5"></span>
         <div>
             <section layout="row" layout-align="center center">
-                <md-button class="groupX left">Active</md-button>
-                <md-button class="groupX right">Archived</md-button>
+                <md-button class="groupX left" ng-click="proj.filter.archived = false">Active</md-button>
+                <md-button class="groupX right" ng-click="proj.filter.archived = true">Archived</md-button>
             </section>
         </div>
         <span flex></span>
         <md-input-container class="md-icon-float">
             <label>Search</label>
             <md-icon md-svg-src="assets/icons/search.svg"></md-icon>
-            <input ng-model="search" type="text">
+            <input ng-model="proj.search" type="text">
         </md-input-container>
         <span flex></span>
         <md-menu-bar>
@@ -30,15 +30,15 @@
             </md-menu>
         </md-menu-bar>
         <span flex="5"></span>
-    </div>
-    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-bottom-right">
+    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-up-right">
         <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
     </md-button>
+    </div>
 </md-toolbar>
 <section class="projects" layout="row">
 	<span flex="5"></span>
 	<div layout="row" layout-align="center center" layout-wrap flex>
-    	<card flex="33" info="project" ng-repeat="project in proj.projects | filter:{name: proj.searchValue}"></card>
+    	<card flex="33" info="project" ng-repeat="project in proj.projects | filter: proj.filter"></card>
     </div>
     <span flex="5"></span>
 </section>
