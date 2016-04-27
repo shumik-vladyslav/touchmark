@@ -7,11 +7,6 @@
                 <md-icon md-svg-src="{{card.checked ? 'assets/icons/check_box.svg' : 'assets/icons/uncheck_box.svg'}}" class="white"></md-icon>
             </md-button>
         </div>
-        <div class="actions right" ng-if="card.isHovered" flex layout="row">
-            <md-button ng-repeat="item in card.socialButton" type="button" class="md-icon-button" ng-click="item.click($event)" aria-label="{{item.label}}">
-                <md-icon md-svg-src="{{item.svg}}" class="white"></md-icon>
-            </md-button>
-        </div>
         <div class="actions right" ng-if="card.isHovered" flex layout="row" ng-transclude="rightActions"></div>
     </div>
     <div class="info" layout="row" layout-align="center center" layout-padding>
