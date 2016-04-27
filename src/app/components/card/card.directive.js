@@ -13,8 +13,11 @@
       controller: 'CardController',
       controllerAs: 'card',
       scope: {
-        info: '=',
-        size: '='
+        info: '='
+      },
+      transclude: {
+        'mainAction': 'cardMainAction',
+        'rightActions': '?cardRightActions'
       }
     };
 

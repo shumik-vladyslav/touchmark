@@ -13,7 +13,8 @@
 				'ui.router', 
 				'ngMaterial', 
 				'toastr',
-				'ngStorage'
+				'ngStorage',
+				'angular.filter'
 			]
 		);
 })();

@@ -2,46 +2,75 @@
 <md-toolbar md-theme="filterBar" class="filterBar" flex>
     <div class="md-toolbar-tools" flex>
         <span flex="5"></span>
-        <div>
-            <section layout="row" layout-align="center center">
-                <md-button class="groupX left" ng-click="proj.filter.archived = false">Active</md-button>
-                <md-button class="groupX right" ng-click="proj.filter.archived = true">Archived</md-button>
-            </section>
-        </div>
-        <span flex></span>
-        <md-input-container class="md-icon-float">
-            <label>Search</label>
+        <md-input-container md-no-float class="md-icon-float search-container">
             <md-icon md-svg-src="assets/icons/search.svg"></md-icon>
-            <input ng-model="proj.search" type="text">
+            <input ng-model="proj.search" type="text" placeholder="Search">
         </md-input-container>
         <span flex></span>
         <md-menu-bar>
-            <md-menu ng-repeat="menu in proj.filterConfig">
+            <md-menu ng-repeat="menu in proj.filterConfig" ng-init="proj.filterSelect(menu.selected, menu)">
                 <md-button ng-click="$mdOpenMenu($event)">
 					{{menu.selected.value}}
+        			<md-icon md-svg-src="assets/icons/caret.svg"></md-icon>
                 </md-button>
                 <md-menu-content layout="column" layout-align="center start">
                     <md-menu-item ng-repeat="item in menu.items">
-                        <a class="search-menu-button" ng-click="menu.selected = item">
-                        {{item.value}}
+                        <a class="search-menu-button" ng-click="proj.filterSelect(item, menu)">
+	        				<md-icon md-svg-src="{{menu.selected.key === item.key ? 'assets/icons/check.svg' : ''}}"></md-icon>
+	        				<img class="md-user-avatar" width="16" ng-src="{{item.avatar}}" ng-if="item.avatar" />
+	                        {{item.value}}
                         </a>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
         </md-menu-bar>
         <span flex="5"></span>
-    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-up-right">
+    </div>
+    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-top-right">
         <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
     </md-button>
-    </div>
 </md-toolbar>
 <section class="projects" layout="row">
 	<span flex="5"></span>
 	<div layout="row" layout-align="center center" layout-wrap flex>
-    	<card flex="33" info="project" ng-repeat="project in proj.projects | filter: proj.filter"></card>
+    	<card flex="33" info="project" ng-repeat="project in proj.projects | orderBy: proj.orders | searchField: 'name' : 'update' | filter: proj.search | where: proj.filters" ng-hide="proj.projects | isEmpty">
+    		<card-main-action>
+    			<md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
+	                <md-icon md-svg-src="assets/icons/eye.svg" class="icon"></md-icon>
+	                <span>View</span>
+	            </md-button>
+            </card-main-action>
+            <card-right-actions ng-if="!project.archived">
+            	<md-button type="button" class="md-icon-button" ng-click="" aria-label="Share">
+            		<md-tooltip>Share</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/share.svg" class="white"></md-icon>
+	            </md-button>
+	            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Copy">
+	            	<md-tooltip>Copy</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
+	            </md-button>
+	            <md-button type="button" class="md-icon-button" ng-click="proj.archive(project, $event)" aria-label="Archive">
+	            	<md-tooltip>Archive</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
+	            </md-button>
+	            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Delete">
+	            	<md-tooltip>Delete</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
+	            </md-button>
+            </card-right-actions>
+            <card-right-actions ng-if="project.archived">
+	            <md-button type="button" class="md-icon-button" ng-click="proj.unArchive(project, $event)" aria-label="Unarchive">
+	            	<md-tooltip>Unarchive</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/unarchive.svg" class="white"></md-icon>
+	            </md-button>
+	            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Delete">
+	            	<md-tooltip>Delete</md-tooltip>
+	                <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
+	            </md-button>
+            </card-right-actions>
+    	</card>
+    	<div ng-show="!proj.filters.archived && (proj.projects | where: proj.filters | isEmpty)">no content to show in active mode</div>
+    	<div ng-show="proj.filters.archived && (proj.projects | where: {archived: true} | isEmpty)">no content to show in archive mode</div>
     </div>
     <span flex="5"></span>
 </section>
-  
- 
-  
