@@ -45,7 +45,6 @@
 				value: 'Android Watch'
 			}
 		];
-
 		var collaborators = [
 			{
 				key: 1,
@@ -109,8 +108,16 @@
 			return col;
 		};
 
+		var status = {
+			onHold: 'ON HOLD',
+			inProgress: 'IN PROGRESS',
+			needsRewiev: 'NEEDS REWIEV',
+			approved: 'APPROVED'
+		};
+
 		var projects = [
 			{
+				id: 1,
 				name: 'D-D Play',
 				update: 1460094322,
 				owner: 'user',
@@ -121,6 +128,7 @@
 				archived: false
 			},
 			{
+				id: 2,
 				name: 'dDt4',
 				update: 1460091112,
 				owner: 'user',
@@ -131,6 +139,7 @@
 				archived: false
 			},
 			{
+				id: 3,
 				name: 'Aaafst2',
 				update: 1460094442,
 				owner: 'user',
@@ -141,6 +150,7 @@
 				archived: false
 			},
 			{
+				id: 4,
 				name: 'St3',
 				update: 1460094022,
 				owner: 'user2',
@@ -151,6 +161,7 @@
 				archived: false
 			},
 			{
+				id: 5,
 				name: 'Aaf',
 				update: 1460092532,
 				owner: 'user',
@@ -161,6 +172,7 @@
 				archived: false
 			},
 			{
+				id: 6,
 				name: 'aa',
 				update: 1460094002,
 				owner: 'user2',
@@ -231,16 +243,24 @@
 		];
 		var service = {
 			getTypes: getTypes,
+			getStatus: getStatus,
 			getProjects: getProjects,
 			addProject: addProject,
 			addProjectModal: addProjectModal,
-			getFilterConfig: getFilterConfig
+			getFilterConfig: getFilterConfig,
+            getUniqueСollaborators: getUniqueСollaborators,
+			updateValue: updateValue,
+			deletedProject: deletedProject
 		};
 
 		return service;
 
 		function getTypes() {
 			return types;
+		}
+		
+		function getStatus() {
+			return status;
 		}
 
 		function getFilterConfig() {
@@ -257,7 +277,6 @@
 					value: 'All collaborators'
 				}
 			];
-
 			var _ = $window._;
 			for (var key in projects) {
 				if (projects.hasOwnProperty(key)) {
@@ -268,12 +287,28 @@
 			}
 			return _.uniqWith(collaborators, _.isEqual);
 		}
-
 		function addProject(proj){
 			projects.push(proj);
 		}
 
-		function addProjectModal(ev) {
+		function updateValue(id, key, value){
+			projects.forEach(function(item, i, arr){
+				if(item.id === id){
+					item[key] = value;
+					
+				}
+			});
+		}
+		
+		function deletedProject(id){
+			projects.forEach(function(item, i, arr){
+				if(item.id === id){
+					arr.splice(i, 1);
+				}
+			});
+		}
+        
+        function addProjectModal(ev) {
 			$mdDialog.show({
 				controller: 'AddProjectController',
 				controllerAs:'addProj',

@@ -7,6 +7,11 @@
                 <md-icon md-svg-src="{{card.checked ? 'assets/icons/check_box.svg' : 'assets/icons/uncheck_box.svg'}}" class="white"></md-icon>
             </md-button>
         </div>
+        <div class="actions right" ng-if="card.isHovered" flex layout="row">
+            <md-button ng-repeat="item in card.socialButton" type="button" class="md-icon-button" ng-click="item.click($event)" aria-label="{{item.label}}">
+                <md-icon md-svg-src="{{item.svg}}" class="white"></md-icon>
+            </md-button>
+        </div>
         <div class="actions right" ng-if="card.isHovered" flex layout="row" ng-transclude="rightActions"></div>
     </div>
     <div class="info" layout="row" layout-align="center center" layout-padding>
@@ -25,35 +30,3 @@
         </div>
     </div>
 </md-card>
-<!-- <md-card class="card grid hvr-sweep-to-right">
-    <figure class="effect-julia">
-    
-        <img ng-src="{{info.img}}" class="md-card-image card-image" alt="">
-        <div layout="row" layout-align="center center" layout-padding>
-            <div flex layout="column" layout-align="center start">
-                <h5 class="title">{{info.name}}</h5>
-                <div class="projects-time-label">LAST UPDATE: 
-                    <span class="projects-time">{{info.update | date:'HH:mm dd.MM'}}</span>
-                </div>
-            </div>
-            <div>
-                <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">
-                    <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
-                </md-button>
-            </div>
-        </div>
-        <figcaption>
-            <div>
-                <div class="figcaption-center">
-                      <md-button type="button" class="md-icon-button" ng-click="console.log(23);" aria-label="Owner">
-                        <md-icon md-svg-src="assets/icons/perm_identity.svg"></md-icon>
-                    </md-button>
-                    <h6>VIEW SCREEN</h6>
-                </div>
-                
-            </div>
-        </figcaption>				
-        
-    </figure>
-    
-</md-card> -->
