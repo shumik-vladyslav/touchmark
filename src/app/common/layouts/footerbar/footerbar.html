@@ -1,6 +1,5 @@
 <footer flex layout="row" layout-align="space-around center">
     <div flex class="footer-menu" layout="row" layout-align="space-around start">
-        
         <div flex="20" class="footer-logo">
             <img flex ng-src="/assets/images/main/logo_footer.jpg">
         </div>
@@ -13,7 +12,7 @@
             <div class="footer-socials">
                 <p>FOLLOW US:</p>
                 <md-button class="md-icon-button" ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
-                <md-icon md-svg-src="{{social.image}}"></md-icon>
+                    <md-icon md-svg-src="{{social.image}}"></md-icon>
                 </md-button>
             </div>
         </div>

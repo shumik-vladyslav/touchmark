@@ -6,7 +6,7 @@
 		.controller('DialogModalController', DialogModalController);
 
 	/** @ngInject */
-	function DialogModalController($scope, $mdDialog, AuthService) {
+	function DialogModalController($scope, $mdDialog) {
 		var vm = this;
 		vm.submit = submit;
 		

@@ -11,12 +11,12 @@
         vm.sheetValue = BottomSheetService.getSheetValue();
         vm.selectedObject = BottomSheetService.getSelectedObject();
         vm.status = ProjectsService.getStatus();
-        
+
         vm.listItemClick = function($index) {
-            var clickedItem = vm.items[$index];
+        var clickedItem = vm.items[$index];
             $mdBottomSheet.hide(clickedItem);
         };
-        
+
         vm.delete = function (ev) {
 			$mdDialog.show({
 					controller: 'DialogModalController',
@@ -37,11 +37,9 @@
                     
                     vm.selectedObject = BottomSheetService.getSelectedObject();
                     
-                    BottomSheetService.showBottomSheet();
-				}, function() {
-				});
-              
-	    };
+                BottomSheetService.showBottomSheet();
+            });
+        };
         
         vm.update = function(value){
             for (var key in vm.selectedObject) {
@@ -55,6 +53,5 @@
         };
         
         vm.socialButton = BottomSheetService.getSocialButtonValue(vm);
-
 	}
 })();

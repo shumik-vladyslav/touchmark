@@ -6,7 +6,7 @@
 		.factory('ProjectsService', ProjectsService);
 
 	/** @ngInject */
-	function ProjectsService($mdDialog, $document, $window, $filter, $http) {
+	function ProjectsService($mdDialog, $document, $window) {
 		var types = [
 			{
 				key: 'all',
@@ -48,53 +48,53 @@
 		var collaborators = [
 			{
 				key: 1,
-	        	value: 'cindeekeem',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/cindeekeem/128.jpg'
+				value: 'cindeekeem',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/cindeekeem/128.jpg'
 			},
 			{
 				key: 2,
-	        	value: 'faisal_anwar22',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/faisal_anwar22/128.jpg'
+				value: 'faisal_anwar22',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/faisal_anwar22/128.jpg'
 			},
 			{
 				key: 3,
-	        	value: 'nuraika',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/nuraika/128.jpg'
+				value: 'nuraika',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/nuraika/128.jpg'
 			},
 			{
 				key: 4,
-	        	value: 'nategoyco',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/nategoyco/128.jpg'
+				value: 'nategoyco',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/nategoyco/128.jpg'
 			},
 			{
 				key: 5,
-	        	value: 'webtanya',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/webtanya/128.jpg'
+				value: 'webtanya',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/webtanya/128.jpg'
 			},
 			{
 				key: 6,
-	        	value: 'keremk',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/keremk/128.jpg'
+				value: 'keremk',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/keremk/128.jpg'
 			},
 			{
 				key: 7,
-	        	value: 'janiashutosh15',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/janiashutosh15/128.jpg'
+				value: 'janiashutosh15',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/janiashutosh15/128.jpg'
 			},
 			{
 				key: 8,
-	        	value: 'malgordon',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/malgordon/128.jpg'
+				value: 'malgordon',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/malgordon/128.jpg'
 			},
 			{
 				key: 9,
-	        	value: 'fichristiand',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
+				value: 'fichristiand',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
 			},
 			{
 				key: 10,
-	        	value: 'randomlies',
-	        	avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/randomlies/128.jpg'
+				value: 'randomlies',
+				avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/randomlies/128.jpg'
 			}
 		];
 
@@ -248,9 +248,10 @@
 			addProject: addProject,
 			addProjectModal: addProjectModal,
 			getFilterConfig: getFilterConfig,
-            getUniqueСollaborators: getUniqueСollaborators,
+			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
-			deletedProject: deletedProject
+			deletedProject: deletedProject,
+			copyProject: copyProject
 		};
 
 		return service;
@@ -292,7 +293,7 @@
 		}
 
 		function updateValue(id, key, value){
-			projects.forEach(function(item, i, arr){
+			projects.forEach(function(item){
 				if(item.id === id){
 					item[key] = value;
 					
@@ -307,8 +308,8 @@
 				}
 			});
 		}
-        
-        function addProjectModal(ev) {
+
+		function addProjectModal(ev) {
 			$mdDialog.show({
 				controller: 'AddProjectController',
 				controllerAs:'addProj',
@@ -323,6 +324,25 @@
 				// делать в этом сервисе
 			}, function() {
 
+			});
+		}
+
+		function copyProject(id) {
+			projects.forEach(function(item, i, arr){
+				if(item.id === id){
+					var tmpProject = {
+						id: item.id + 11,
+						name: item.name + '(Copy)',
+						update: item.update,
+						owner: item.owner,
+						type: item.type,
+						collaborators: item.collaborators,
+						img: item.img,
+						screens: item.screens,
+						archived: item.archived
+					};
+					projects.push(tmpProject);
+				}
 			});
 		}
 	}

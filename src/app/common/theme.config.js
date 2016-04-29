@@ -64,7 +64,7 @@
             'contrastDarkColors': '50 100 200 A100 A200'
         });
 
-        $mdThemingProvider.definePalette('filterBar', {
+        $mdThemingProvider.definePalette('subBar', {
             '50': '#cdedf0',
             '100': '#b9e6ea',
             '200': '#a6dee4',
@@ -96,8 +96,8 @@
         $mdThemingProvider.theme('bottomSheet')
             .primaryPalette('bottomSheet');
         
-        $mdThemingProvider.theme('filterBar')
-            .primaryPalette('filterBar');
+        $mdThemingProvider.theme('subBar')
+            .primaryPalette('subBar');
 
         $mdThemingProvider.alwaysWatchTheme(true);
     }

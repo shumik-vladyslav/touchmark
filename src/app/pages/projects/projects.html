@@ -1,5 +1,17 @@
-<!-- <filter-bar settings="proj.arrSetti" search="roj.searchValue" add="proj.add"></filter-bar> -->
-<md-toolbar md-theme="filterBar" class="filterBar" flex>
+<md-toolbar md-theme="subBar" class="subBar" flex>
+    <div class="md-toolbar-tools" flex>
+        <span flex="5"></span>
+        <group-button>
+        	<md-button ng-class="{'md-raised md-primary md-hue-3': !proj.filters.archived}" ng-click="proj.filters.archived = false">Active</md-button>
+        	<md-button ng-class="{'md-raised md-primary md-hue-3': proj.filters.archived}" ng-click="proj.filters.archived = true">Archive</md-button>
+        </group-button>
+        <span flex="5"></span>
+    </div>
+    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-top-right">
+        <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
+    </md-button>
+</md-toolbar>
+<md-toolbar class="filterBar" flex>
     <div class="md-toolbar-tools" flex>
         <span flex="5"></span>
         <md-input-container md-no-float class="md-icon-float search-container">
@@ -24,11 +36,16 @@
                 </md-menu-content>
             </md-menu>
         </md-menu-bar>
+        <group-button>
+        	<md-button ng-class="{'md-raised md-primary md-hue-3': !proj.filters.archived}" ng-click="proj.filters.archived = false">
+        		<md-icon md-svg-src="assets/icons/view_module.svg"></md-icon>
+        	</md-button>
+        	<md-button ng-class="{'md-raised md-primary md-hue-3': proj.filters.archived}" ng-click="proj.filters.archived = true">
+        		<md-icon md-svg-src="assets/icons/view_list.svg"></md-icon>
+        	</md-button>
+        </group-button>
         <span flex="5"></span>
     </div>
-    <md-button ng-click="add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-top-right">
-        <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
-    </md-button>
 </md-toolbar>
 <section class="projects" layout="row">
 	<span flex="5"></span>
@@ -45,7 +62,7 @@
             		<md-tooltip>Share</md-tooltip>
 	                <md-icon md-svg-src="assets/icons/share.svg" class="white"></md-icon>
 	            </md-button>
-	            <md-button type="button" class="md-icon-button" ng-click="" aria-label="Copy">
+	            <md-button type="button" class="md-icon-button" ng-click="proj.copy(project.id)" aria-label="Copy">
 	            	<md-tooltip>Copy</md-tooltip>
 	                <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
 	            </md-button>
@@ -69,8 +86,7 @@
 	            </md-button>
             </card-right-actions>
     	</card>
-    	<div ng-show="!proj.filters.archived && (proj.projects | where: proj.filters | isEmpty)">no content to show in active mode</div>
-    	<div ng-show="proj.filters.archived && (proj.projects | where: {archived: true} | isEmpty)">no content to show in archive mode</div>
+    	<div ng-show="proj.projects | filter: proj.search | where: proj.filters | isEmpty">no content to show</div>
     </div>
     <span flex="5"></span>
 </section>

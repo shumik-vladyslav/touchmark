@@ -11,20 +11,20 @@
 	    margin-bottom: 0;
     	margin-top: 0;
 
-    	.md-input {
-			color: rgba(255,255,255,.54);
-		}
+  //   	.md-input {
+		// 	color: rgba(255,255,255,.54);
+		// }
     	.md-errors-spacer {
     		min-height: 0;
     	}
     	&.md-input-focused {
-    		.md-input {
-    			border-color: rgba(255,255,255,.5) !important;
-    			color: #fff;
-    		}
-    		md-icon {
-	    		color: rgba(255,255,255,0.87) !important;
-	    	}
+    		// .md-input {
+    		// 	border-color: rgba(255,255,255,.5) !important;
+    		// 	color: #fff;
+    		// }
+    		// md-icon {
+	    	// 	color: rgba(255,255,255,0.87) !important;
+	    	// }
     	}
 	}
 }

@@ -8,7 +8,10 @@
 	/** @ngInject */
 	function SigninController($mdDialog, AuthService) {
 		var vm = this;
-		vm.user = {};
+		vm.user = {
+			email: 'user1@mail.com',
+			password: 'User1'
+		};
 		vm.forget = AuthService.forget;
 		vm.hide = $mdDialog.hide;
 		vm.cancel = $mdDialog.cancel;

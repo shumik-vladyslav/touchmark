@@ -6,7 +6,7 @@
 		.factory('BottomSheetService', BottomSheetService);
 
 	/** @ngInject */
-	function BottomSheetService($mdBottomSheet, $mdToast) {
+	function BottomSheetService($mdBottomSheet) {
         
         var vm = this;
         var showBottomFlag = true;
@@ -40,7 +40,7 @@
                 {label: 'Share', svg: 'assets/icons/share.svg'},
                 {label: 'Copy', svg: 'assets/icons/copy.svg'},
                 {label: 'Archive', svg: 'assets/icons/archive.svg'},
-                {label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete},
+                {label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete}
             ];
             
             return arr;
@@ -86,7 +86,7 @@
                 clickOutsideToClose: false,
                 disableParentScroll : false,
                 disableBackdrop: true,
-                onRemove: function (scope, element, options) {
+                onRemove: function() {
                     if(!vm.selectedObject.length){
                         // var scrollmask = document.getElementsByClassName('md-scroll-mask');
                         // var backdrop = document.getElementsByTagName('md-backdrop');
@@ -94,9 +94,10 @@
                         // angular.element(backdrop).remove();
                         // angular.element(element).remove();
                         $mdBottomSheet.hide();
-                    }else{
-                        $mdUtil.enableScrolling();
                     }
+                    // else{
+                    //     // $mdUtil.enableScrolling();
+                    // }
                 }});
             }
            

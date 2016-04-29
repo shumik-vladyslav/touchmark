@@ -90,3 +90,10 @@
 //         margin-left: 620px;
 //     }
 // }
+group-button {
+    border-radius: 3px;
+    background: rgba(0,0,0,.2);
+    .md-button {
+    	margin: 0;
+    }
+}

@@ -18,6 +18,7 @@
     vm.projects = ProjectsService.getProjects();
     vm.filters = {};
     vm.orders = '';
+
     vm.filterSelect = function(item, menu) {
       menu.selected = item;
       var _ = $window._;
@@ -39,6 +40,7 @@
         break;
       }
     };
+
     vm.archive = function(project, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
@@ -48,13 +50,13 @@
         .theme('navAuth')
         .ok('Archive')
         .cancel('Cancel');
+
       $mdDialog.show(confirm).then(function() {
         project.archived = true;
         toastr.success('Successfully', 'Archived', {timeOut: false});
-      }, function() {
-
       });
     };
+
     vm.unArchive = function(project, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to unarchive?')
@@ -64,12 +66,15 @@
         .theme('navAuth')
         .ok('Archive')
         .cancel('Cancel');
+
       $mdDialog.show(confirm).then(function() {
         project.archived = false;
         toastr.success('Successfully', 'Unarchived', {timeOut: false});
-      }, function() {
-
       });
+    };
+
+    vm.copy= function(id) {
+      ProjectsService.copyProject(id);
     };
   }
 })();
