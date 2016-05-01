@@ -18,6 +18,23 @@
     vm.projects = ProjectsService.getProjects();
     vm.filters = {};
     vm.orders = '';
+    vm.cardTypes = [
+      {
+        key: 'module',
+        value: 'Module',
+        icon: 'assets/icons/view_module.svg'
+      },
+      {
+        key: 'list',
+        value: 'List',
+        icon: 'assets/icons/view_list.svg'
+      }
+    ];
+    vm.cardType = 'module';
+
+    vm.setCardType = function(type) {
+      vm.cardType = type;
+    };
 
     vm.filterSelect = function(item, menu) {
       menu.selected = item;
@@ -53,7 +70,7 @@
 
       $mdDialog.show(confirm).then(function() {
         project.archived = true;
-        toastr.success('Successfully', 'Archived', {timeOut: false});
+        toastr.success('Successfully', 'Archived', {progressBar: false});
       });
     };
 
@@ -69,7 +86,7 @@
 
       $mdDialog.show(confirm).then(function() {
         project.archived = false;
-        toastr.success('Successfully', 'Unarchived', {timeOut: false});
+        toastr.success('Successfully', 'Unarchived', {progressBar: false});
       });
     };
 

@@ -6,7 +6,7 @@
     .controller('NavbarController', NavbarController);
 
   /** @ngInject */
-  function NavbarController($scope, AuthService, NavService) {
+  function NavbarController(AuthService, NavService) {
     var vm = this;
     vm.theme = theme;
     vm.signIn = AuthService.signIn;

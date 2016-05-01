@@ -193,9 +193,9 @@ h6{
 }
 
 //redio button
-md-radio-button.md-default-theme.md-checked .md-off, 
+md-radio-button.md-default-theme.md-checked .md-off,
 md-radio-button.md-checked .md-off {
-        border-color: $primary-color; 
+        border-color: $primary-color;
 }
 
  md-radio-group .md-checked .md-ink-ripple {
@@ -203,35 +203,35 @@ md-radio-button.md-checked .md-off {
 }
 
 md-radio-button {
-    
-    div.md-on{ 
-        background-color: $primary-color; 
+
+    div.md-on{
+        background-color: $primary-color;
         top: 2.3px;
         left: 2.4px;
         width: 16px;
         height: 16px;
     }
-    
+
     div.md-off{
-        border-color: $primary-color; 
-    } 
-    
-    
+        border-color: $primary-color;
+    }
+
+
     div.md-label {
         font-family: $family-Raleway-semibold;
         color: $primary-color;
     }
-    
+
 }
 
 //checkbox
 md-checkbox {
-    
+
     .md-label{
         font-family: $family-Raleway-semibold;
         color: $primary-color
     }
-    
+
     .md-icon {
         border-color: $primary-color;
         border-radius: 25%;
@@ -244,14 +244,14 @@ md-checkbox.md-checked .md-icon {
 
 //dropdown
 div.md-open-menu-container md-menu-content {
-    
+
     md-menu-item{
-        
+
         color: $primary-light-color;
         font-family: $family-Raleway-semibold;
         padding: 0 16px;
     }
-    
+
     md-menu-item:hover {
         cursor: pointer;
         color: #ff7f9f;
@@ -269,21 +269,21 @@ div.md-open-menu-container md-menu-content {
 // }
 
 // button.md-button:not([disabled]):hover {
-//     background-color: #d90036; 
+//     background-color: #d90036;
 // }
 
 // button.md-button:not([disabled]):active {
-//     background-color: #bf0030; 
+//     background-color: #bf0030;
 // }
 
 // .md-button[disabled] {
-//     background-color: #f7ccd7; 
+//     background-color: #f7ccd7;
 //     color: white !important;
 // }
 
 // .circle-button{
 //     line-height: 56px;
-//     padding: 0 0; 
+//     padding: 0 0;
 //     min-width: 0;
 //     width: 56px;
 //     height: 56px;
@@ -308,7 +308,7 @@ div.md-open-menu-container md-menu-content {
 //     color: $primary-dark-color;
 //     font-family: $family-Raleway-semibold;
 //     padding: 5px 26px;
-    
+
 // }
 
 // md-input-container:not(.md-input-invalid).md-input-focused .md-input {
@@ -439,6 +439,23 @@ section.jumbotron {
 }
 .subBar {
   z-index: 10;
+}
+
+group-button {
+  border-radius: 3px;
+  background: rgba(0,0,0,.2);
+  .md-button {
+    margin: 0;
+
+    &.md-mini {
+      min-width: auto;
+    }
+  }
+}
+
+.md-user-avatar {
+  border-radius: 50%;
+  width: 24px;
 }
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject

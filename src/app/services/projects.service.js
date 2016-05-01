@@ -204,24 +204,24 @@
 					expression: '-update'
 				}
 			},
-			{
-				type: 'filter',
-				items: [
-					{
-						key: false,
-						value: 'Active'
-					},
-					{
-						key: true,
-						value: 'Archive'
-					}
-				],
-				selected: {
-					key: false,
-					value: 'Active'
-				},
-				column: 'archived'
-			},
+			// {
+			// 	type: 'filter',
+			// 	items: [
+			// 		{
+			// 			key: false,
+			// 			value: 'Active'
+			// 		},
+			// 		{
+			// 			key: true,
+			// 			value: 'Archive'
+			// 		}
+			// 	],
+			// 	selected: {
+			// 		key: false,
+			// 		value: 'Active'
+			// 	},
+			// 	column: 'archived'
+			// },
 			{
 				type: 'filter',
 				items: types,
@@ -259,7 +259,7 @@
 		function getTypes() {
 			return types;
 		}
-		
+
 		function getStatus() {
 			return status;
 		}
@@ -296,11 +296,11 @@
 			projects.forEach(function(item){
 				if(item.id === id){
 					item[key] = value;
-					
+
 				}
 			});
 		}
-		
+
 		function deletedProject(id){
 			projects.forEach(function(item, i, arr){
 				if(item.id === id){
@@ -320,7 +320,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-				// self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо 
+				// self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо
 				// делать в этом сервисе
 			}, function() {
 
@@ -328,7 +328,7 @@
 		}
 
 		function copyProject(id) {
-			projects.forEach(function(item, i, arr){
+			projects.forEach(function(item){
 				if(item.id === id){
 					var tmpProject = {
 						id: item.id + 11,

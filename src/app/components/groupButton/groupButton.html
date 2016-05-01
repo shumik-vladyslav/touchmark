@@ -1,0 +1,8 @@
+<md-button class="md-mini" ng-class="{'md-raised md-primary md-hue-3': !proj.filters.archived}"
+           ng-click="proj.filters.archived = false" aria-label="View module">
+  <md-icon md-svg-src="assets/icons/view_module.svg"></md-icon>
+</md-button>
+<md-button class="md-mini" ng-class="{'md-raised md-primary md-hue-3': proj.filters.archived}"
+           ng-click="proj.filters.archived = true" aria-label="View list">
+  <md-icon md-svg-src="assets/icons/view_list.svg"></md-icon>
+</md-button>
