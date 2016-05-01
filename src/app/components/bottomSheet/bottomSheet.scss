@@ -1,14 +1,15 @@
 .bottom-sheet{
-    background: #006A85;
+  background: #006A85;
+  position: fixed;
     h5{
         color: white;
     }
-    
+
    div .md-icon-button md-icon {
         color: white;;
     }
-  
-   
+
+
 }
 
 .md-open-menu-container md-menu-content{
@@ -20,15 +21,15 @@
         display: block;
         width: 100%;
         padding-left: 16px;
-        
+
         div{
             float: right;
             padding-right: 25px;
             font-size: 12px;
         }
-        
+
     }
-   
+
 }
 
 md-backdrop.md-bottom-sheet-backdrop {
