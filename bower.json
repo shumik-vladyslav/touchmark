@@ -1,5 +1,5 @@
 {
-  "name": "touchMark",
+  "name": "touch-mark",
   "version": "0.0.0",
   "dependencies": {
     "angular-animate": "^1.5.1",
