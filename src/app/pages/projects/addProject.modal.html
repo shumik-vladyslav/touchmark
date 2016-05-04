@@ -1,0 +1,39 @@
+<md-dialog aria-label="Add Project dialog">
+  <form name="form" ng-submit="form.$valid && addProj.submit()" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Create new prototype</h2>
+        <span flex></span>
+        <md-button type="button" class="md-icon-button" ng-click="addProj.close()">
+          <md-icon md-svg-src="/assets/icons/close.svg" aria-label="close"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout-padding>
+        <md-input-container class="md-block">
+          <label>Prototype name</label>
+          <input required type="text" name="name" ng-model="addProj.project.name">
+          <div ng-messages="form.name.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Prototype type</label>
+          <md-select ng-model="addProj.project.type" name="types" required>
+            <md-option ng-repeat="type in addProj.projectTypes" value="{{type.key}}">
+              {{type.value}}
+            </md-option>
+          </md-select>
+          <div class="errors" ng-messages="form.types.$error" ng-if="form.$dirty && form.$submitted">
+            <div ng-message="required">Required</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button ng-disabled="form.$invalid" type="submit" class="md-primary md-raised">Create prototype</md-button>
+      <md-button type="button" ng-click="addProj.close()" class="md-primary md-raised">Cancel</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

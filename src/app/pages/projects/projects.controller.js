@@ -93,5 +93,13 @@
     vm.copy= function(id) {
       ProjectsService.copyProject(id);
     };
+
+
+    vm.addDialog = function(ev){
+      
+      ProjectsService.addProjectModal(ev);
+      
+    };
+
   }
 })();

@@ -251,7 +251,8 @@
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
 			deletedProject: deletedProject,
-			copyProject: copyProject
+			copyProject: copyProject,
+      rndUsers: rndUsers
 		};
 
 		return service;
@@ -309,11 +310,12 @@
 			});
 		}
 
+
 		function addProjectModal(ev) {
-			$mdDialog.show({
+      $mdDialog.show({
 				controller: 'AddProjectController',
 				controllerAs:'addProj',
-				templateUrl: 'app/components/addProject/addProject.modal.html',
+				templateUrl: 'app/pages/projects/addProject.modal.html',
 				parent: angular.element($document.body),
 				targetEvent: ev,
 				clickOutsideToClose: true,

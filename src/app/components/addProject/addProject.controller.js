@@ -1,11 +1,11 @@
-(function() {
+/*(function() {
 	'use strict';
 
 	angular
 		.module('app')
 		.controller('AddProjectController', AddProjectController);
 
-	/** @ngInject */
+	/** @ngInject 
 	function AddProjectController($mdDialog, ProjectsService) {
 		var vm = this;
 		vm.project = {};
@@ -40,4 +40,4 @@
             
 		}
 	}
-})();
+})();*/
