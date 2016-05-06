@@ -48,6 +48,12 @@
         controller: 'ScreensController',
         controllerAs: 'proj'
       })
+      .state('main.screen', {
+        url: '/screen/:uuid',
+        templateUrl: 'app/pages/screen/screen.html',
+        controller: 'ScreenController',
+        controllerAs: 'screen'
+      })
       .state('main.uikit', {
         url: '/uikit',
         templateUrl: 'app/pages/uikit/uikit.html'
