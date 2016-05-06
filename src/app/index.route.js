@@ -42,6 +42,12 @@
         controller: 'ProjectsController',
         controllerAs: 'proj'
       })
+      .state('main.project', {
+        url: '/project/:project',
+        templateUrl: 'app/pages/project/project.html',
+        controller: 'ProjectController',
+        controllerAs: 'proj'
+      })
       .state('main.uikit', {
         url: '/uikit',
         templateUrl: 'app/pages/uikit/uikit.html'
