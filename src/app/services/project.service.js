@@ -63,7 +63,7 @@
 
 		var rndUsers = function() {
 			var col = [];
-			var rnd = Math.floor(Math.random() * 2);
+			var rnd = Math.floor(Math.random() * 2)+1;
 			for (var i = 0; i < rnd; i++) {
 				var rnd2 = Math.floor(Math.random() * collaborators.length);
 				col.push(collaborators[rnd2]);
@@ -157,10 +157,9 @@
 		
 		var rndScreen = function() {
 			var col = [];
-			var rnd = Math.floor(Math.random() * 3) + 1;
+			var rnd = Math.floor(Math.random() * 5) + 1;
 			for (var i = 0; i < rnd; i++) {
-				var rnd2 = Math.floor(Math.random() * screens.length);
-				col.push(screens[rnd2]);
+				col.push(screens[i]);
 			}
 			return col;
 		};
@@ -226,9 +225,8 @@
 			addScreenModal: addScreenModal,
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
-			updateValue: updateValue,
 			deletedScreen: deletedScreen,
-			copyProject: copyProject
+			copyScreen: copyScreen
 		};
 
 		return service;
@@ -279,22 +277,13 @@
 			}
 		}
 
-		function updateValue(id, key, value){
-			project.forEach(function(item){
-				if(item.id === id){
-					item[key] = value;
-
-				}
-			});
-		}
-
-		function deletedScreen(id, idScreen){
+		function deletedScreen(id, screenId){
 			for (var key in project) {
 				if (project.hasOwnProperty(key)) {
 					var element = project[key];
 					if(element.id === id){
 						element.screens.forEach(function(item, i, arr){
-							if(item.id === id){
+							if(item.id === screenId){
 								arr.splice(i, 1);
 							}
 						});
@@ -320,21 +309,22 @@
 			});
 		}
 
-		function copyProject(id) {
+		function copyScreen(id, screenId) {
 			project.forEach(function(item){
 				if(item.id === id){
-					var tmpProject = {
-						id: item.id + 11,
-						name: item.name + '(Copy)',
-						update: item.update,
-						owner: item.owner,
-						type: item.type,
-						collaborators: item.collaborators,
-						img: item.img,
-						screens: item.screens,
-						archived: item.archived
-					};
-					project.push(tmpProject);
+					item.screens.forEach(function(screen){
+						if(screen.id === screenId){
+							var tmpProject = {
+							id: screen.id + 11,
+							name: screen.name + '(Copy)',
+							fileName: screen.fileName + '(Copy)',
+							update: new Date(),
+							owner: screen.owner,
+							img: screen.img,
+						};
+						item.screens.push(tmpProject);
+						}
+					});
 				}
 			});
 		}

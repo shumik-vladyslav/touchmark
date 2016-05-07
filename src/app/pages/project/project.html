@@ -7,7 +7,15 @@
       <md-button ng-class="{'md-raised md-primary md-hue-3': proj.filters.archived}"
                  ng-click="proj.filters.archived = true">Archive</md-button>
     </group-button>
-    <span flex="5"></span>
+    <span flex="55"></span>
+    <md-menu-content class="menu-content-project" layout="row" layout-align="center center">
+      <md-menu-item ng-repeat="item in proj.project.collaborators">
+        <a class="search-menu-button" ng-click="proj.filterSelect(item, menu)">
+          <md-icon md-svg-src="{{menu.selected.key === item.key ? 'assets/icons/check.svg' : ''}}"></md-icon>
+          <img class="md-user-avatar" width="16" ng-src="{{item.avatar}}" ng-if="item.avatar" />
+        </a>
+      </md-menu-item>
+    </md-menu-content>
   </div>
   <md-button ng-click="proj.add.click($event)" aria-label="add.title" class="md-warn md-fab md-fab-top-right">
     <md-icon md-svg-src="/assets/icons/add.svg"></md-icon>
@@ -73,7 +81,7 @@
           <md-tooltip>Archive</md-tooltip>
           <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
         </md-button>
-        <md-button type="button" class="md-icon-button" ng-click="" aria-label="Delete">
+        <md-button type="button" class="md-icon-button" ng-click="proj.deleted(screen.id)" aria-label="Delete">
           <md-tooltip>Delete</md-tooltip>
           <md-icon md-svg-src="assets/icons/delete.svg" class="white"></md-icon>
         </md-button>

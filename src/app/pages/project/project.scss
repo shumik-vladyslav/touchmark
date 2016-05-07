@@ -1,3 +1,14 @@
 .project{
     padding: 50px 0;
 }
+
+.menu-content-project{
+    background: rgb(107,201,210);
+    md-menu-item{
+        a{
+            padding-left: 0; 
+            padding-right: 0;
+        }
+        
+    }
+}

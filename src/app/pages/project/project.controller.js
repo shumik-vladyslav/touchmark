@@ -14,8 +14,9 @@
       title: 'Add Screen',
       click: ProjectService.addScreenModal
     };
-    vm.project = ProjectService.getProject(+$state.params['project']);
-    console.log(vm.project);
+    vm.projectId = +$state.params['project'];
+    vm.project = ProjectService.getProject(vm.projectId);
+    console.log(vm.project)
     vm.filters = {};
     vm.orders = '';
     vm.cardTypes = [
@@ -88,7 +89,11 @@
     };
 
     vm.copy= function(id) {
-      ProjectService.copyProject(id);
+      ProjectService.copyScreen(vm.projectId, id);
+    };
+    
+    vm.deleted= function(id) {
+      ProjectService.deletedScreen(vm.projectId, id);
     };
   }
 })();
