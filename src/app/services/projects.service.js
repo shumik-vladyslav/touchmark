@@ -319,7 +319,11 @@
 				parent: angular.element($document.body),
 				targetEvent: ev,
 				clickOutsideToClose: true,
-				fullscreen: false
+				fullscreen: false,
+        bindToController: true,
+        scope: {
+
+        }
 			})
 			.then(function() {
 				// self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо

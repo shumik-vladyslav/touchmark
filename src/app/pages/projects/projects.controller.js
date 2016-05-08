@@ -6,7 +6,7 @@
     .controller('ProjectsController', ProjectsController);
 
   /** @ngInject */
-  function ProjectsController(ProjectsService, BottomSheetService, $window, $mdDialog, toastr) {
+  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.filterConfig = ProjectsService.getFilterConfig();
@@ -58,6 +58,50 @@
       }
     };
 
+
+    vm.showModal = function(ev){
+      CommonService.formDialog(
+        ev,
+        {
+          type: 'text',
+          items: [
+            {
+              type: 'text',
+              name: 'name',
+              label: 'Your name',
+              required: true,
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                }
+              ]
+            }, {
+              type: 'select',
+              name: 'name',
+              label: 'Your name',
+              required: true,
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                }
+              ],
+              options: [
+                {
+                  key: '1',
+                  value: 'Ivan'
+                }, {
+                  key: '2',
+                  value: 'Petya'
+                }
+              ]
+            }
+          ]
+        }
+      );
+    };
+
     vm.archive = function(project, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
@@ -96,9 +140,9 @@
 
 
     vm.addDialog = function(ev){
-      
+
       ProjectsService.addProjectModal(ev);
-      
+
     };
 
   }

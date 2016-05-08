@@ -1,0 +1,48 @@
+<md-dialog aria-label="Form Dialog" flex="50">
+  <form name="form" ng-submit="form.$valid && dialog.submit($event)">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1>{{dialog.title || 'Form Dialog'}}</h1>
+        <span flex></span>
+        <md-button type="button" class="md-icon-button" ng-click="dialog.cancel($event)">
+          <md-icon md-svg-icon="/assets/icons/close.svg" aria-label="close"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout-padding>
+        <md-input-container class="md-block" ng-repeat="item in dialog.items">
+          <label ng-if="item.label">{{ item.label }}</label>
+
+          <input
+            ng-if="item.type !== 'select' && item.type !== 'textarea'"
+            aria-label="item.label"
+            ng-required="item.required"
+            name="{{item.name}}"
+            type="{{item.type}}"
+            ng-model="dialog.result.input">
+
+          <md-select
+            ng-if="item.type === 'select'"
+            aria-label="item.label"
+            ng-required="item.required"
+            name="{{item.name}}"
+            ng-model="dialog.result.select">
+            <md-option ng-repeat="option in item.options" value="{{option.key}}">
+              {{option.value}}
+            </md-option>
+          </md-select>
+
+          <ng-messages for="dialog.getMessagesStr(item.name)" role="alert">
+            <ng-message ng-repeat="err in item.errors" when-exp="err.type">error</ng-message>
+          </ng-messages>
+
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button type="submit" class="md-primary md-raised" >Ok</md-button>
+      <md-button type="button" class="md-primary md-raised" ng-click="dialog.cancel($event)">Cancel</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
