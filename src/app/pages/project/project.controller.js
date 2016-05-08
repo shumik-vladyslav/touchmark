@@ -34,29 +34,29 @@
     vm.cardType = 'module';
 
 
-    // vm.filterSelect = function(item, menu) {
-    //   menu.selected = item;
-    //   var _ = $window._;
+    vm.filterSelect = function(item, menu) {
+      menu.selected = item;
+      var _ = $window._;
 
-    //   switch(menu.type) {
-    //     case 'order':
-    //       vm.orders = item.expression;
-    //     break;
-    //     case 'filter':
-    //       if(item.key === 'all') {
-    //         vm.filters = _.omit(vm.filters, menu.column);
-    //       } else {
-    //         if(menu.column === 'collaborators.key') {
-    //           vm.filters[menu.column] = item.key;
-    //         } else {
-    //           vm.filters[menu.column] = item.key;
-    //         }
-    //       }
-    //     break;
-    //   }
-    // };
+      switch(menu.type) {
+        case 'order':
+          vm.orders = item.expression;
+        break;
+        case 'filter':
+          if(item.key === 'all') {
+            vm.filters = _.omit(vm.filters, menu.column);
+          } else {
+            if(menu.column === 'collaborators.key') {
+              vm.filters[menu.column] = item.key;
+            } else {
+              vm.filters[menu.column] = item.key;
+            }
+          }
+        break;
+      }
+    };
 
-    vm.archive = function(screen, ev) {
+    vm.archive = function(id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
         .textContent('Your projects will be archived')
@@ -67,7 +67,7 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        screen.archived = true;
+        ProjectService.setScreenValue(vm.projectId, id, 'archived', true);
         toastr.success('Successfully', 'Archived', {progressBar: false});
       });
     };
@@ -83,7 +83,7 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        screen.archived = false;
+        ProjectService.setScreenValue(vm.projectId, id, 'archived', false);
         toastr.success('Successfully', 'Unarchived', {progressBar: false});
       });
     };

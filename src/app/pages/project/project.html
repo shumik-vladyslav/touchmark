@@ -12,7 +12,8 @@
       <md-menu-item ng-repeat="item in proj.project.collaborators">
         <a class="search-menu-button" ng-click="proj.filterSelect(item, menu)">
           <md-icon md-svg-src="{{menu.selected.key === item.key ? 'assets/icons/check.svg' : ''}}"></md-icon>
-          <img class="md-user-avatar" width="16" ng-src="{{item.avatar}}" ng-if="item.avatar" />
+          <img class="md-user-avatar" width="16" ng-src="{{item.avatar}}" ng-if="item.avatar"/>
+          <md-tooltip>{{item.value}}</md-tooltip>
         </a>
       </md-menu-item>
     </md-menu-content>
@@ -59,8 +60,8 @@
 </md-toolbar>
 <section class="project" layout="row">
   <span flex="5"></span>
-  <div layout="row" layout-align="center center" layout-wrap flex>
-    <card info="screen" type="proj.cardType" ng-repeat="screen in proj.project.screens" ng-hide="proj.project.screens | isEmpty"
+  <div layout="row" layout-align="start center" layout-wrap flex>
+    <card info="screen" type="proj.cardType" ng-repeat="screen in proj.project.screens | where: proj.filters" ng-hide="proj.project.screens | isEmpty"
       flex="{{proj.cardType === 'module' ? '33' : '100'}}">
       <card-main-action>
         <md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
@@ -77,7 +78,7 @@
           <md-tooltip>Copy</md-tooltip>
           <md-icon md-svg-src="assets/icons/copy.svg" class="white"></md-icon>
         </md-button>
-        <md-button type="button" class="md-icon-button" ng-click="proj.archive(screen, $event)" aria-label="Archive">
+        <md-button type="button" class="md-icon-button" ng-click="proj.archive(screen.id, $event)" aria-label="Archive">
           <md-tooltip>Archive</md-tooltip>
           <md-icon md-svg-src="assets/icons/archive.svg" class="white"></md-icon>
         </md-button>
@@ -97,7 +98,7 @@
         </md-button>
       </card-right-actions>
     </card>
-    <div ng-show="proj.project.screens | filter: proj.search | isEmpty">no content to show</div>
+    <div ng-show="proj.project.screens | where: proj.filters | filter: proj.search | isEmpty">no content to show</div>
   </div>
   <span flex="5"></span>
 </section>

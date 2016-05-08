@@ -92,6 +92,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
 				},
 				img: 'assets/images/project/p1.jpg',
+				archived: false
 			},
 			{
 				id: 2,
@@ -104,6 +105,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/malgordon/128.jpg'
 				},
 				img: 'assets/images/project/p2.jpg',
+				archived: false
 			},
 			{
 				id: 3,
@@ -116,6 +118,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/malgordon/128.jpg'
 				},
 				img: 'assets/images/project/p3.jpg',
+				archived: false
 			},
 			{
 				id: 4,
@@ -128,6 +131,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/janiashutosh15/128.jpg'
 				},
 				img: 'assets/images/project/p4.jpg',
+				archived: false
 			},
 			{
 				id: 5,
@@ -140,6 +144,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/malgordon/128.jpg'
 				},
 				img: 'assets/images/project/p5.jpg',
+				archived: false
 			},
 			{
 				id: 6,
@@ -152,6 +157,7 @@
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
 				},
 				img: 'assets/images/project/p6.jpg',
+				archived: false
 			}
 		];
 		
@@ -190,33 +196,6 @@
 					expression: '-update'
 				}
 			},
-			// {
-			// 	type: 'filter',
-			// 	items: [
-			// 		{
-			// 			key: false,
-			// 			value: 'Active'
-			// 		},
-			// 		{
-			// 			key: true,
-			// 			value: 'Archive'
-			// 		}
-			// 	],
-			// 	selected: {
-			// 		key: false,
-			// 		value: 'Active'
-			// 	},
-			// 	column: 'archived'
-			// },
-			{
-				type: 'filter',
-				items: getUniqueСollaborators(),
-				selected: {
-					key: 'all',
-					value: 'All collaborators'
-				},
-				column: 'collaborators.key'
-			}
 		];
 		var service = {
 			getStatus: getStatus,
@@ -226,7 +205,8 @@
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			deletedScreen: deletedScreen,
-			copyScreen: copyScreen
+			copyScreen: copyScreen,
+			setScreenValue: setScreenValue
 		};
 
 		return service;
@@ -328,5 +308,17 @@
 				}
 			});
 		}
+		
+		function setScreenValue(id, screenId, key, vlaue){
+			project.forEach(function(item){
+				if(item.id === id){
+					item.screens.forEach(function(screen){
+						if(screen.id === screenId){
+							screen[key] = vlaue;
+						}
+					});
+				}
+			});
+		}	
 	}
 })();
