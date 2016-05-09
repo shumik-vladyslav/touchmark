@@ -1,5 +1,5 @@
 <md-dialog aria-label="Form Dialog" flex="50">
-  <form name="form" ng-submit="form.$valid && dialog.submit($event)">
+  <form name="form" ng-submit="form.$valid && dialog.submit($event)" novalidate>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h1>{{dialog.title || 'Form Dialog'}}</h1>
@@ -11,30 +11,29 @@
     </md-toolbar>
     <md-dialog-content>
       <div layout-padding>
-        <md-input-container class="md-block" ng-repeat="item in dialog.items">
+        <md-input-container class="md-block" ng-repeat="item in dialog.items" ng-switch="item.type">
           <label ng-if="item.label">{{ item.label }}</label>
 
           <input
-            ng-if="item.type !== 'select' && item.type !== 'textarea'"
+            ng-switch-when="text"
             aria-label="item.label"
             ng-required="item.required"
             name="{{item.name}}"
             type="{{item.type}}"
-            ng-model="dialog.result.input">
+            ng-model="dialog.result[item.name]">
 
           <md-select
-            ng-if="item.type === 'select'"
+            ng-switch-when="select"
             aria-label="item.label"
             ng-required="item.required"
             name="{{item.name}}"
-            ng-model="dialog.result.select">
+            ng-model="dialog.result[item.name]">
             <md-option ng-repeat="option in item.options" value="{{option.key}}">
               {{option.value}}
             </md-option>
           </md-select>
-
-          <ng-messages for="dialog.getMessagesStr(item.name)" role="alert">
-            <ng-message ng-repeat="err in item.errors" when-exp="err.type">error</ng-message>
+          <ng-messages ng-show="form.$submitted" for="form[item.name].$error" role="alert">
+            <ng-message ng-repeat="err in item.errors" when-exp="err.type">{{err.message}}</ng-message>
           </ng-messages>
 
         </md-input-container>
@@ -42,7 +41,7 @@
     </md-dialog-content>
     <md-dialog-actions>
       <md-button type="submit" class="md-primary md-raised" >Ok</md-button>
-      <md-button type="button" class="md-primary md-raised" ng-click="dialog.cancel($event)">Cancel</md-button>
+      <md-button type="button" class="md-primary md-raised" ng-click="dialog.cancel()">Cancel</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>

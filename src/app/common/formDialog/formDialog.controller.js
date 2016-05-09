@@ -10,20 +10,12 @@
 	/** @ngInject */
 	function FormDialogController($mdDialog) {
 		var vm = this;
-		vm.submit = function (ev) {
-
+		vm.submit = function() {
+      $mdDialog.hide(vm.result);
 		};
 
-    vm.cancel = function(ev){
-      $mdDialog.cancel(ev);
-    };
-
-    vm.getMessagesStr = function(itemName){ 
-      return "form." + itemName + ".$error";
-    };
-
-    vm.getMessageStr = function(errorName){
-      return errorName;
+    vm.cancel = function(){
+      $mdDialog.cancel();
     };
 
 	}

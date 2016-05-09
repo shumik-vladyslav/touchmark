@@ -6,7 +6,7 @@
     .controller('ProjectsController', ProjectsController);
 
   /** @ngInject */
-  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, toastr) {
+  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, toastr, $log) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.filterConfig = ProjectsService.getFilterConfig();
@@ -68,7 +68,7 @@
             {
               type: 'text',
               name: 'name',
-              label: 'Your name',
+              label: 'Project name',
               required: true,
               errors: [
                 {
@@ -78,8 +78,8 @@
               ]
             }, {
               type: 'select',
-              name: 'name',
-              label: 'Your name',
+              name: 'type',
+              label: 'Project type',
               required: true,
               errors: [
                 {
@@ -87,19 +87,26 @@
                   message: 'This is required.'
                 }
               ],
-              options: [
-                {
-                  key: '1',
-                  value: 'Ivan'
-                }, {
-                  key: '2',
-                  value: 'Petya'
-                }
-              ]
+              options: ProjectsService.getTypes()
             }
           ]
         }
-      );
+      ).then(function(data){
+        ProjectsService.addProject({
+          id: new Date().getTime(),
+          name: data.name,
+          update: new Date().getTime(),
+          owner: 'user',
+          collaborators: ProjectsService.rndUsers(),
+          type: data.type,
+          img: 'assets/images/projects/p'+Math.floor(Math.random() * 5 + 1)+'.jpg',
+          screens: Math.floor(Math.random() * 29 + 1),
+          archived: false
+        });
+        $log.log(ProjectsService.getProjects());
+      }, function(a){
+        $log.info(a);
+      });
     };
 
     vm.archive = function(project, ev) {
