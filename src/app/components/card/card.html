@@ -17,7 +17,8 @@
       <div flex layout="column" layout-align="center start">
         <h5 class="title">{{info.name}}</h5>
         <div ng-if="!card.isHovered" class="subTitle">{{info.update | date:'HH:mm dd.MM'}}</div>
-        <div ng-if="card.isHovered" class="subTitle">{{info.screens}} screens</div>
+        <div ng-if="card.isHovered && info.screens" class="subTitle">{{info.screens}} screens</div>
+        <div ng-if="card.isHovered && info.fileName" class="subTitle">{{info.fileName}}</div>
       </div>
       <div layout="row">
         <md-button type="button" class="md-icon-button" ng-click="" aria-label="Owner">

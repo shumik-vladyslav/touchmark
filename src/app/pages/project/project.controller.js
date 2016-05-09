@@ -46,11 +46,7 @@
           if(item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
-            if(menu.column === 'collaborators.key') {
-              vm.filters[menu.column] = item.key;
-            } else {
-              vm.filters[menu.column] = item.key;
-            }
+            vm.filters[menu.column] = item.key;
           }
         break;
       }
@@ -72,7 +68,7 @@
       });
     };
 
-    vm.unArchive = function(screen, ev) {
+    vm.unArchive = function(id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to unarchive?')
         .textContent('Your projects will be unarchived')

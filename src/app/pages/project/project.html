@@ -61,7 +61,8 @@
 <section class="project" layout="row">
   <span flex="5"></span>
   <div layout="row" layout-align="start center" layout-wrap flex>
-    <card info="screen" type="proj.cardType" ng-repeat="screen in proj.project.screens | where: proj.filters" ng-hide="proj.project.screens | isEmpty"
+    <card info="screen" type="proj.cardType" ng-repeat="screen in proj.project.screens | orderBy: proj.orders |
+      searchField: 'name' : 'update' | where: proj.filters" ng-hide="proj.project.screens | isEmpty"
       flex="{{proj.cardType === 'module' ? '33' : '100'}}">
       <card-main-action>
         <md-button type="button" class="enter" md-no-ink ng-click="" layout="column" aria-label="Enter">
