@@ -3,10 +3,10 @@
 
 	angular
 		.module('app')
-		.factory('ProjectService', ProjectService);
+		.factory('ScreensService', ScreensService);
 
 	/** @ngInject */
-	function ProjectService($mdDialog, $document, $window) {
+	function ScreensService($mdDialog, $document, $window) {
 		
 		var collaborators = [
 			{

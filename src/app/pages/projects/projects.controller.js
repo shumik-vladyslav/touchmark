@@ -95,7 +95,7 @@
     };
     
     vm.view = function(id){
-      $state.go('main.project', {project: id});
+      $state.go('main.screens', {screens: id});
     };
   }
 })();

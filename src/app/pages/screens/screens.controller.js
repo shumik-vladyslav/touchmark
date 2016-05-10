@@ -3,20 +3,19 @@
 
   angular
     .module('app')
-    .controller('ProjectController', ProjectController);
+    .controller('ScreensController', ScreensController);
 
   /** @ngInject */
-  function ProjectController(ProjectService, BottomSheetService, $window, $mdDialog, $state, toastr) {
+  function ScreensController(ScreensService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
-    vm.filterConfig = ProjectService.getFilterConfig();
+    vm.filterConfig = ScreensService.getFilterConfig();
     vm.add = {
       title: 'Add Screen',
-      click: ProjectService.addScreenModal
+      click: ScreensService.addScreenModal
     };
-    vm.projectId = +$state.params['project'];
-    vm.project = ProjectService.getProject(vm.projectId);
-    console.log(vm.project)
+    vm.projectId = +$state.params['screens'];
+    vm.project = ScreensService.getProject(vm.projectId);
     vm.filters = {};
     vm.orders = '';
     vm.cardTypes = [
@@ -63,7 +62,7 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        ProjectService.setScreenValue(vm.projectId, id, 'archived', true);
+        ScreensService.setScreenValue(vm.projectId, id, 'archived', true);
         toastr.success('Successfully', 'Archived', {progressBar: false});
       });
     };
@@ -79,17 +78,17 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        ProjectService.setScreenValue(vm.projectId, id, 'archived', false);
+        ScreensService.setScreenValue(vm.projectId, id, 'archived', false);
         toastr.success('Successfully', 'Unarchived', {progressBar: false});
       });
     };
 
     vm.copy= function(id) {
-      ProjectService.copyScreen(vm.projectId, id);
+      ScreensService.copyScreen(vm.projectId, id);
     };
     
     vm.deleted= function(id) {
-      ProjectService.deletedScreen(vm.projectId, id);
+      ScreensService.deletedScreen(vm.projectId, id);
     };
   }
 })();

@@ -42,10 +42,10 @@
         controller: 'ProjectsController',
         controllerAs: 'proj'
       })
-      .state('main.project', {
-        url: '/project/:project',
-        templateUrl: 'app/pages/project/project.html',
-        controller: 'ProjectController',
+      .state('main.screens', {
+        url: '/screens/:screens',
+        templateUrl: 'app/pages/screens/screens.html',
+        controller: 'ScreensController',
         controllerAs: 'proj'
       })
       .state('main.uikit', {

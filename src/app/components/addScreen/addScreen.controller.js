@@ -6,7 +6,7 @@
 		.controller('AddScreenController', AddScreenController);
 
 	/** @ngInject */
-	function AddScreenController($mdDialog, $state, ProjectService) {
+	function AddScreenController($mdDialog, $state, ScreensService) {
 		var vm = this;
 		vm.screen = {
 				id: 6,
@@ -35,7 +35,7 @@
 		function submit() {
 			
                 vm.screen.update = new Date();
-                ProjectService.addScreen(+$state.params['project'], vm.screen);
+                ScreensService.addScreen(+$state.params['project'], vm.screen);
 				$mdDialog.hide();
             
 		}
