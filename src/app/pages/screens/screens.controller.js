@@ -32,6 +32,9 @@
     ];
     vm.cardType = 'module';
 
+    vm.setCardType = function(type) {
+      vm.cardType = type;
+    };
 
     vm.filterSelect = function(item, menu) {
       menu.selected = item;

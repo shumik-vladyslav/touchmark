@@ -8,7 +8,9 @@
 	/** @ngInject */
 	function BottomSheetController(BottomSheetService, ProjectsService, $mdBottomSheet, $mdDialog) {
     var vm = this;
-    vm.sheetValue = BottomSheetService.getSheetValue();
+    vm.sheetValue = ProjectsService.getSheetValue();
+    vm.socialButton = ProjectsService.getSocialButtonValue(vm);
+    
     vm.selectedObject = BottomSheetService.getSelectedObject();
     vm.status = ProjectsService.getStatus();
 
@@ -55,6 +57,5 @@
       vm.selectedObject = BottomSheetService.getSelectedObject();
     };
 
-    vm.socialButton = BottomSheetService.getSocialButtonValue(vm);
   }
 })();
