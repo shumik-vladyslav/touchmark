@@ -6,7 +6,7 @@
 		.factory('AuthService', AuthService);
 
 	/** @ngInject */
-	function AuthService($mdDialog, $document, toastr, $localStorage, $state) {
+	function AuthService($mdDialog, $document, toastr, $localStorage, $state, CommonService, $log) {
 		var users = [
 			{
 				email: 'user1@mail.com',
@@ -106,22 +106,54 @@
 			}
 		}
 
-		function signIn(ev) {
-			$mdDialog.show({
-				controller: 'SigninController',
-				controllerAs:'signIn',
-				templateUrl: 'app/components/signin/signin.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+    function signIn(ev){
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Sign In',
+          items: [
+            {
+              type:'text',
+              name: 'email',
+              required: true,
+              validators: {
+                'maxlength': 3,
+                'ng-pattern': new RegExp("\\d+")
+              }
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Log In'
+            },
+            items: [
+              // {
+              //   type: 'button',
+              //   action: ''
+              // }
+            ]
+          }
+        }
+      ).then(function(data){$log.log(data);}, function(){$log.log('cancel');});
+    }
 
-			}, function() {
 
-			});
-		}
+		// function signIn(ev) {
+		// 	$mdDialog.show({
+		// 		controller: 'SigninController',
+		// 		controllerAs:'signIn',
+		// 		templateUrl: 'app/components/signin/signin.modal.html',
+		// 		parent: angular.element($document.body),
+		// 		targetEvent: ev,
+		// 		clickOutsideToClose: true,
+		// 		fullscreen: false
+		// 	})
+		// 	.then(function() {
+        //
+		// 	}, function() {
+        //
+		// 	});
+		// }
 
 		function signUp(ev) {
 			$mdDialog.show({
@@ -134,9 +166,9 @@
 				fullscreen: false
 			})
 			.then(function() {
-				
+
 			}, function() {
-				
+
 			});
 		}
 
@@ -151,9 +183,9 @@
 				fullscreen: false
 			})
 			.then(function() {
-				
+
 			}, function() {
-				
+
 			});
 		}
 	}

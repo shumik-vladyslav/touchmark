@@ -6,7 +6,7 @@
     .controller('ProjectsController', ProjectsController);
 
   /** @ngInject */
-  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, toastr, $log) {
+  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.filterConfig = ProjectsService.getFilterConfig();
@@ -63,7 +63,7 @@
       CommonService.formDialog(
         ev,
         {
-          type: 'text',
+          title: 'Add new project',
           items: [
             {
               type: 'text',
@@ -89,10 +89,18 @@
               ],
               options: ProjectsService.getTypes()
             }
-          ]
+          ],
+          action: {
+            submit: {
+              name: 'Add'
+            },
+            cancel: {
+              name: 'Cancel'
+            }
+          }
         }
       ).then(function(data){
-        ProjectsService.addProject({
+        if(data) ProjectsService.addProject({
           id: new Date().getTime(),
           name: data.name,
           update: new Date().getTime(),
@@ -103,9 +111,6 @@
           screens: Math.floor(Math.random() * 29 + 1),
           archived: false
         });
-        $log.log(ProjectsService.getProjects());
-      }, function(a){
-        $log.info(a);
       });
     };
 
