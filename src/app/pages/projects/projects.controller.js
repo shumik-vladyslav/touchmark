@@ -36,6 +36,26 @@
       vm.cardType = type;
     };
 
+    vm.pickFilter = function(el){
+
+      var collaborators = el.collaborators, isCollaborator = false;
+      if(!vm.filters.collaborator) {
+        isCollaborator = true;
+      } else {
+        for(var i in collaborators) {
+          if(collaborators[i].key === vm.filters.collaborator){
+            isCollaborator = true;
+          }
+        }
+      }
+
+      var isType = ( ( vm.filters.type && el.type === vm.filters.type ) || !vm.filters.type );
+
+      var result = ( isType && isCollaborator );
+
+      return result;
+    };
+
     vm.filterSelect = function(item, menu) {
       menu.selected = item;
       var _ = $window._;
@@ -48,7 +68,7 @@
           if(item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
-            if(menu.column === 'collaborators.key') {
+            if(menu.column === 'collaborator') {
               vm.filters[menu.column] = item.key;
             } else {
               vm.filters[menu.column] = item.key;
@@ -56,6 +76,7 @@
           }
         break;
       }
+
     };
 
     vm.archive = function(project, ev) {

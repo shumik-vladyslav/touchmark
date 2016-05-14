@@ -238,7 +238,7 @@
 					key: 'all',
 					value: 'All collaborators'
 				},
-				column: 'collaborators.key'
+				column: 'collaborator'
 			}
 		];
 		var service = {
