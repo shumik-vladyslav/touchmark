@@ -3,19 +3,19 @@
 
   angular
     .module('app')
-    .controller('ProjectsController', ProjectsController);
+    .controller('ScreensController', ScreensController);
 
   /** @ngInject */
-  function ProjectsController(ProjectsService, BottomSheetService, $window, $mdDialog, $state, toastr) {
+  function ScreensController(ScreensService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
-    vm.filterConfig = ProjectsService.getFilterConfig();
-    vm.types = ProjectsService.getTypes();
+    vm.filterConfig = ScreensService.getFilterConfig();
     vm.add = {
-      title: 'Add Project',
-      click: ProjectsService.addProjectModal
+      title: 'Add Screen',
+      click: ScreensService.addScreenModal
     };
-    vm.projects = ProjectsService.getProjects();
+    vm.projectId = +$state.params['screens'];
+    vm.project = ScreensService.getProject(vm.projectId);
     vm.filters = {};
     vm.orders = '';
     vm.cardTypes = [
@@ -36,26 +36,6 @@
       vm.cardType = type;
     };
 
-    vm.pickFilter = function(el){
-
-      var collaborators = el.collaborators, isCollaborator = false;
-      if(!vm.filters.collaborator) {
-        isCollaborator = true;
-      } else {
-        for(var i in collaborators) {
-          if(collaborators[i].key === vm.filters.collaborator){
-            isCollaborator = true;
-          }
-        }
-      }
-
-      var isType = ( ( vm.filters.type && el.type === vm.filters.type ) || !vm.filters.type );
-
-      var result = ( isType && isCollaborator );
-
-      return result;
-    };
-
     vm.filterSelect = function(item, menu) {
       menu.selected = item;
       var _ = $window._;
@@ -68,18 +48,13 @@
           if(item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
-            if(menu.column === 'collaborator') {
-              vm.filters[menu.column] = item.key;
-            } else {
-              vm.filters[menu.column] = item.key;
-            }
+            vm.filters[menu.column] = item.key;
           }
         break;
       }
-
     };
 
-    vm.archive = function(project, ev) {
+    vm.archive = function(id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
         .textContent('Your projects will be archived')
@@ -90,12 +65,12 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        project.archived = true;
+        ScreensService.setScreenValue(vm.projectId, id, 'archived', true);
         toastr.success('Successfully', 'Archived', {progressBar: false});
       });
     };
 
-    vm.unArchive = function(project, ev) {
+    vm.unArchive = function(id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to unarchive?')
         .textContent('Your projects will be unarchived')
@@ -106,17 +81,17 @@
         .cancel('Cancel');
 
       $mdDialog.show(confirm).then(function() {
-        project.archived = false;
+        ScreensService.setScreenValue(vm.projectId, id, 'archived', false);
         toastr.success('Successfully', 'Unarchived', {progressBar: false});
       });
     };
 
     vm.copy= function(id) {
-      ProjectsService.copyProject(id);
+      ScreensService.copyScreen(vm.projectId, id);
     };
     
-    vm.view = function(id){
-      $state.go('main.screens', {screens: id});
+    vm.deleted= function(id) {
+      ScreensService.deletedScreen(vm.projectId, id);
     };
   }
 })();
