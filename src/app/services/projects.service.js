@@ -246,7 +246,6 @@
 			getStatus: getStatus,
 			getProjects: getProjects,
 			addProject: addProject,
-			addProjectModal: addProjectModal,
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
@@ -307,29 +306,6 @@
 				if(item.id === id){
 					arr.splice(i, 1);
 				}
-			});
-		}
-
-
-		function addProjectModal(ev) {
-      $mdDialog.show({
-				controller: 'AddProjectController',
-				controllerAs:'addProj',
-				templateUrl: 'app/pages/projects/addProject.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false,
-        bindToController: true,
-        scope: {
-
-        }
-			})
-			.then(function() {
-				// self.refreshData(); // не надо его передавать в контроллер, все операции с этими данными надо
-				// делать в этом сервисе
-			}, function() {
-
 			});
 		}
 

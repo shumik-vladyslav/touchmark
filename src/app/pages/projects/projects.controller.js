@@ -59,7 +59,7 @@
     };
 
 
-    vm.showModal = function(ev){
+    vm.addProjectModal = function(ev){
       CommonService.formDialog(
         ev,
         {
@@ -100,7 +100,7 @@
           }
         }
       ).then(function(data){
-        if(data) ProjectsService.addProject({
+        ProjectsService.addProject({
           id: new Date().getTime(),
           name: data.name,
           update: new Date().getTime(),
@@ -148,13 +148,6 @@
 
     vm.copy= function(id) {
       ProjectsService.copyProject(id);
-    };
-
-
-    vm.addDialog = function(ev){
-
-      ProjectsService.addProjectModal(ev);
-
     };
 
   }
