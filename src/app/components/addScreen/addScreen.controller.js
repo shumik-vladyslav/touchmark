@@ -18,7 +18,7 @@
 					name: 'user2',
 					avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
 				},
-				img: 'assets/images/project/p6.jpg',
+				img: 'assets/images/project/p6.jpg'
 			};
 		vm.hide = $mdDialog.hide;
 		vm.cancel = $mdDialog.cancel;

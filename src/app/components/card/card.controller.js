@@ -6,7 +6,7 @@
 		.controller('CardController', CardController);
 
 	/** @ngInject */
-	function CardController($scope, $mdDialog, ProjectsService, AuthService, BottomSheetService) {
+	function CardController($scope, $mdDialog, AuthService, BottomSheetService) {
     var vm = this;
     vm.isHovered = false;
     vm.checked = false;
@@ -34,7 +34,7 @@
         fullscreen: false
       })
       .then(function() {
-        ProjectsService.deletedProject($scope.info.id);
+        BottomSheetService.getBottomService().deletedProject($scope.info.id);
       });
 		};
 	}

@@ -6,7 +6,12 @@
 		.factory('ScreensService', ScreensService);
 
 	/** @ngInject */
-	function ScreensService($mdDialog, $document, $window) {
+	function ScreensService(BottomSheetService, $mdDialog, $document, $window, $state) {
+		var vm = this;
+		
+		vm.selectedObject = BottomSheetService.getSelectedObject();
+		
+		vm.projectId = +$state.params['screens'];
 		
 		var collaborators = [
 			{
@@ -195,7 +200,7 @@
 					value: 'Recent',
 					expression: '-update'
 				}
-			},
+			}
 		];
 		var service = {
 			getStatus: getStatus,
@@ -206,7 +211,9 @@
 			getUniqueСollaborators: getUniqueСollaborators,
 			deletedScreen: deletedScreen,
 			copyScreen: copyScreen,
-			setScreenValue: setScreenValue
+			setScreenValue: setScreenValue,
+			getSheetValue: getSheetValue,
+			getSocialButtonValue: getSocialButtonValue
 		};
 
 		return service;
@@ -300,7 +307,7 @@
 							fileName: screen.fileName + '(Copy)',
 							update: new Date(),
 							owner: screen.owner,
-							img: screen.img,
+							img: screen.img
 						};
 						item.screens.push(tmpProject);
 						}
@@ -319,6 +326,115 @@
 					});
 				}
 			});
+		}
+		
+		function getSocialButtonValue() {
+			var arr = [
+				{label: 'Share', svg: 'assets/icons/share.svg'},
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copyObject},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archiveObject},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleteObject}
+			];
+
+			return arr;
+		}
+		
+		function copyObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					copyScreen(vm.projectId, element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function deleteObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					deletedScreen(vm.projectId, element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function archiveObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					setScreenValue(vm.projectId, element.id, 'archived', true);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function getSheetValue() {
+
+			var changeStatus = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var copyToPrototype = [
+				{key: 'NEW PROTOTYPE', action: '/'},
+				{key: 'PROTOTYPE 1', action: '/'},
+				{key: 'PROTOTYPE 2', action: '/'}
+			];
+
+			var moveToSection = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var arr = [
+				{key: 'DUPLICATE', action: '/'},
+				{key: 'CHANGE STATUS', value: changeStatus},
+				{key: 'COPY TO PROTOTYPE', value: copyToPrototype},
+				{key: 'MOVE TO SECTION', value: moveToSection}
+			];
+
+			return arr;
 		}	
 	}
 })();

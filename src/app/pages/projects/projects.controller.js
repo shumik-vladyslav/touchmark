@@ -9,6 +9,7 @@
   function ProjectsController(ProjectsService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
+    BottomSheetService.setBottomService(ProjectsService);
     vm.filterConfig = ProjectsService.getFilterConfig();
     vm.types = ProjectsService.getTypes();
     vm.add = {

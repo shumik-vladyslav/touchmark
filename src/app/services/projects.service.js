@@ -6,7 +6,11 @@
 		.factory('ProjectsService', ProjectsService);
 
 	/** @ngInject */
-	function ProjectsService($mdDialog, $document, $window) {
+	function ProjectsService(BottomSheetService, $mdDialog, $document, $window) {
+		var vm = this;
+		
+		vm.selectedObject = BottomSheetService.getSelectedObject();
+
 		var types = [
 			{
 				key: 'all',
@@ -253,7 +257,8 @@
 			deletedProject: deletedProject,
 			copyProject: copyProject,
 			getSheetValue: getSheetValue,
-      		getSocialButtonValue: getSocialButtonValue
+			getSocialButtonValue: getSocialButtonValue,
+			updateObject: updateObject
 		};
 
 		return service;
@@ -273,6 +278,7 @@
 		function getProjects() {
 			return projects;
 		}
+		
 		function getUniqueСollaborators() {
 			var collaborators = [
 				{
@@ -290,6 +296,7 @@
 			}
 			return _.uniqWith(collaborators, _.isEqual);
 		}
+		
 		function addProject(proj){
 			projects.push(proj);
 		}
@@ -346,15 +353,97 @@
 			});
 		}
 		
-		function getSocialButtonValue(param) {
+		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
-				{label: 'Copy', svg: 'assets/icons/copy.svg'},
-				{label: 'Archive', svg: 'assets/icons/archive.svg'},
-				{label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete}
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copyObject},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archiveObject},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleteObject}
 			];
 
 			return arr;
+		}
+		
+		function copyObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					copyProject(element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function archiveObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					element.archived = true;
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function deleteObject(ev) {
+			$mdDialog.show({
+				controller: 'DialogModalController',
+				controllerAs:'dialog',
+				templateUrl: 'app/components/dialog/dialog.modal.html',
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				fullscreen: false
+			})
+			.then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					deletedProject(element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+
+		function updateObject(value){
+			for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					updateValue(element.id, 'status', value);
+				}
+			}
+			vm.selectedObject = BottomSheetService.getSelectedObject();
 		}
 
 		function getSheetValue() {
