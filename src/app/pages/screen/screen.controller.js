@@ -6,7 +6,7 @@
     .controller('ScreenController', ScreenController);
 
   /** @ngInject */
-  function ScreenController($window, $mdDialog, toastr) {
+  function ScreenController() {
     var vm = this;
   }
 })();
