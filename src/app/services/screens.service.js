@@ -7,7 +7,7 @@
 
 	/** @ngInject */
 	function ScreensService($mdDialog, $document, $window) {
-		
+
 		var collaborators = [
 			{
 				key: 1,
@@ -70,8 +70,8 @@
 			}
 			return col;
 		};
-		
-		
+
+
 
 		var status = {
 			onHold: 'ON HOLD',
@@ -160,7 +160,7 @@
 				archived: false
 			}
 		];
-		
+
 		var rndScreen = function() {
 			var col = [];
 			var rnd = Math.floor(Math.random() * 5) + 1;
@@ -169,12 +169,12 @@
 			}
 			return col;
 		};
-		
+
 		var project = [
-			{id: 1, name: 'Desmark', screens: rndScreen(), collaborators: rndUsers()},	
-			{id: 3, name: 'Desmark ID 3', screens: rndScreen(), collaborators: rndUsers()}	
+			{id: 1, name: 'Desmark', screens: rndScreen(), collaborators: rndUsers()},
+			{id: 3, name: 'Desmark ID 3', screens: rndScreen(), collaborators: rndUsers()}
 		];
-		
+
 		var filterConfig = [
 			{
 				type: 'order',
@@ -195,7 +195,7 @@
 					value: 'Recent',
 					expression: '-update'
 				}
-			},
+			}
 		];
 		var service = {
 			getStatus: getStatus,
@@ -283,7 +283,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-				
+
 			}, function() {
 
 			});
@@ -300,7 +300,7 @@
 							fileName: screen.fileName + '(Copy)',
 							update: new Date(),
 							owner: screen.owner,
-							img: screen.img,
+							img: screen.img
 						};
 						item.screens.push(tmpProject);
 						}
@@ -308,7 +308,7 @@
 				}
 			});
 		}
-		
+
 		function setScreenValue(id, screenId, key, vlaue){
 			project.forEach(function(item){
 				if(item.id === id){
@@ -319,6 +319,6 @@
 					});
 				}
 			});
-		}	
+		}
 	}
 })();

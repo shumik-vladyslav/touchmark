@@ -253,7 +253,7 @@
 			deletedProject: deletedProject,
 			copyProject: copyProject,
 			getSheetValue: getSheetValue,
-      		getSocialButtonValue: getSocialButtonValue
+      getSocialButtonValue: getSocialButtonValue
 		};
 
 		return service;
@@ -345,7 +345,7 @@
 				}
 			});
 		}
-		
+
 		function getSocialButtonValue(param) {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},

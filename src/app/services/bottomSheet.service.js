@@ -12,12 +12,11 @@
 
     vm.selectedObject = [];
     var service = {
-      showBottomSheet: showBottomSheet,     
+      showBottomSheet: showBottomSheet,
       pushCheckedObject: pushCheckedObject,
       deleteCheckedObject: deleteCheckedObject,
       getSelectedObject: getSelectedObject,
-      deleteCheckedObjects: deleteCheckedObjects,
-      
+      deleteCheckedObjects: deleteCheckedObjects
     };
 
     return service;
