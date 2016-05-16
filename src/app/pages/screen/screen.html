@@ -1,3 +1,64 @@
+<md-toolbar md-theme="subBar" class="subBar" flex>
+  <div class="md-toolbar-tools" flex>
+    <span flex="5"></span>
+    <div class="screen-toolbar">
+      <div class="screen-left-toolbar">
+        <a ui-sref="main.projects" ng-bind="screen.project.name"></a>
+        <span>&nbsp;»&nbsp;</span>
+
+        <md-input-container>
+          <md-select ng-model="screen.currentId" ng-change="screen.goToScreen(screen.currentId)">
+            <md-option ng-repeat="scr in screen.screens" value="{{scr.id}}">
+              {{scr.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <ul class="screen-modes-switcher">
+        <li>
+          <a ng-click="screen.toggleMode(0)" ng-class="{'active': screen.activeMode == 0}">Preview</a>
+        </li>
+        <li>
+          <a ng-click="screen.toggleMode(1)" ng-class="{'active': screen.activeMode == 1}">Build</a>
+        </li>
+        <li>
+          <a ng-click="screen.toggleMode(2)" ng-class="{'active': screen.activeMode == 2}">Comments</a>
+        </li>
+        <li>
+          <a>History</a>
+        </li>
+      </ul>
+    </div>
+    <span flex="5"></span>
+  </div>
+</md-toolbar>
 <div screen-wrapper-dynamic-height class="screen-wrapper">
-hello, world
+  <panzoom
+    config="screen.zoomConfig"
+    model="screen.zoomModel"
+    style="width:100%; height: 100%"
+  >
+    <div class="zoom-container">
+      <img ng-src="{{ screen.current.url }}"/>
+
+      <div
+        class="pin-container-comment"
+        ng-repeat="pin in screen.pins"
+        ng-if="pin.type == screen.activeMode"
+        ng-style="{left: pin.x + '%', top: pin.y + '%', zoom: (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')}"
+      >
+        <div class="pin-point">&nbsp;</div>
+      </div>
+    </div>
+  </panzoom>
+  <div class="zoom-helper">
+    <div>
+      <input type="checkbox" ng-model="screen.useAbsoluteSizes" id="useAbsoluteSizes"/>
+      <label for="useAbsoluteSizes">Use absolute sizes</label>
+    </div>
+    <br/>
+    <div>{{screen.zoomModel}}</div>
+    <div>scale: {{screen.scale}}</div>
+  </div>
 </div>

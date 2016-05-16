@@ -14,7 +14,8 @@
 				'toastr',
 				'ngStorage',
 				'angular.filter',
-        'restangular'
+        'restangular',
+        'panzoom'
       ]
 		);
 })();

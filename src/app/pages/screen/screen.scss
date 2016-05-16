@@ -1,4 +1,88 @@
+.screen-toolbar{
+  width: 100%;
+
+  .screen-left-toolbar{
+    display: inline-block;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+
+    md-input-container{
+      md-select{
+        position: relative;
+        top: -3px;
+
+        md-select-value{
+          border: 0;
+        }
+      }
+    }
+  }
+
+  .screen-modes-switcher{
+    display: inline-block;
+    float: right;
+    margin: 0;
+    padding: 0;
+
+    li{
+      display: inline-block;
+      margin: 0;
+      padding: 20px 20px;
+
+      a{
+        cursor: pointer;
+        font-size: 12px;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        &.active{
+          color: $primary-dark-color;
+        }
+      }
+    }
+  }
+
+}
+
 .screen-wrapper{
   position: relative;
   width: 100%;
+
+  .zoom-container{
+    display: inline-block;
+    position: relative;
+
+    .pin-container-comment{
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+
+      .pin-point{
+        display: block;
+        background: rgba(234, 47, 93, 0.5);
+        border: 2px solid #ea2f5d;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .zoom-helper{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    height: 100px;
+    border: 1px solid black;
+    background: white;
+    font-size: 10px;
+    padding: 10px;
+    word-break: break-all;
+  }
 }
