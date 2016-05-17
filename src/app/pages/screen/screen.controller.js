@@ -26,8 +26,6 @@
       }
     ];
 
-    console.log("I'm HERE!");
-
     vm.current = vm.screens.filter(function(scr){ return scr.id == vm.currentId; })[0];
 
     vm.project = {
@@ -35,8 +33,18 @@
       name: 'My project'
     };
 
+    vm.user = { id: 2, username: "my_username" };
+
     vm.pins = [
-      { id: 1, x: 12.3, y: 44, type: 1, comments:[ { user: { id: 2, username: "my_username" }, message: "text text text" } ] }
+      {
+        id: 1, x: 2.3, y: 3, type: 2, comments:[
+          { user: { id: 2, username: "my_username" }, message: "text text text1" },
+          { user: { id: 2, username: "my_username" }, message: "text text text2" },
+          { user: { id: 2, username: "my_username" }, message: "text text text3" },
+          { user: { id: 2, username: "my_username" }, message: "text text text4" },
+          { user: { id: 2, username: "my_username" }, message: "text text text5" }
+        ]
+      }
     ];    
 
     /* helper functions */
@@ -61,6 +69,36 @@
     vm.zoomModel = {}; // always pass empty object
 
     vm.useAbsoluteSizes = true;
+
+
+    /* pins actions */
+    vm.selectPin = function(pin, e){
+      vm.selectedPin = pin;
+      e.stopPropagation();
+    };
+    vm.unselectPin = function(){
+      vm.selectedPin = null;
+    };
+    vm.isPinSelected = function(pin){
+      return pin == vm.selectedPin;
+    };
+
+    vm.startNewCommentMode = function(pin){
+      pin.newCommentMode = true;
+    };
+    vm.cancelNewCommentMode = function(pin){
+      pin.newCommentMode = false;
+    };
+    vm.isNewCommentMode = function(pin){
+      return pin.newCommentMode;
+    };
+
+    vm.addComment = function(pin){
+      pin.newComment.user = vm.user;
+      pin.comments.push(angular.copy(pin.newComment));
+      vm.cancelNewCommentMode(pin);
+    };
+    /* end pins actions */
 
   }
 })();
