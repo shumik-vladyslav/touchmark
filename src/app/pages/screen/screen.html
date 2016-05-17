@@ -1,0 +1,125 @@
+<md-toolbar md-theme="subBar" class="subBar" flex>
+  <div class="md-toolbar-tools" flex>
+    <span flex="5"></span>
+    <div class="screen-toolbar">
+      <div class="screen-left-toolbar">
+        <a ui-sref="main.projects" ng-bind="screen.project.name"></a>
+        <span>&nbsp;»&nbsp;</span>
+
+        <md-input-container>
+          <md-select ng-model="screen.currentId" ng-change="screen.goToScreen(screen.currentId)">
+            <md-option ng-repeat="scr in screen.screens" value="{{scr.id}}">
+              {{scr.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <ul class="screen-modes-switcher">
+        <li>
+          <a ng-click="screen.toggleMode(0)" ng-class="{'active': screen.activeMode == 0}">Preview</a>
+        </li>
+        <li>
+          <a ng-click="screen.toggleMode(1)" ng-class="{'active': screen.activeMode == 1}">Build</a>
+        </li>
+        <li>
+          <a ng-click="screen.toggleMode(2)" ng-class="{'active': screen.activeMode == 2}">Comments</a>
+        </li>
+        <li>
+          <a>History</a>
+        </li>
+      </ul>
+    </div>
+    <span flex="5"></span>
+  </div>
+</md-toolbar>
+<div screen-wrapper-dynamic-height class="screen-wrapper">
+  <panzoom
+    config="screen.zoomConfig"
+    model="screen.zoomModel"
+    style="width:100%; height: 100%"
+    ng-click="screen.unselectPin()"
+  >
+    <div class="zoom-container">
+      <!-- main image -->
+      <img ng-src="{{ screen.current.url }}"/>
+
+      <!-- comments pins only -->
+      <div
+        class="pin-container-comment"
+        ng-repeat="pin in screen.pins"
+        ng-if="(pin.type == screen.activeMode) && (screen.activeMode == 2)"
+        ng-style="{
+          'left': pin.x + '%',
+          'top': pin.y + '%',
+          'zoom': (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')
+        }"
+      >
+        <div
+          class="pin-point"
+          ng-click="screen.selectPin(pin, $event)"
+        >&nbsp;</div>
+        <div
+          class="pin-content pin-content-comment"
+          ng-if="screen.isPinSelected(pin)"
+          ng-click="$event.stopPropagation()"
+          scroll-stop-propagation
+        >
+          <ul
+            class="comments-list"
+            ng-if="pin.comments.length"
+          >
+            <li ng-repeat="comment in pin.comments">
+              {{ comment.message }}
+            </li>
+          </ul>
+
+          <div
+            class="pin-fallback"
+            ng-if="!screen.isNewCommentMode(pin) && !pin.comments.length"
+            ng-click="screen.startNewCommentMode(pin)"
+          >Click to leave a comment</div>
+
+          <div
+            class="pin-new-comment-link"
+            ng-if="!screen.isNewCommentMode(pin) && pin.comments.length"
+            ng-click="screen.startNewCommentMode(pin)"
+          >Add a new comment</div>
+
+          <form
+            class="pin-new-comment-form"
+            ng-if="screen.isNewCommentMode(pin)"
+            ng-submit="screen.addComment(pin)"
+          >
+            <md-input-container class="md-block">
+              <label>Leave a comment</label>
+              <textarea
+                ng-model="pin.newComment.message"
+                rows="5"
+                md-select-on-focus
+              ></textarea>
+            </md-input-container>
+            <div class="comment-actions">
+              <md-button
+                class="md-raised md-warn"
+                ng-click="screen.addComment(pin)"
+              >Send</md-button>
+              <a ng-click="screen.cancelNewCommentMode(pin)">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end comments pins only -->
+
+    </div>
+  </panzoom>
+  <div class="zoom-helper">
+    <div>
+      <input type="checkbox" ng-model="screen.useAbsoluteSizes" id="useAbsoluteSizes"/>
+      <label for="useAbsoluteSizes">Use absolute sizes</label>
+    </div>
+    <br/>
+    <div>{{screen.zoomModel}}</div>
+    <div>scale: {{screen.scale}}</div>
+  </div>
+</div>
