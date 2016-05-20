@@ -10,8 +10,11 @@
 	/** @ngInject */
 	function FormDialogController($mdDialog) {
 		var vm = this;
-    
-    vm.result = {};
+
+    vm.runAction = function($ev, action, data){
+      vm.cancel();
+      action($ev, data);
+    };
 
 		vm.submit = function() {
       $mdDialog.hide(vm.result);

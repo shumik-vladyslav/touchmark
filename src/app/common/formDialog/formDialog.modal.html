@@ -2,7 +2,7 @@
   <form name="form" ng-submit="form.$valid && dialog.submit($event)" novalidate>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h1>{{dialog.title || 'Form Dialog'}}</h1>
+        <h1>{{dialog.title}}</h1>
         <span flex></span>
         <md-button type="button" class="md-icon-button" ng-click="dialog.cancel($event)">
           <md-icon md-svg-icon="/assets/icons/close.svg" aria-label="close"></md-icon>
@@ -10,40 +10,63 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-      <div layout-padding>
-        <md-input-container class="md-block" ng-repeat="item in dialog.items" ng-switch="item.type">
-          <label ng-if="item.label">{{ item.label }}</label>
+      <div layout="column" layout-padding>
+        <div style="padding: 0px;" ng-repeat="item in dialog.items" ng-switch on="item.type">
 
-          <input
-            validators
-            ng-switch-when="text"
-            aria-label="item.label"
-            ng-required="item.required"
-            name="{{item.name}}"
-            type="{{item.type}}"
-            ng-model="dialog.result[item.name]">
+          <div ng-switch-when="input">
+            <md-input-container class="md-block">
+              <label ng-if="item.label">{{ item.label }}</label>
+              <input
+                validators
+                aria-label="item.label"
+                ng-required="item.required"
+                name="{{item.name}}"
+                type="{{item.subtype}}"
+                ng-model="dialog.result[item.name]">
+              <ng-messages multiple ng-show="form.$dirty" for="form[item.name].$error" role="alert">
+                <ng-message ng-repeat="err in item.errors" when-exp="err.type">{{err.message}}</ng-message>
+              </ng-messages>
+            </md-input-container>
+          </div>
 
-          <md-select
-            validators
-            ng-switch-when="select"
-            aria-label="item.label"
-            ng-required="item.required"
-            name="{{item.name}}"
-            ng-model="dialog.result[item.name]">
-            <md-option ng-repeat="option in item.options" value="{{option.key}}">
-              {{option.value}}
-            </md-option>
-          </md-select>
-          <ng-messages ng-show="form.$submitted" for="form[item.name].$error" role="alert">
-            <ng-message ng-repeat="err in item.errors" when-exp="err.type">{{err.message}}</ng-message>
-          </ng-messages>
-        </md-input-container>
+          <div ng-switch-when="select">
+            <md-input-container class="md-block">
+              <label ng-if="item.label">{{ item.label }}</label>
+              <md-select
+                validators
+                aria-label="item.label"
+                ng-required="item.required"
+                name="{{item.name}}"
+                ng-model="dialog.result[item.name]">
+                <md-option ng-repeat="option in item.options" value="{{option.key}}">
+                  {{option.value}}
+                </md-option>
+              </md-select>
+              <ng-messages multiple ng-show="form.$dirty" for="form[item.name].$error" role="alert">
+                <ng-message ng-repeat="err in item.errors" when-exp="err.type">{{err.message}}</ng-message>
+              </ng-messages>
+            </md-input-container>
+          </div>
+
+          <div ng-switch-when="textarea">
+            <md-input-container class="md-block">
+              <label ng-if="item.label">{{ item.label }}</label>
+              <textarea
+                validators
+                ng-model="dialog.result[item.name]"></textarea>
+              <ng-messages multiple ng-show="form.$dirty" for="form[item.name].$error" role="alert">
+                <ng-message ng-repeat="err in item.errors" when-exp="err.type">{{err.message}}</ng-message>
+              </ng-messages>
+            </md-input-container>
+          </div>
+
+        </div>
       </div>
     </md-dialog-content>
     <md-dialog-actions>
-      <md-button type="submit" class="md-primary md-raised">{{dialog.action.submit.name}}</md-button>
+      <md-button type="submit" ng-class="dialog.action.submit.classes" ng-disabled="!form.$valid">{{dialog.action.submit.name}}</md-button>
       <md-button type="button" ng-if="dialog.action.cancel" class="md-primary md-raised" ng-click="dialog.cancel()">{{dialog.action.cancel.name}}</md-button>
-      <md-button type="button" class="md-primary md-raised" ng-repeat="button in dialog.action.items" ng-click="button.action">{{button.text}}</md-button>
+      <md-button type="button" ng-class="button.classes" ng-repeat="button in dialog.action.items" ng-click="dialog.runAction($event, button.action, button.data)">{{button.text}}</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
