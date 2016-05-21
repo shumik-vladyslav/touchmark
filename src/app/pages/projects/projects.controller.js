@@ -16,7 +16,9 @@
       click: ProjectsService.addProjectModal
     };
     vm.projects = ProjectsService.getProjects();
-    vm.filters = {};
+    vm.filters = {
+      archived: false
+    };
     vm.orders = '';
     vm.cardTypes = [
       {
@@ -50,8 +52,9 @@
       }
 
       var isType = ( ( vm.filters.type && el.type === vm.filters.type ) || !vm.filters.type );
+      var archived = (vm.filters.archived === el.archived);
 
-      var result = ( isType && isCollaborator );
+      var result = ( isType && isCollaborator && archived );
 
       return result;
     };
