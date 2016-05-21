@@ -246,12 +246,12 @@
 			getStatus: getStatus,
 			getProjects: getProjects,
 			addProject: addProject,
-			addProjectModal: addProjectModal,
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
 			deletedProject: deletedProject,
-			copyProject: copyProject,
+      copyProject: copyProject, 
+      rndUsers: rndUsers,
 			getSheetValue: getSheetValue,
       getSocialButtonValue: getSocialButtonValue
 		};
@@ -308,22 +308,6 @@
 				if(item.id === id){
 					arr.splice(i, 1);
 				}
-			});
-		}
-
-		function addProjectModal(ev) {
-			$mdDialog.show({
-				controller: 'AddProjectController',
-				controllerAs:'addProj',
-				templateUrl: 'app/components/addProject/addProject.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
-			}, function() {
-
 			});
 		}
 

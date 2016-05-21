@@ -6,7 +6,7 @@
     .controller('ProjectsController', ProjectsController);
 
   /** @ngInject */
-  function ProjectsController(ProjectsService, BottomSheetService, $window, $mdDialog, $state, toastr) {
+  function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     vm.filterConfig = ProjectsService.getFilterConfig();
@@ -76,7 +76,62 @@
           }
         break;
       }
+    };
 
+
+    vm.addProjectModal = function(ev){
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Add new project',
+          items: [
+            {
+              type: 'text',
+              name: 'name',
+              label: 'Project name',
+              required: true,
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                }
+              ]
+            }, {
+              type: 'select',
+              name: 'type',
+              label: 'Project type',
+              required: true,
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                }
+              ],
+              options: ProjectsService.getTypes()
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Add'
+            },
+            cancel: {
+              name: 'Cancel'
+            }
+          }
+        }
+      ).then(function(data){
+        ProjectsService.addProject({
+          id: new Date().getTime(),
+          name: data.name,
+          update: new Date().getTime(),
+          owner: 'user',
+          collaborators: ProjectsService.rndUsers(),
+          type: data.type,
+          img: 'assets/images/projects/p'+Math.floor(Math.random() * 5 + 1)+'.jpg',
+          screens: Math.floor(Math.random() * 29 + 1),
+          archived: false
+        });
+      });
     };
 
     vm.archive = function(project, ev) {
