@@ -250,11 +250,10 @@
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
 			deletedProject: deletedProject,
-			copyProject: copyProject,
-            rndUsers: rndUsers
-			copyProject: copyProject,
+      copyProject: copyProject, 
+      rndUsers: rndUsers,
 			getSheetValue: getSheetValue,
-            getSocialButtonValue: getSocialButtonValue
+      getSocialButtonValue: getSocialButtonValue
 		};
 
 		return service;
