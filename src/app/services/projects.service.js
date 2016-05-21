@@ -238,7 +238,7 @@
 					key: 'all',
 					value: 'All collaborators'
 				},
-				column: 'collaborators.key'
+				column: 'collaborator'
 			}
 		];
 		var service = {
@@ -251,7 +251,10 @@
 			updateValue: updateValue,
 			deletedProject: deletedProject,
 			copyProject: copyProject,
-      rndUsers: rndUsers
+            rndUsers: rndUsers
+			copyProject: copyProject,
+			getSheetValue: getSheetValue,
+            getSocialButtonValue: getSocialButtonValue
 		};
 
 		return service;
@@ -326,6 +329,43 @@
 					projects.push(tmpProject);
 				}
 			});
+		}
+
+		function getSocialButtonValue(param) {
+			var arr = [
+				{label: 'Share', svg: 'assets/icons/share.svg'},
+				{label: 'Copy', svg: 'assets/icons/copy.svg'},
+				{label: 'Archive', svg: 'assets/icons/archive.svg'},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete}
+			];
+
+			return arr;
+		}
+
+		function getSheetValue() {
+
+			var changeStatus = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var copyToPrototype = [
+				{key: 'NEW PROTOTYPE', action: '/'},
+				{key: 'PROTOTYPE 1', action: '/'},
+				{key: 'PROTOTYPE 2', action: '/'}
+			];
+
+			var moveToSection = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var arr = [
+				{key: 'DUPLICATE', action: '/'},
+				{key: 'CHANGE STATUS', value: changeStatus},
+				{key: 'COPY TO PROTOTYPE', value: copyToPrototype},
+				{key: 'MOVE TO SECTION', value: moveToSection}
+			];
+
+			return arr;
 		}
 	}
 })();
