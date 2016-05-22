@@ -75,8 +75,8 @@
 			}
 			return col;
 		};
-		
-		
+
+
 
 		var status = {
 			onHold: 'ON HOLD',
@@ -165,7 +165,7 @@
 				archived: false
 			}
 		];
-		
+
 		var rndScreen = function() {
 			var col = [];
 			var rnd = Math.floor(Math.random() * 5) + 1;
@@ -174,12 +174,12 @@
 			}
 			return col;
 		};
-		
+
 		var project = [
-			{id: 1, name: 'Desmark', screens: rndScreen(), collaborators: rndUsers()},	
-			{id: 3, name: 'Desmark ID 3', screens: rndScreen(), collaborators: rndUsers()}	
+			{id: 1, name: 'Desmark', screens: rndScreen(), collaborators: rndUsers()},
+			{id: 3, name: 'Desmark ID 3', screens: rndScreen(), collaborators: rndUsers()}
 		];
-		
+
 		var filterConfig = [
 			{
 				type: 'order',
@@ -290,7 +290,7 @@
 				fullscreen: false
 			})
 			.then(function() {
-				
+
 			}, function() {
 
 			});
@@ -315,7 +315,7 @@
 				}
 			});
 		}
-		
+
 		function setScreenValue(id, screenId, key, vlaue){
 			project.forEach(function(item){
 				if(item.id === id){
@@ -331,24 +331,25 @@
 		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
-				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copyObject},
-				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archiveObject},
-				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleteObject}
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copy},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archive},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleted}
 			];
 
 			return arr;
 		}
 		
-		function copyObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function copy(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to copy?')
+				.textContent('Your projects will be copied')
+				.ariaLabel('Copy dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Copy')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
@@ -363,16 +364,17 @@
 			});
 		}
 		
-		function deleteObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function deleted(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to delete?')
+				.textContent('Your projects will be deleted')
+				.ariaLabel('Delete dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Delete')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
@@ -387,16 +389,17 @@
 			});
 		}
 		
-		function archiveObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function archive(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to archive?')
+				.textContent('Your projects will be archived')
+				.ariaLabel('Archive dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Archive')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
@@ -436,5 +439,6 @@
 
 			return arr;
 		}	
+
 	}
 })();

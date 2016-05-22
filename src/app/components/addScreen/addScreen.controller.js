@@ -25,19 +25,19 @@
 		vm.submit = submit;
 		vm.selectType = selectType;
 		vm.typeValue = 'Select type';
-        
-        
+
+
         function selectType(params) {
 			vm.typeValue = params;
 			vm.project.type = params;
         }
-        
+
 		function submit() {
-			
+
                 vm.screen.update = new Date();
                 ScreensService.addScreen(+$state.params['project'], vm.screen);
 				$mdDialog.hide();
-            
+
 		}
 	}
 })();

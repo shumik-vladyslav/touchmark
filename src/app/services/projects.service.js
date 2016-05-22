@@ -242,7 +242,7 @@
 					key: 'all',
 					value: 'All collaborators'
 				},
-				column: 'collaborators.key'
+				column: 'collaborator'
 			}
 		];
 		var service = {
@@ -250,15 +250,14 @@
 			getStatus: getStatus,
 			getProjects: getProjects,
 			addProject: addProject,
-			addProjectModal: addProjectModal,
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
-			deleted: deleted,
-			copy: copy,
+			deleted: deletedProjects,
+			copy: copyProjects,
 			getSheetValue: getSheetValue,
 			getSocialButtonValue: getSocialButtonValue,
-			update: update
+			update: updateProjects
 		};
 
 		return service;
@@ -310,7 +309,7 @@
 			});
 		}
 
-		function deleted(id){
+		function deletedProjects(id){
 			projects.forEach(function(item, i, arr){
 				if(item.id === id){
 					arr.splice(i, 1);
@@ -318,23 +317,8 @@
 			});
 		}
 
-		function addProjectModal(ev) {
-			$mdDialog.show({
-				controller: 'AddProjectController',
-				controllerAs:'addProj',
-				templateUrl: 'app/components/addProject/addProject.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
-			}, function() {
+		function copyProjects(id) {
 
-			});
-		}
-
-		function copy(id) {
 			projects.forEach(function(item){
 				if(item.id === id){
 					var tmpProject = {
@@ -356,28 +340,29 @@
 		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
-				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copyObject},
-				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archiveObject},
-				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleteObject}
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copy},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archive},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleted}
 			];
 
 			return arr;
 		}
 		
-		function copyObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function copy(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to copy?')
+				.textContent('Your projects will be copied')
+				.ariaLabel('Copy dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Copy')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
-					copy(element.id);
+					copyProjects(element.id);
 				}
 				}
 				BottomSheetService.deleteCheckedObjects();
@@ -388,16 +373,17 @@
 			});
 		}
 		
-		function archiveObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function archive(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to archive?')
+				.textContent('Your projects will be archived')
+				.ariaLabel('Archive dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Archive')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
@@ -412,20 +398,21 @@
 			});
 		}
 		
-		function deleteObject(ev) {
-			$mdDialog.show({
-				controller: 'DialogModalController',
-				controllerAs:'dialog',
-				templateUrl: 'app/components/dialog/dialog.modal.html',
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
+		function deleted(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to delete?')
+				.textContent('Your projects will be deleted')
+				.ariaLabel('Delete dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Delete')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
-					deleted(element.id);
+					deletedProjects(element.id);
 				}
 				}
 				BottomSheetService.deleteCheckedObjects();
@@ -436,7 +423,7 @@
 			});
 		}
 
-		function update(value){
+		function updateProjects(value){
 			for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];

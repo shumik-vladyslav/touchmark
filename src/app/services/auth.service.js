@@ -6,7 +6,7 @@
 		.factory('AuthService', AuthService);
 
 	/** @ngInject */
-	function AuthService($mdDialog, $document, toastr, $localStorage, $state) {
+	function AuthService($mdDialog, $document, toastr, $localStorage, $state, CommonService) {
 		var users = [
 			{
 				email: 'user1@mail.com',
@@ -106,55 +106,203 @@
 			}
 		}
 
-		function signIn(ev) {
-			$mdDialog.show({
-				controller: 'SigninController',
-				controllerAs:'signIn',
-				templateUrl: 'app/components/signin/signin.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
-
-			}, function() {
-
-			});
-		}
+    function signIn(ev){
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Sign In',
+          result: {
+            email: 'user1@mail.com',
+            password: 'User1'
+          },
+          items: [
+            {
+              type:'input',
+              subtype: 'email',
+              name: 'email',
+              label: 'Email',
+              required: true,
+              validators: {
+                'ng-pattern': /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/
+              },
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                },
+                {
+                  type: 'pattern',
+                  message: 'This is not valid.'
+                }
+              ]
+            },
+            {
+              type:'input',
+              subtype: 'password',
+              name: 'password',
+              label: 'Password',
+              required: true,
+              validators: {
+                'maxlength': 20,
+                'minlength': 4,
+                'ng-pattern': /(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/
+              },
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                },
+                {
+                  type: 'pattern',
+                  message: 'Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)'
+                },
+                {
+                  type: 'minlength',
+                  message: 'Passwords must be more than 4 characters'
+                },
+                {
+                  type: 'maxlength',
+                  message: 'Passwords must be less than 20 characters'
+                }
+              ]
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Log In',
+              classes: "md-warn md-raised"
+            },
+            items: [
+              {
+                type: 'button',
+                text: 'Forgot password?',
+                action: forget,
+                classes: "md-primary md-raised"
+              }
+            ]
+          }
+        }
+      ).then(function(data){
+        if(!checkUserExist(data)){
+          signIn(ev);
+        }
+      });
+    }
 
 		function signUp(ev) {
-			$mdDialog.show({
-				controller: 'SignupController',
-				controllerAs: 'signUp',
-				templateUrl: 'app/components/signup/signup.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
-				
-			}, function() {
-				
-			});
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Sign Up',
+          items: [
+            {
+              type:'input',
+              subtype: 'email',
+              name: 'email',
+              label: 'Email',
+              required: true,
+              validators: {
+                'ng-pattern': /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/
+              },
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                },
+                {
+                  type: 'pattern',
+                  message: 'This is not valid.'
+                }
+              ]
+            },
+            {
+              type:'input',
+              subtype: 'password',
+              name: 'password',
+              label: 'Password',
+              required: true,
+              validators: {
+                'maxlength': 20,
+                'minlength': 4,
+                'ng-pattern': /(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/
+              },
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                },
+                {
+                  type: 'pattern',
+                  message: 'Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)'
+                },
+                {
+                  type: 'minlength',
+                  message: 'Passwords must be more than 4 characters'
+                },
+                {
+                  type: 'maxlength',
+                  message: 'Passwords must be less than 20 characters'
+                }
+              ]
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Sign Up',
+              classes: "md-warn md-raised"
+            }
+          }
+        }
+      ).then(function(data){
+        if(!registerUser(data) || !checkUserExist(data)) {
+          signUp(ev);
+        }
+      });
 		}
 
-		function forget(ev) {
-			$mdDialog.show({
-				controller: 'ForgetController',
-				controllerAs: 'forget',
-				templateUrl: 'app/components/forget/forget.modal.html',
-				parent: angular.element($document.body),
-				targetEvent: ev,
-				clickOutsideToClose: true,
-				fullscreen: false
-			})
-			.then(function() {
-				
-			}, function() {
-				
-			});
-		}
+    function forget(ev) {
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Forgot password?',
+          items: [
+            {
+              type:'input',
+              subtype: 'email',
+              name: 'email',
+              label: 'Email',
+              required: true,
+              validators: {
+                'ng-pattern': /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/
+              },
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                },
+                {
+                  type: 'pattern',
+                  message: 'This is not valid.'
+                }
+              ]
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Log In',
+              classes: "md-warn md-raised"
+            }
+          }
+        }
+      ).then(function(data){
+        var password = rememberPassword(data.email);
+        if(password) {
+          toastr.info(password, 'Your password!');
+        } else {
+          forget(ev);
+          toastr.error('User not found', 'Forget');
+        }
+      });
+    }
 	}
 })();

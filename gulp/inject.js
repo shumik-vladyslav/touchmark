@@ -19,6 +19,11 @@ gulp.task('inject', ['scripts', 'styles', 'fonts'], function () {
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
   ], { read: false });
 
+  var injectOptions = {
+    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
+    addRootSlash: false
+  };
+
   var injectScripts = gulp.src([
     path.join(conf.paths.src, '/app/**/*.module.js'),
     path.join(conf.paths.src, '/app/**/*.js'),
@@ -26,11 +31,6 @@ gulp.task('inject', ['scripts', 'styles', 'fonts'], function () {
     path.join('!' + conf.paths.src, '/app/**/*.mock.js'),
   ])
   .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
-
-  var injectOptions = {
-    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
-    addRootSlash: false
-  };
 
   return gulp.src(path.join(conf.paths.src, '/*.html'))
     .pipe($.inject(injectStyles, injectOptions))
