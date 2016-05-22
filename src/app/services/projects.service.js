@@ -254,11 +254,11 @@
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
-			deletedProject: deletedProject,
-			copyProject: copyProject,
+			deleted: deleted,
+			copy: copy,
 			getSheetValue: getSheetValue,
 			getSocialButtonValue: getSocialButtonValue,
-			updateObject: updateObject
+			update: update
 		};
 
 		return service;
@@ -310,7 +310,7 @@
 			});
 		}
 
-		function deletedProject(id){
+		function deleted(id){
 			projects.forEach(function(item, i, arr){
 				if(item.id === id){
 					arr.splice(i, 1);
@@ -334,7 +334,7 @@
 			});
 		}
 
-		function copyProject(id) {
+		function copy(id) {
 			projects.forEach(function(item){
 				if(item.id === id){
 					var tmpProject = {
@@ -377,7 +377,7 @@
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
-					copyProject(element.id);
+					copy(element.id);
 				}
 				}
 				BottomSheetService.deleteCheckedObjects();
@@ -425,7 +425,7 @@
 				for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];
-					deletedProject(element.id);
+					deleted(element.id);
 				}
 				}
 				BottomSheetService.deleteCheckedObjects();
@@ -436,7 +436,7 @@
 			});
 		}
 
-		function updateObject(value){
+		function update(value){
 			for (var key in vm.selectedObject) {
 				if (vm.selectedObject.hasOwnProperty(key)) {
 					var element = vm.selectedObject[key];

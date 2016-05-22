@@ -92,7 +92,7 @@
     };
 
     vm.copy= function(id) {
-      ProjectsService.copyProject(id);
+      ProjectsService.copy(id);
     };
     
     vm.view = function(id){

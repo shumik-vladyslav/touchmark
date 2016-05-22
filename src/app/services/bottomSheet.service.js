@@ -14,7 +14,7 @@
     vm.selectedObject = [];
     var service = {
       setBottomService: setBottomService,
-      getBottomService: getBottomService,
+      extService: extService,
       showBottomSheet: showBottomSheet,     
       pushCheckedObject: pushCheckedObject,
       deleteCheckedObject: deleteCheckedObject,
@@ -28,7 +28,7 @@
       vm.bottomService = service;
     }
     
-    function getBottomService() {
+    function extService() {
       return vm.bottomService;
     }
     

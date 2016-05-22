@@ -11,6 +11,7 @@
     vm.isHovered = false;
     vm.checked = false;
     vm.userInfo = AuthService.getUserInfo;
+    vm.service = BottomSheetService.extService();
     vm.toggle = function() {
 			vm.checked = !vm.checked;
 			if(vm.checked){
@@ -34,7 +35,7 @@
         fullscreen: false
       })
       .then(function() {
-        BottomSheetService.getBottomService().deletedProject($scope.info.id);
+        vm.service.deleted($scope.info.id);
       });
 		};
 	}

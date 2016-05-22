@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function BottomSheetController(BottomSheetService, $mdBottomSheet) {
     var vm = this;
-    vm.service = BottomSheetService.getBottomService();
+    vm.service = BottomSheetService.extService();
     vm.sheetValue = vm.service.getSheetValue();
     vm.socialButton = vm.service.getSocialButtonValue();
     
