@@ -6,7 +6,7 @@
     .controller('ScreenController', ScreenController);
 
   /** @ngInject */
-  function ScreenController($state, $scope, $timeout) {
+  function ScreenController($state, $scope, $timeout, PanZoomService) {
     var vm = this;
 
     /* initial data */
@@ -99,6 +99,20 @@
       vm.cancelNewCommentMode(pin);
     };
     /* end pins actions */
+
+    /* common */
+    vm.click = function(){
+      if (vm.activeMode == 2){
+        vm.unselectPin();
+      }
+    };
+    vm.mousemove = function($event){
+      //PanZoomService.getAPI('pane').then(function (api) {
+      // you can now invoke the api
+      //});
+      console.log([$event.offsetX, $event.offsetY]);
+    };
+    /*  */
 
   }
 })();

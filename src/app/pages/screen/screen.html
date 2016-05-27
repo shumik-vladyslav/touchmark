@@ -35,14 +35,20 @@
 </md-toolbar>
 <div screen-wrapper-dynamic-height class="screen-wrapper">
   <panzoom
+    id="pane"
     config="screen.zoomConfig"
     model="screen.zoomModel"
     style="width:100%; height: 100%"
-    ng-click="screen.unselectPin()"
+    ng-click="screen.click()"
   >
-    <div class="zoom-container">
+    <div
+      class="zoom-container"
+      ng-mousemove="screen.mousemove($event)"
+    >
       <!-- main image -->
-      <img ng-src="{{ screen.current.url }}"/>
+      <img
+        ng-src="{{ screen.current.url }}"
+      />
 
       <!-- comments pins only -->
       <div
