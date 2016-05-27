@@ -59,6 +59,7 @@
       vm.activeMode = mode;
     };
 
+    vm.scale = 100;
     vm.zoomConfig = {
       modelChangedCallback: function(obj){
         $timeout(function(){
@@ -101,6 +102,11 @@
     /* end pins actions */
 
     /* common */
+
+    vm.convertCoords = function(coords){
+      return {x: coords.x * vm.scale / 100, y: coords.y * vm.scale / 100};
+    };
+
     vm.click = function(){
       if (vm.activeMode == 2){
         vm.unselectPin();
@@ -110,7 +116,7 @@
       //PanZoomService.getAPI('pane').then(function (api) {
       // you can now invoke the api
       //});
-      console.log([$event.offsetX, $event.offsetY]);
+      console.log(vm.convertCoords({x: $event.offsetX, y: $event.offsetY}));
     };
     /*  */
 
