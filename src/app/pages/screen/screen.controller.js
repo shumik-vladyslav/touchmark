@@ -104,7 +104,7 @@
     /* common */
 
     vm.convertCoords = function(coords){
-      return {x: coords.x * vm.scale / 100, y: coords.y * vm.scale / 100};
+      return {x: coords.x * (vm.scale / 100), y: coords.y * (vm.scale / 100)};
     };
 
     vm.click = function(){
@@ -112,11 +112,27 @@
         vm.unselectPin();
       }
     };
+
+    $timeout(function(){
+      vm.zoomContainer = $('.zoom-container');
+    });
     vm.mousemove = function($event){
       //PanZoomService.getAPI('pane').then(function (api) {
       // you can now invoke the api
       //});
-      console.log(vm.convertCoords({x: $event.offsetX, y: $event.offsetY}));
+      var w = vm.zoomContainer.width();
+      var h = vm.zoomContainer.height();
+      //console.log($('#pane'));
+      vm.mouseCoords = vm.convertCoords({x: ($event.offsetX) / w * 100, y: ($event.offsetY) / h * 100});
+    };
+    vm.mouseleave = function(){
+      vm.mouseInside = false;
+    };
+    vm.mouseenter = function(){
+      vm.mouseInside = true;
+    };
+    vm.preventMousemove = function($event){
+      $event.stopPropagation();
     };
     /*  */
 

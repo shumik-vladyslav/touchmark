@@ -59,6 +59,16 @@
     display: inline-block;
     position: relative;
 
+    .comments-popup{
+      position: absolute;
+      display: block;
+      background: white;
+      padding: 5px;
+      box-shadow: 0px 0px 18px -1px rgba(102,102,102,1);
+      white-space: nowrap;
+      margin-left: 20px;
+    }
+
     .pin-container-comment{
       position: absolute;
       display: block;

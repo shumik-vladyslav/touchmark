@@ -44,6 +44,8 @@
     <div
       class="zoom-container"
       ng-mousemove="screen.mousemove($event)"
+      ng-mouseleave="screen.mouseleave()"
+      ng-mouseenter="screen.mouseenter()"
     >
       <!-- main image -->
       <img
@@ -51,6 +53,16 @@
       />
 
       <!-- comments pins only -->
+      <div
+        ng-if="(screen.activeMode == 2) && screen.mouseInside"
+        class="comments-popup"
+        ng-style="{
+          'left': screen.mouseCoords.x + '%',
+          'top': screen.mouseCoords.y + '%',
+          'zoom': (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')
+        }"
+        ng-mousemove="$event.stopPropagation()"
+      >Click to leave a comment</div>
       <div
         class="pin-container-comment"
         ng-repeat="pin in screen.pins"
@@ -60,6 +72,9 @@
           'top': pin.y + '%',
           'zoom': (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')
         }"
+        ng-mousemove="$event.stopPropagation()"
+        ng-mouseleave="screen.mouseenter()"
+        ng-mouseenter="screen.mouseleave()"
       >
         <div
           class="pin-point"
