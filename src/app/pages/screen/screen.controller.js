@@ -45,36 +45,68 @@
           { user: { id: 2, username: "my_username" }, message: "text text text5" }
         ]
       }
-    ];    
+    ];
+    /* end mock data */
+
 
     /* helper functions */
     vm.goToScreen = function(uuid){
       $state.params.uuid = uuid;
       $state.go($state.current.name, $state.params, {reload: true});
     };
+    /**/
+
 
     /* mode actions */
     vm.activeMode = 0;
     vm.toggleMode = function(mode){
       vm.activeMode = mode;
     };
+    /**/
 
+
+    /* INITIAL VALUES FOR THE ZOOM PLUGIN CONFIGS */
     vm.scale = 100;
     vm.zoomConfig = {
       modelChangedCallback: function(obj){
         $timeout(function(){
           vm.scale = 400 / Math.pow(2, obj.zoomLevel);
         });
-      }
+      },
+      initialPanX: 0 // will be changed to when the image is downloaded
     };
     vm.zoomModel = {}; // always pass empty object
+    /**/
 
+
+    /* our configs */
     vm.useAbsoluteSizes = true;
+    /**/
+
+
+    // watch while the project is available. maybe it should be downloaded from the remote server
+    $scope.$watch('vm.current', function(){
+      var img = new Image();
+      // HERE WE CAN DO LOADER
+      img.onload = function(){
+        vm.ww = $(window).width();
+        vm.iw = this.width; // image width
+        vm.ih = this.height // image height
+        if (vm.ww > vm.iw){
+          vm.zoomConfig.initialPanX = (vm.ww - vm.iw) / 2;
+        }
+        vm.showImage = true;
+        $scope.$digest();
+      };
+      img.src = vm.current.url;
+    }, true)
+    /**/
 
 
     /* pins actions */
     vm.selectPin = function(pin, e){
       vm.selectedPin = pin;
+      vm.scrollPinComments(pin);
       e.stopPropagation();
     };
     vm.unselectPin = function(){
@@ -82,6 +114,15 @@
     };
     vm.isPinSelected = function(pin){
       return pin == vm.selectedPin;
+    };
+    vm.scrollPinComments = function(pin){
+      var pinIndex = vm.pins.indexOf(pin);
+      if (pinIndex > -1){
+        $timeout(function(){
+          var targetEl = $('#pin-' + pinIndex).find('.pin-content-comment');
+          targetEl.scrollTop(targetEl[0].scrollHeight);
+        });
+      }
     };
 
     vm.startNewCommentMode = function(pin){
@@ -101,8 +142,8 @@
     };
     /* end pins actions */
 
-    /* common */
 
+    /* common */
     vm.convertCoords = function(coords){
       return {x: coords.x * (vm.scale / 100), y: coords.y * (vm.scale / 100)};
     };
@@ -113,17 +154,8 @@
       }
     };
 
-    $timeout(function(){
-      vm.zoomContainer = $('.zoom-container');
-    });
     vm.mousemove = function($event){
-      //PanZoomService.getAPI('pane').then(function (api) {
-      // you can now invoke the api
-      //});
-      var w = vm.zoomContainer.width();
-      var h = vm.zoomContainer.height();
-      //console.log($('#pane'));
-      vm.mouseCoords = vm.convertCoords({x: ($event.offsetX) / w * 100, y: ($event.offsetY) / h * 100});
+      vm.mouseCoords = vm.convertCoords({x: ($event.offsetX) / vm.iw * 100, y: ($event.offsetY) / vm.ih * 100});
     };
     vm.mouseleave = function(){
       vm.mouseInside = false;
@@ -131,10 +163,11 @@
     vm.mouseenter = function(){
       vm.mouseInside = true;
     };
-    vm.preventMousemove = function($event){
-      $event.stopPropagation();
+
+    vm.canBeAddedNewPin = function(){
+      return (vm.activeMode == 2) && vm.mouseInside && !vm.selectedPin;
     };
-    /*  */
+    /**/
 
   }
 })();
