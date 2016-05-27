@@ -107,7 +107,9 @@
     vm.selectPin = function(pin, e){
       vm.selectedPin = pin;
       vm.scrollPinComments(pin);
-      e.stopPropagation();
+      if (e){
+        e.stopPropagation();
+      }
     };
     vm.unselectPin = function(){
       vm.selectedPin = null;
@@ -135,15 +137,36 @@
       return pin.newCommentMode;
     };
 
+    vm.clearNewComment = function(pin){
+      pin.newComment = {};
+    };
+
     vm.addComment = function(pin){
       pin.newComment.user = vm.user;
       pin.comments.push(angular.copy(pin.newComment));
+      vm.clearNewComment(pin);
       vm.cancelNewCommentMode(pin);
+    };
+
+    vm.containerClick = function($event){
+      if (vm.canBeAddedNewPin()){
+        var coords = vm.getMouseCoords($event);
+        var newPin = { id: null, x: coords.x, y: coords.y, type: 2, comments: [] };
+        vm.pins.push(newPin);
+        $timeout(function(){
+          vm.selectPin(newPin);
+          vm.startNewCommentMode(newPin);
+        });
+      }
     };
     /* end pins actions */
 
 
     /* common */
+    vm.getMouseCoords = function($event){
+      return  vm.convertCoords({x: ($event.offsetX) / vm.iw * 100, y: ($event.offsetY) / vm.ih * 100});
+    };
+
     vm.convertCoords = function(coords){
       return {x: coords.x * (vm.scale / 100), y: coords.y * (vm.scale / 100)};
     };
@@ -155,7 +178,7 @@
     };
 
     vm.mousemove = function($event){
-      vm.mouseCoords = vm.convertCoords({x: ($event.offsetX) / vm.iw * 100, y: ($event.offsetY) / vm.ih * 100});
+      vm.mouseCoords = vm.getMouseCoords($event);
     };
     vm.mouseleave = function(){
       vm.mouseInside = false;
