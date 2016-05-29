@@ -318,7 +318,6 @@
 		}
 
 		function copyProjects(id) {
-
 			projects.forEach(function(item){
 				if(item.id === id){
 					var tmpProject = {
