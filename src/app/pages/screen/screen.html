@@ -82,8 +82,17 @@
         <div
           class="pin-point"
           ng-click="screen.selectPin(pin, $event)"
-          ng-bind="(pin.comments.length > 0) ? pin.comments.length : ''"
-        ></div>
+        >
+          <span
+            class="pin-point-number"
+            ng-if="pin.comments.length > 0"
+            ng-bind="pin.comments.length"
+          ></span>
+          <span
+            class="pin-point-plus"
+            ng-if="pin.comments.length <= 0"
+          >+</span>
+        </div>
         <div
           class="pin-content pin-content-comment"
           ng-if="screen.isPinSelected(pin)"

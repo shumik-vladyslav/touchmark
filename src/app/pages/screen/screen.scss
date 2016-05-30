@@ -85,11 +85,21 @@
         margin-top: -15px;
         border-radius: 50%;
         cursor: pointer;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        line-height: 26px;
-        vertical-align: middle;
+
+        .pin-point-number, .pin-point-plus{
+          display: inline-block;
+          width: 100%;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          line-height: 26px;
+          font-size: 13px;
+          vertical-align: middle;
+        }
+        .pin-point-plus{
+          font-size: 26px;
+          line-height: 30px;
+        }
       }
 
       .pin-content{
