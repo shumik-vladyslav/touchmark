@@ -112,6 +112,7 @@
       }
     };
     vm.unselectPin = function(){
+      vm.cancelNewCommentMode(vm.selectedPin);
       vm.selectedPin = null;
     };
     vm.isPinSelected = function(pin){
@@ -126,11 +127,23 @@
         });
       }
     };
+    vm.focusNewCommentInput = function(pin){
+      var pinIndex = vm.pins.indexOf(pin);
+      if (pinIndex > -1){
+        $timeout(function(){
+          var targetEl = $('#pin-' + pinIndex + ' .pin-content-comment .pin-new-comment-form md-input-container textarea');
+          targetEl.focus();
+        });
+      }
+    };
 
     vm.startNewCommentMode = function(pin){
       pin.newCommentMode = true;
+      vm.scrollPinComments(pin);
+      vm.focusNewCommentInput(pin);
     };
     vm.cancelNewCommentMode = function(pin){
+      if (!pin) return;
       pin.newCommentMode = false;
     };
     vm.isNewCommentMode = function(pin){
