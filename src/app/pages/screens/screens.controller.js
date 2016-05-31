@@ -9,6 +9,7 @@
   function ScreensController(ScreensService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
+    BottomSheetService.setBottomService(ScreensService);
     vm.filterConfig = ScreensService.getFilterConfig();
     vm.add = {
       title: 'Add Screen',

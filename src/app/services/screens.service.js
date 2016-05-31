@@ -6,8 +6,13 @@
 		.factory('ScreensService', ScreensService);
 
 	/** @ngInject */
-	function ScreensService($mdDialog, $document, $window) {
-
+	function ScreensService(BottomSheetService, $mdDialog, $document, $window, $state) {
+		var vm = this;
+		
+		vm.selectedObject = BottomSheetService.getSelectedObject();
+		
+		vm.projectId = +$state.params['screens'];
+		
 		var collaborators = [
 			{
 				key: 1,
@@ -206,7 +211,9 @@
 			getUniqueСollaborators: getUniqueСollaborators,
 			deletedScreen: deletedScreen,
 			copyScreen: copyScreen,
-			setScreenValue: setScreenValue
+			setScreenValue: setScreenValue,
+			getSheetValue: getSheetValue,
+			getSocialButtonValue: getSocialButtonValue
 		};
 
 		return service;
@@ -320,5 +327,118 @@
 				}
 			});
 		}
+		
+		function getSocialButtonValue() {
+			var arr = [
+				{label: 'Share', svg: 'assets/icons/share.svg'},
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copy},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archive},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleted}
+			];
+
+			return arr;
+		}
+		
+		function copy(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to copy?')
+				.textContent('Your projects will be copied')
+				.ariaLabel('Copy dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Copy')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					copyScreen(vm.projectId, element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function deleted(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to delete?')
+				.textContent('Your projects will be deleted')
+				.ariaLabel('Delete dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Delete')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					deletedScreen(vm.projectId, element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function archive(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to archive?')
+				.textContent('Your projects will be archived')
+				.ariaLabel('Archive dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Archive')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					setScreenValue(vm.projectId, element.id, 'archived', true);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function getSheetValue() {
+
+			var changeStatus = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var copyToPrototype = [
+				{key: 'NEW PROTOTYPE', action: '/'},
+				{key: 'PROTOTYPE 1', action: '/'},
+				{key: 'PROTOTYPE 2', action: '/'}
+			];
+
+			var moveToSection = [
+				{key: 'DUPLICATE', action: '/'}
+			];
+
+			var arr = [
+				{key: 'DUPLICATE', action: '/'},
+				{key: 'CHANGE STATUS', value: changeStatus},
+				{key: 'COPY TO PROTOTYPE', value: copyToPrototype},
+				{key: 'MOVE TO SECTION', value: moveToSection}
+			];
+
+			return arr;
+		}	
+
 	}
 })();

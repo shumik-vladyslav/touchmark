@@ -6,7 +6,11 @@
 		.factory('ProjectsService', ProjectsService);
 
 	/** @ngInject */
-	function ProjectsService($mdDialog, $document, $window) {
+	function ProjectsService(BottomSheetService, $mdDialog, $document, $window) {
+		var vm = this;
+		
+		vm.selectedObject = BottomSheetService.getSelectedObject();
+
 		var types = [
 			{
 				key: 'all',
@@ -249,11 +253,11 @@
 			getFilterConfig: getFilterConfig,
 			getUniqueСollaborators: getUniqueСollaborators,
 			updateValue: updateValue,
-			deletedProject: deletedProject,
-      copyProject: copyProject, 
-      rndUsers: rndUsers,
+			deleted: deletedProjects,
+			copy: copyProjects,
 			getSheetValue: getSheetValue,
-      getSocialButtonValue: getSocialButtonValue
+			getSocialButtonValue: getSocialButtonValue,
+			update: updateProjects
 		};
 
 		return service;
@@ -273,6 +277,7 @@
 		function getProjects() {
 			return projects;
 		}
+		
 		function getUniqueСollaborators() {
 			var collaborators = [
 				{
@@ -290,6 +295,7 @@
 			}
 			return _.uniqWith(collaborators, _.isEqual);
 		}
+		
 		function addProject(proj){
 			projects.push(proj);
 		}
@@ -303,7 +309,7 @@
 			});
 		}
 
-		function deletedProject(id){
+		function deletedProjects(id){
 			projects.forEach(function(item, i, arr){
 				if(item.id === id){
 					arr.splice(i, 1);
@@ -311,7 +317,7 @@
 			});
 		}
 
-		function copyProject(id) {
+		function copyProjects(id) {
 			projects.forEach(function(item){
 				if(item.id === id){
 					var tmpProject = {
@@ -329,16 +335,101 @@
 				}
 			});
 		}
-
-		function getSocialButtonValue(param) {
+		
+		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
-				{label: 'Copy', svg: 'assets/icons/copy.svg'},
-				{label: 'Archive', svg: 'assets/icons/archive.svg'},
-				{label: 'Delete', svg: 'assets/icons/delete.svg', click: param.delete}
+				{label: 'Copy', svg: 'assets/icons/copy.svg', click: copy},
+				{label: 'Archive', svg: 'assets/icons/archive.svg', click: archive},
+				{label: 'Delete', svg: 'assets/icons/delete.svg', click: deleted}
 			];
 
 			return arr;
+		}
+		
+		function copy(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to copy?')
+				.textContent('Your projects will be copied')
+				.ariaLabel('Copy dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Copy')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					copyProjects(element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function archive(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to archive?')
+				.textContent('Your projects will be archived')
+				.ariaLabel('Archive dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Archive')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					element.archived = true;
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+		
+		function deleted(ev) {
+			var confirm = $mdDialog.confirm()
+				.title('Would you like to delete?')
+				.textContent('Your projects will be deleted')
+				.ariaLabel('Delete dialog')
+				.targetEvent(ev)
+				.theme('navAuth')
+				.ok('Delete')
+				.cancel('Cancel');
+
+			$mdDialog.show(confirm).then(function() {
+				for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					deletedProjects(element.id);
+				}
+				}
+				BottomSheetService.deleteCheckedObjects();
+
+				vm.selectedObject = BottomSheetService.getSelectedObject();
+
+				BottomSheetService.showBottomSheet();
+			});
+		}
+
+		function updateProjects(value){
+			for (var key in vm.selectedObject) {
+				if (vm.selectedObject.hasOwnProperty(key)) {
+					var element = vm.selectedObject[key];
+					updateValue(element.id, 'status', value);
+				}
+			}
+			vm.selectedObject = BottomSheetService.getSelectedObject();
 		}
 
 		function getSheetValue() {

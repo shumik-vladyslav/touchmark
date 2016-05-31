@@ -9,6 +9,7 @@
   function ProjectsController(ProjectsService, CommonService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
+    BottomSheetService.setBottomService(ProjectsService);
     vm.filterConfig = ProjectsService.getFilterConfig();
     vm.types = ProjectsService.getTypes();
     vm.add = {
@@ -52,6 +53,7 @@
       }
 
       var isType = ( ( vm.filters.type && el.type === vm.filters.type ) || !vm.filters.type );
+
       var archived = (vm.filters.archived === el.archived);
 
       var result = ( isType && isCollaborator && archived );
@@ -170,7 +172,7 @@
     };
 
     vm.copy= function(id) {
-      ProjectsService.copyProject(id);
+      ProjectsService.copy(id);
     };
     
     vm.view = function(id){

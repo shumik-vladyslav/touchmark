@@ -6,11 +6,12 @@
 		.controller('CardController', CardController);
 
 	/** @ngInject */
-	function CardController($scope, $mdDialog, ProjectsService, AuthService, BottomSheetService) {
+	function CardController($scope, $mdDialog, AuthService, BottomSheetService) {
     var vm = this;
     vm.isHovered = false;
     vm.checked = false;
     vm.userInfo = AuthService.getUserInfo;
+    vm.service = BottomSheetService.extService();
     vm.toggle = function() {
 			vm.checked = !vm.checked;
 			if(vm.checked){
@@ -34,7 +35,7 @@
         fullscreen: false
       })
       .then(function() {
-        ProjectsService.deletedProject($scope.info.id);
+        vm.service.deleted($scope.info.id);
       });
 		};
 	}

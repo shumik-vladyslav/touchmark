@@ -9,10 +9,13 @@
 	function BottomSheetService($mdBottomSheet) {
     var vm = this;
     var showBottomFlag = true;
+    vm.bottomService = null;
 
     vm.selectedObject = [];
     var service = {
-      showBottomSheet: showBottomSheet,
+      setBottomService: setBottomService,
+      extService: extService,
+      showBottomSheet: showBottomSheet,     
       pushCheckedObject: pushCheckedObject,
       deleteCheckedObject: deleteCheckedObject,
       getSelectedObject: getSelectedObject,
@@ -20,7 +23,15 @@
     };
 
     return service;
-
+    
+    function setBottomService(service) {
+      vm.bottomService = service;
+    }
+    
+    function extService() {
+      return vm.bottomService;
+    }
+    
     function getSelectedObject() {
       return vm.selectedObject;
     }
