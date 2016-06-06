@@ -16,25 +16,30 @@
         url: '/',
         templateUrl: 'app/pages/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        freePage: true
       })
       .state('main.pricing', {
         url: '/pricing',
         templateUrl: 'app/pages/pricing/pricing.html',
         controller: 'PricingController',
-        controllerAs: 'pric'
+        controllerAs: 'pric',
+        freePage: true
       })
       .state('main.about', {
         url: '/about',
-        templateUrl: 'app/pages/about/about.html'
+        templateUrl: 'app/pages/about/about.html',
+        freePage: true
       })
       .state('main.showcase', {
         url: '/showcase',
-        templateUrl: 'app/pages/showcase/showcase.html'
+        templateUrl: 'app/pages/showcase/showcase.html',
+        freePage: true
       })
       .state('main.support', {
         url: '/support',
-        templateUrl: 'app/pages/support/support.html'
+        templateUrl: 'app/pages/support/support.html',
+        freePage: true
       })
       .state('main.projects', {
         url: '/projects',
@@ -56,7 +61,8 @@
       })
       .state('main.uikit', {
         url: '/uikit',
-        templateUrl: 'app/pages/uikit/uikit.html'
+        templateUrl: 'app/pages/uikit/uikit.html',
+        freePage: true
       })
       .state('main.boards', {
         url: '/boards',
@@ -76,11 +82,13 @@
       })
       .state('main.contact', {
         url: '/contact',
-        templateUrl: 'app/pages/contact/contact.html'
+        templateUrl: 'app/pages/contact/contact.html',
+        freePage: true
       })
       .state('main.privacy', {
         url: '/privacy',
-        templateUrl: 'app/pages/privacy/privacy.html'
+        templateUrl: 'app/pages/privacy/privacy.html',
+        freePage: true
       })
       .state('main.terms', {
         url: '/terms',
