@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -35,63 +35,63 @@
     ];
     vm.cardType = 'module';
 
-    vm.setCardType = function(type) {
+    vm.setCardType = function (type) {
       vm.cardType = type;
     };
 
-    vm.pickFilter = function(el){
+    vm.pickFilter = function (el) {
 
       var collaborators = el.collaborators, isCollaborator = false;
-      if(!vm.filters.collaborator) {
+      if (!vm.filters.collaborator) {
         isCollaborator = true;
       } else {
-        for(var i in collaborators) {
-          if(collaborators[i].key === vm.filters.collaborator){
+        for (var i in collaborators) {
+          if (collaborators[i].key === vm.filters.collaborator) {
             isCollaborator = true;
           }
         }
       }
 
-      var isType = ( ( vm.filters.type && el.type === vm.filters.type ) || !vm.filters.type );
+      var isType = ((vm.filters.type && el.type === vm.filters.type) || !vm.filters.type);
 
       var archived = (vm.filters.archived === el.archived);
 
-      var result = ( isType && isCollaborator && archived );
+      var result = (isType && isCollaborator && archived);
 
       return result;
     };
 
-    vm.filterSelect = function(item, menu) {
+    vm.filterSelect = function (item, menu) {
       menu.selected = item;
       var _ = $window._;
 
-      switch(menu.type) {
+      switch (menu.type) {
         case 'order':
           vm.orders = item.expression;
-        break;
+          break;
         case 'filter':
-          if(item.key === 'all') {
+          if (item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
-            if(menu.column === 'collaborator') {
+            if (menu.column === 'collaborator') {
               vm.filters[menu.column] = item.key;
             } else {
               vm.filters[menu.column] = item.key;
             }
           }
-        break;
+          break;
       }
     };
 
 
-    vm.addProjectModal = function(ev){
+    vm.addProjectModal = function (ev) {
       CommonService.formDialog(
         ev,
         {
           title: 'Add new project',
           items: [
             {
-              type: 'text',
+              type: 'input',
               name: 'name',
               label: 'Project name',
               required: true,
@@ -124,7 +124,7 @@
             }
           }
         }
-      ).then(function(data){
+      ).then(function (data) {
         ProjectsService.addProject({
           id: new Date().getTime(),
           name: data.name,
@@ -132,14 +132,14 @@
           owner: 'user',
           collaborators: ProjectsService.rndUsers(),
           type: data.type,
-          img: 'assets/images/projects/p'+Math.floor(Math.random() * 5 + 1)+'.jpg',
+          img: 'assets/images/projects/p' + Math.floor(Math.random() * 5 + 1) + '.jpg',
           screens: Math.floor(Math.random() * 29 + 1),
           archived: false
         });
       });
     };
 
-    vm.archive = function(project, ev) {
+    vm.archive = function (project, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
         .textContent('Your projects will be archived')
@@ -149,13 +149,13 @@
         .ok('Archive')
         .cancel('Cancel');
 
-      $mdDialog.show(confirm).then(function() {
+      $mdDialog.show(confirm).then(function () {
         project.archived = true;
-        toastr.success('Successfully', 'Archived', {progressBar: false});
+        toastr.success('Successfully', 'Archived', { progressBar: false });
       });
     };
 
-    vm.unArchive = function(project, ev) {
+    vm.unArchive = function (project, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to unarchive?')
         .textContent('Your projects will be unarchived')
@@ -165,18 +165,46 @@
         .ok('Archive')
         .cancel('Cancel');
 
-      $mdDialog.show(confirm).then(function() {
+      $mdDialog.show(confirm).then(function () {
         project.archived = false;
-        toastr.success('Successfully', 'Unarchived', {progressBar: false});
+        toastr.success('Successfully', 'Unarchived', { progressBar: false });
       });
     };
 
-    vm.copy= function(id) {
-      ProjectsService.copy(id);
+    vm.copy = function (id, ev) {
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to copy?')
+        .textContent('Your projects will be copied')
+        .ariaLabel('Copy dialog')
+        .targetEvent(ev)
+        .theme('navAuth')
+        .ok('Copy')
+        .cancel('Cancel');
+
+      $mdDialog.show(confirm).then(function () {
+        ProjectsService.copy(id);
+        toastr.success('Successfully', 'Copied', { progressBar: false });
+      });
     };
-    
-    vm.view = function(id){
-      $state.go('main.screens', {screens: id});
+
+    vm.deleted = function (id, ev) {
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to deleted?')
+        .textContent('Your projects will be deleted')
+        .ariaLabel('Delete dialog')
+        .targetEvent(ev)
+        .theme('navAuth')
+        .ok('Delete')
+        .cancel('Cancel');
+
+      $mdDialog.show(confirm).then(function () {
+        ProjectsService.deleted(id);
+        toastr.success('Successfully', 'Deleted', { progressBar: false });
+      });
+    };
+
+    vm.view = function (id) {
+      $state.go('main.screens', { screens: id });
     };
   }
 })();

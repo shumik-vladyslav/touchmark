@@ -257,7 +257,8 @@
 			copy: copyProjects,
 			getSheetValue: getSheetValue,
 			getSocialButtonValue: getSocialButtonValue,
-			update: updateProjects
+			update: updateProjects,
+			rndUsers: rndUsers
 		};
 
 		return service;
