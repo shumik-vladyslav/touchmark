@@ -8,11 +8,11 @@
 	/** @ngInject */
 	function ScreensService(BottomSheetService, $mdDialog, $document, $window, $state) {
 		var vm = this;
-		
+
 		vm.selectedObject = BottomSheetService.getSelectedObject();
-		
+
 		vm.projectId = +$state.params['screens'];
-		
+
 		var collaborators = [
 			{
 				key: 1,
@@ -75,8 +75,6 @@
 			}
 			return col;
 		};
-
-
 
 		var status = {
 			onHold: 'ON HOLD',
@@ -168,17 +166,19 @@
 
 		var rndScreen = function() {
 			var col = [];
-			var rnd = Math.floor(Math.random() * 5) + 1;
-			for (var i = 0; i < rnd; i++) {
+			// var rnd = Math.floor(Math.random() * 5) + 1;
+			for (var i = 0; i < screens.length; i++) {
 				col.push(screens[i]);
 			}
 			return col;
 		};
 
-		var project = [
-			{id: 1, name: 'Desmark', screens: rndScreen(), collaborators: rndUsers()},
-			{id: 3, name: 'Desmark ID 3', screens: rndScreen(), collaborators: rndUsers()}
-		];
+		var project = {
+      id: 1,
+      name: 'Desmark',
+      screens: screens,
+      collaborators: rndUsers()
+    };
 
 		var filterConfig = [
 			{
@@ -203,12 +203,13 @@
 			}
 		];
 		var service = {
+      project: project,
 			getStatus: getStatus,
-			getProject: getProject,
+			// getProject: getProject,
 			addScreen: addScreen,
 			addScreenModal: addScreenModal,
 			getFilterConfig: getFilterConfig,
-			getUniqueСollaborators: getUniqueСollaborators,
+      getUniqueCollaborators: getUniqueCollaborators,
 			deletedScreen: deletedScreen,
 			copyScreen: copyScreen,
 			setScreenValue: setScreenValue,
@@ -226,17 +227,18 @@
 			return filterConfig;
 		}
 
-		function getProject(id) {
-			for (var key in project) {
-				if (project.hasOwnProperty(key)) {
-					var element = project[key];
-					if(element.id === id){
-						return element;
-					}
-				}
-			}
-		}
-		function getUniqueСollaborators() {
+		// function getProject(id) {
+
+			// for (var key in project) {
+			// 	if (project.hasOwnProperty(key)) {
+			// 		var element = project[key];
+			// 		if(element.id === id){
+			// 			return element;
+			// 		}
+			// 	}
+			// }
+		// }
+		function getUniqueCollaborators() {
 			var collaborators = [
 				{
 					key: 'all',
@@ -244,39 +246,34 @@
 				}
 			];
 			var _ = $window._;
-			for (var key in project) {
-				if (project.hasOwnProperty(key)) {
-					var element = project[key];
-
-					collaborators = _.concat(collaborators, element.collaborators);
-				}
-			}
+      collaborators = _.concat(collaborators, project.collaborators);
 			return _.uniqWith(collaborators, _.isEqual);
 		}
 		function addScreen(id, screen){
-			for (var key in project) {
-				if (project.hasOwnProperty(key)) {
-					var element = project[key];
-					if(element.id === id){
-						element.screens.push(screen);
-					}
-				}
-			}
+			// for (var key in project) {
+			// 	if (project.hasOwnProperty(key)) {
+			// 		var element = project[key];
+			// 		if(element.id === id){
+			// 		}
+			// 	}
+			// }
+      project.screens.push(screen);
 		}
 
 		function deletedScreen(id, screenId){
-			for (var key in project) {
-				if (project.hasOwnProperty(key)) {
-					var element = project[key];
-					if(element.id === id){
-						element.screens.forEach(function(item, i, arr){
-							if(item.id === screenId){
-								arr.splice(i, 1);
-							}
-						});
-					}
-				}
-			}
+			// for (var key in project) {
+			// 	if (project.hasOwnProperty(key)) {
+			// 		var element = project[key];
+			// 		if(element.id === id){
+            //
+			// 		}
+			// 	}
+			// }
+      project.screens.forEach(function(item, i, arr){
+        if(item.id === screenId){
+          arr.splice(i, 1);
+        }
+      });
 		}
 
 		function addScreenModal(ev) {
@@ -297,37 +294,29 @@
 		}
 
 		function copyScreen(id, screenId) {
-			project.forEach(function(item){
-				if(item.id === id){
-					item.screens.forEach(function(screen){
-						if(screen.id === screenId){
-							var tmpProject = {
-							id: screen.id + 11,
-							name: screen.name + '(Copy)',
-							fileName: screen.fileName + '(Copy)',
-							update: new Date(),
-							owner: screen.owner,
-							img: screen.img
-						};
-						item.screens.push(tmpProject);
-						}
-					});
-				}
-			});
+      project.screens.forEach(function(screen){
+        if(screen.id === screenId){
+          var tmpProject = {
+            id: screen.id + 11,
+            name: screen.name + '(Copy)',
+            fileName: screen.fileName + '(Copy)',
+            update: new Date(),
+            owner: screen.owner,
+            img: screen.img
+          };
+          project.screens.push(tmpProject);
+        }
+      });
 		}
 
-		function setScreenValue(id, screenId, key, vlaue){
-			project.forEach(function(item){
-				if(item.id === id){
-					item.screens.forEach(function(screen){
-						if(screen.id === screenId){
-							screen[key] = vlaue;
-						}
-					});
-				}
-			});
+		function setScreenValue(id, screenId, key, value){
+      project.screens.forEach(function(screen){
+        if(screen.id === screenId){
+          screen[key] = value;
+        }
+      });
 		}
-		
+
 		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
@@ -338,7 +327,7 @@
 
 			return arr;
 		}
-		
+
 		function copy(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to copy?')
@@ -363,7 +352,7 @@
 				BottomSheetService.showBottomSheet();
 			});
 		}
-		
+
 		function deleted(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to delete?')
@@ -388,7 +377,7 @@
 				BottomSheetService.showBottomSheet();
 			});
 		}
-		
+
 		function archive(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to archive?')
@@ -413,7 +402,7 @@
 				BottomSheetService.showBottomSheet();
 			});
 		}
-		
+
 		function getSheetValue() {
 
 			var changeStatus = [
@@ -438,7 +427,7 @@
 			];
 
 			return arr;
-		}	
+		}
 
 	}
 })();

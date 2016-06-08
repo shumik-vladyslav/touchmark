@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function ProjectsService(BottomSheetService, $mdDialog, $document, $window) {
 		var vm = this;
-		
+
 		vm.selectedObject = BottomSheetService.getSelectedObject();
 
 		var types = [
@@ -237,7 +237,7 @@
 			},
 			{
 				type: 'filter',
-				items: getUniqueСollaborators(),
+				items: getUniqueCollaborators(),
 				selected: {
 					key: 'all',
 					value: 'All collaborators'
@@ -251,7 +251,7 @@
 			getProjects: getProjects,
 			addProject: addProject,
 			getFilterConfig: getFilterConfig,
-			getUniqueСollaborators: getUniqueСollaborators,
+      getUniqueCollaborators: getUniqueCollaborators,
 			updateValue: updateValue,
 			deleted: deletedProjects,
 			copy: copyProjects,
@@ -278,8 +278,8 @@
 		function getProjects() {
 			return projects;
 		}
-		
-		function getUniqueСollaborators() {
+
+		function getUniqueCollaborators() {
 			var collaborators = [
 				{
 					key: 'all',
@@ -296,7 +296,7 @@
 			}
 			return _.uniqWith(collaborators, _.isEqual);
 		}
-		
+
 		function addProject(proj){
 			projects.push(proj);
 		}
@@ -336,7 +336,7 @@
 				}
 			});
 		}
-		
+
 		function getSocialButtonValue() {
 			var arr = [
 				{label: 'Share', svg: 'assets/icons/share.svg'},
@@ -347,7 +347,7 @@
 
 			return arr;
 		}
-		
+
 		function copy(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to copy?')
@@ -372,7 +372,7 @@
 				BottomSheetService.showBottomSheet();
 			});
 		}
-		
+
 		function archive(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to archive?')
@@ -397,7 +397,7 @@
 				BottomSheetService.showBottomSheet();
 			});
 		}
-		
+
 		function deleted(ev) {
 			var confirm = $mdDialog.confirm()
 				.title('Would you like to delete?')

@@ -9,7 +9,7 @@
     </group-button>
     <span flex></span>
     <md-menu-content class="menu-content-project" layout="row" layout-align="center center">
-      <md-menu-item ng-repeat="item in proj.project.collaborators">
+      <md-menu-item ng-repeat="item in proj.project.collaborators track by $index">
         <a class="search-menu-button" ng-click="">
           <md-icon md-svg-src="{{menu.selected.key === item.key ? 'assets/icons/check.svg' : ''}}"></md-icon>
           <img class="md-user-avatar" width="16" ng-src="{{item.avatar}}" ng-if="item.avatar"/>

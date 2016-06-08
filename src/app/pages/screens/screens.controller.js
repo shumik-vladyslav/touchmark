@@ -16,7 +16,7 @@
       click: ScreensService.addScreenModal
     };
     vm.projectId = +$state.params['screens'];
-    vm.project = ScreensService.getProject(vm.projectId);
+    vm.project = ScreensService.project;
     vm.filters = {};
     vm.orders = '';
     vm.cardTypes = [
@@ -191,7 +191,7 @@
     };
 
     vm.view = function (id) {
-      $state.go('main.screen', { screen: id });
+      $state.go('main.screen', { uuid: id });
     };
   }
 })();

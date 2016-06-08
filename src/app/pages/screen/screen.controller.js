@@ -26,7 +26,8 @@
       }
     ];
 
-    vm.current = vm.screens.filter(function(scr){ return scr.id == vm.currentId; })[0];
+    vm.current = vm.screens[0];
+    // vm.current = vm.screens.filter(function(scr){ return scr.id == vm.currentId; })[0];
 
     vm.project = {
       id: 'project-id',

@@ -54,7 +54,7 @@
         controllerAs: 'proj'
       })
       .state('main.screen', {
-        url: '/screen/:screen',
+        url: '/screen/:uuid',
         templateUrl: 'app/pages/screen/screen.html',
         controller: 'ScreenController',
         controllerAs: 'screen'

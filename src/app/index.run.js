@@ -7,7 +7,6 @@
 
   /** @ngInject */
   function runBlock($log, $rootScope, $state, $timeout, AuthService) {
-
     $rootScope.$on('$stateChangeStart', function (event, data) {
       if (!data.freePage && !AuthService.isAuthorized()) {
         $timeout(function () {
