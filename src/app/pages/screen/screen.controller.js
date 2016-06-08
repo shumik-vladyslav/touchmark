@@ -6,7 +6,7 @@
     .controller('ScreenController', ScreenController);
 
   /** @ngInject */
-  function ScreenController($state, $scope, $timeout) {
+  function ScreenController($state, $scope, $timeout, PanZoomService) {
     var vm = this;
 
     /* initial data */
@@ -45,60 +45,165 @@
           { user: { id: 2, username: "my_username" }, message: "text text text5" }
         ]
       }
-    ];    
+    ];
+    /* end mock data */
+
 
     /* helper functions */
     vm.goToScreen = function(uuid){
       $state.params.uuid = uuid;
       $state.go($state.current.name, $state.params, {reload: true});
     };
+    /**/
+
 
     /* mode actions */
     vm.activeMode = 0;
     vm.toggleMode = function(mode){
       vm.activeMode = mode;
     };
+    /**/
 
+
+    /* INITIAL VALUES FOR THE ZOOM PLUGIN CONFIGS */
+    vm.scale = 100;
     vm.zoomConfig = {
       modelChangedCallback: function(obj){
         $timeout(function(){
           vm.scale = 400 / Math.pow(2, obj.zoomLevel);
         });
-      }
+      },
+      initialPanX: 0 // will be changed to when the image is downloaded
     };
     vm.zoomModel = {}; // always pass empty object
+    /**/
 
+
+    /* our configs */
     vm.useAbsoluteSizes = true;
+    /**/
+
+
+    // watch while the project is available. maybe it should be downloaded from the remote server
+    $scope.$watch('vm.current', function(){
+      var img = new Image();
+      // HERE WE CAN DO LOADER
+      img.onload = function(){
+        vm.ww = $(window).width();
+        vm.iw = this.width; // image width
+        vm.ih = this.height // image height
+        if (vm.ww > vm.iw){
+          vm.zoomConfig.initialPanX = (vm.ww - vm.iw) / 2;
+        }
+        vm.showImage = true;
+        $scope.$digest();
+      };
+      img.src = vm.current.url;
+    }, true)
+    /**/
 
 
     /* pins actions */
     vm.selectPin = function(pin, e){
       vm.selectedPin = pin;
-      e.stopPropagation();
+      vm.scrollPinComments(pin);
+      if (e){
+        e.stopPropagation();
+      }
     };
     vm.unselectPin = function(){
+      vm.cancelNewCommentMode(vm.selectedPin);
       vm.selectedPin = null;
     };
     vm.isPinSelected = function(pin){
       return pin == vm.selectedPin;
     };
+    vm.scrollPinComments = function(pin){
+      var pinIndex = vm.pins.indexOf(pin);
+      if (pinIndex > -1){
+        $timeout(function(){
+          var targetEl = $('#pin-' + pinIndex).find('.pin-content-comment');
+          targetEl.scrollTop(targetEl[0].scrollHeight);
+        });
+      }
+    };
+    vm.focusNewCommentInput = function(pin){
+      var pinIndex = vm.pins.indexOf(pin);
+      if (pinIndex > -1){
+        $timeout(function(){
+          var targetEl = $('#pin-' + pinIndex + ' .pin-content-comment .pin-new-comment-form md-input-container textarea');
+          targetEl.focus();
+        });
+      }
+    };
 
     vm.startNewCommentMode = function(pin){
       pin.newCommentMode = true;
+      vm.scrollPinComments(pin);
+      vm.focusNewCommentInput(pin);
     };
     vm.cancelNewCommentMode = function(pin){
+      if (!pin) return;
       pin.newCommentMode = false;
     };
     vm.isNewCommentMode = function(pin){
       return pin.newCommentMode;
     };
 
+    vm.clearNewComment = function(pin){
+      pin.newComment = {};
+    };
+
     vm.addComment = function(pin){
       pin.newComment.user = vm.user;
       pin.comments.push(angular.copy(pin.newComment));
+      vm.clearNewComment(pin);
       vm.cancelNewCommentMode(pin);
     };
+
+    vm.containerClick = function($event){
+      if (vm.canBeAddedNewPin()){
+        var coords = vm.getMouseCoords($event);
+        var newPin = { id: null, x: coords.x, y: coords.y, type: 2, comments: [] };
+        vm.pins.push(newPin);
+        $timeout(function(){
+          vm.selectPin(newPin);
+          vm.startNewCommentMode(newPin);
+        });
+      }
+    };
     /* end pins actions */
+
+
+    /* common */
+    vm.getMouseCoords = function($event){
+      return  vm.convertCoords({x: ($event.offsetX) / vm.iw * 100, y: ($event.offsetY) / vm.ih * 100});
+    };
+
+    vm.convertCoords = function(coords){
+      return {x: coords.x * (vm.scale / 100), y: coords.y * (vm.scale / 100)};
+    };
+
+    vm.click = function(){
+      if (vm.activeMode == 2){
+        vm.unselectPin();
+      }
+    };
+
+    vm.mousemove = function($event){
+      vm.mouseCoords = vm.getMouseCoords($event);
+    };
+    vm.mouseleave = function(){
+      vm.mouseInside = false;
+    };
+    vm.mouseenter = function(){
+      vm.mouseInside = true;
+    };
+
+    vm.canBeAddedNewPin = function(){
+      return (vm.activeMode == 2) && vm.mouseInside && !vm.selectedPin;
+    };
+    /**/
 
   }
 })();

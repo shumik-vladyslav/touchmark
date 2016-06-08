@@ -51,9 +51,23 @@
   position: relative;
   width: 100%;
 
+  .pan-zoom-frame{
+    cursor: crosshair!important;
+  }
+
   .zoom-container{
     display: inline-block;
     position: relative;
+
+    .comments-popup{
+      position: absolute;
+      display: block;
+      background: white;
+      padding: 5px;
+      box-shadow: 0px 0px 18px -1px rgba(102,102,102,1);
+      white-space: nowrap;
+      margin-left: 20px;
+    }
 
     .pin-container-comment{
       position: absolute;
@@ -71,6 +85,21 @@
         margin-top: -15px;
         border-radius: 50%;
         cursor: pointer;
+
+        .pin-point-number, .pin-point-plus{
+          display: inline-block;
+          width: 100%;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          line-height: 26px;
+          font-size: 13px;
+          vertical-align: middle;
+        }
+        .pin-point-plus{
+          font-size: 26px;
+          line-height: 30px;
+        }
       }
 
       .pin-content{
@@ -81,9 +110,11 @@
         box-shadow: 0px 0px 18px -1px rgba(102,102,102,1);
 
         &.pin-content-comment{
+          position: relative;
           width: 250px;
           max-height: 300px;
           overflow: scroll;
+          z-index: 1;
 
           &.wide{
             width: 370px;
@@ -130,6 +161,7 @@
             color: red;
             text-align: center;
             font-size: 12px;
+            cursor: pointer;
           }
         }
       }

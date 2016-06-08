@@ -35,30 +35,64 @@
 </md-toolbar>
 <div screen-wrapper-dynamic-height class="screen-wrapper">
   <panzoom
+    ng-if="screen.showImage"
+    id="pane"
     config="screen.zoomConfig"
     model="screen.zoomModel"
     style="width:100%; height: 100%"
-    ng-click="screen.unselectPin()"
+    ng-click="screen.click()"
   >
-    <div class="zoom-container">
+    <div
+      class="zoom-container"
+      ng-mousemove="screen.mousemove($event)"
+      ng-mouseleave="screen.mouseleave()"
+      ng-mouseenter="screen.mouseenter()"
+      ng-click="screen.containerClick($event)"
+    >
       <!-- main image -->
-      <img ng-src="{{ screen.current.url }}"/>
+      <img
+        ng-src="{{ screen.current.url }}"
+      />
 
       <!-- comments pins only -->
       <div
+        ng-if="screen.canBeAddedNewPin()"
+        class="comments-popup"
+        ng-style="{
+          'left': screen.mouseCoords.x + '%',
+          'top': screen.mouseCoords.y + '%',
+          'zoom': (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')
+        }"
+        ng-mousemove="$event.stopPropagation()"
+      >Click to leave a comment</div>
+      <div
         class="pin-container-comment"
-        ng-repeat="pin in screen.pins"
+        id="pin-{{$index}}"
+        ng-repeat="pin in screen.pins track by $index"
         ng-if="(pin.type == screen.activeMode) && (screen.activeMode == 2)"
         ng-style="{
           'left': pin.x + '%',
           'top': pin.y + '%',
           'zoom': (screen.useAbsoluteSizes ? screen.scale + '%' : '100%')
         }"
+        ng-mousemove="$event.stopPropagation()"
+        ng-mouseleave="screen.mouseenter()"
+        ng-mouseenter="screen.mouseleave()"
       >
         <div
           class="pin-point"
           ng-click="screen.selectPin(pin, $event)"
-        >&nbsp;</div>
+        >
+          <span
+            class="pin-point-number"
+            ng-if="pin.comments.length > 0"
+            ng-bind="pin.comments.length"
+          ></span>
+          <span
+            class="pin-point-plus"
+            ng-if="pin.comments.length <= 0"
+          >+</span>
+        </div>
         <div
           class="pin-content pin-content-comment"
           ng-if="screen.isPinSelected(pin)"
