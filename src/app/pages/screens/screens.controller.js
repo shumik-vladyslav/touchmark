@@ -37,6 +37,28 @@
       vm.cardType = type;
     };
 
+    vm.pickFilter = function (el) {
+
+      var collaborators = el.collaborators, isCollaborator = false;
+      if (!vm.filters.collaborator) {
+        isCollaborator = true;
+      } else {
+        for (var i in collaborators) {
+          if (collaborators[i].key === vm.filters.collaborator) {
+            isCollaborator = true;
+          }
+        }
+      }
+
+      var isType = ((vm.filters.type && el.type === vm.filters.type) || !vm.filters.type);
+
+      var archived = (vm.filters.archived === el.archived);
+
+      var result = (isType && isCollaborator && archived);
+
+      return result;
+    };
+
     vm.filterSelect = function (item, menu) {
       menu.selected = item;
       var _ = $window._;
@@ -49,7 +71,11 @@
           if (item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
-            vm.filters[menu.column] = item.key;
+            if (menu.column === 'collaborator') {
+              vm.filters[menu.column] = item.key;
+            } else {
+              vm.filters[menu.column] = item.key;
+            }
           }
           break;
       }
@@ -162,6 +188,10 @@
         ScreensService.deletedScreen(vm.projectId, id);
         toastr.success('Successfully', 'Deleted', { progressBar: false });
       });
+    };
+
+    vm.view = function (id) {
+      $state.go('main.screen', { screen: id });
     };
   }
 })();
