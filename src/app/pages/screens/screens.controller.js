@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,7 +6,7 @@
     .controller('ScreensController', ScreensController);
 
   /** @ngInject */
-  function ScreensController(ScreensService, BottomSheetService, $window, $mdDialog, $state, toastr) {
+  function ScreensController(ScreensService, CommonService, BottomSheetService, $window, $mdDialog, $state, toastr) {
     var vm = this;
     vm.showGridBottomSheet = BottomSheetService.showBottomSheet;
     BottomSheetService.setBottomService(ScreensService);
@@ -33,29 +33,74 @@
     ];
     vm.cardType = 'module';
 
-    vm.setCardType = function(type) {
+    vm.setCardType = function (type) {
       vm.cardType = type;
     };
 
-    vm.filterSelect = function(item, menu) {
+    vm.filterSelect = function (item, menu) {
       menu.selected = item;
       var _ = $window._;
 
-      switch(menu.type) {
+      switch (menu.type) {
         case 'order':
           vm.orders = item.expression;
-        break;
+          break;
         case 'filter':
-          if(item.key === 'all') {
+          if (item.key === 'all') {
             vm.filters = _.omit(vm.filters, menu.column);
           } else {
             vm.filters[menu.column] = item.key;
           }
-        break;
+          break;
       }
     };
 
-    vm.archive = function(id, ev) {
+    vm.addScreentModal = function (ev) {
+      CommonService.formDialog(
+        ev,
+        {
+          title: 'Add new screen',
+          items: [
+            {
+              type: 'input',
+              name: 'name',
+              label: 'Project name',
+              required: true,
+              errors: [
+                {
+                  type: 'required',
+                  message: 'This is required.'
+                }
+              ]
+            }
+          ],
+          action: {
+            submit: {
+              name: 'Add'
+            },
+            cancel: {
+              name: 'Cancel'
+            }
+          }
+        }
+      ).then(function (data) {
+        var screen = {
+          id: 6,
+          name: data.name,
+          fileName: 'p6.jpg',
+          owner: {
+            id: 2,
+            name: 'user2',
+            avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fichristiand/128.jpg'
+          },
+          img: 'assets/images/project/p6.jpg'
+        };
+        screen.update = new Date();
+        ScreensService.addScreen(+$state.params['screens'], screen);
+      });
+    };
+
+    vm.archive = function (id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to archive?')
         .textContent('Your projects will be archived')
@@ -65,13 +110,13 @@
         .ok('Archive')
         .cancel('Cancel');
 
-      $mdDialog.show(confirm).then(function() {
+      $mdDialog.show(confirm).then(function () {
         ScreensService.setScreenValue(vm.projectId, id, 'archived', true);
-        toastr.success('Successfully', 'Archived', {progressBar: false});
+        toastr.success('Successfully', 'Archived', { progressBar: false });
       });
     };
 
-    vm.unArchive = function(id, ev) {
+    vm.unArchive = function (id, ev) {
       var confirm = $mdDialog.confirm()
         .title('Would you like to unarchive?')
         .textContent('Your projects will be unarchived')
@@ -81,18 +126,42 @@
         .ok('Archive')
         .cancel('Cancel');
 
-      $mdDialog.show(confirm).then(function() {
+      $mdDialog.show(confirm).then(function () {
         ScreensService.setScreenValue(vm.projectId, id, 'archived', false);
-        toastr.success('Successfully', 'Unarchived', {progressBar: false});
+        toastr.success('Successfully', 'Unarchived', { progressBar: false });
       });
     };
 
-    vm.copy= function(id) {
-      ScreensService.copyScreen(vm.projectId, id);
+    vm.copy = function (id, ev) {
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to copy?')
+        .textContent('Your projects will be copied')
+        .ariaLabel('Copy dialog')
+        .targetEvent(ev)
+        .theme('navAuth')
+        .ok('Copy')
+        .cancel('Cancel');
+
+      $mdDialog.show(confirm).then(function () {
+        ScreensService.copyScreen(vm.projectId, id);
+        toastr.success('Successfully', 'Copied', { progressBar: false });
+      });
     };
-    
-    vm.deleted= function(id) {
-      ScreensService.deletedScreen(vm.projectId, id);
+
+    vm.deleted = function (id, ev) {
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to deleted?')
+        .textContent('Your projects will be deleted')
+        .ariaLabel('Delete dialog')
+        .targetEvent(ev)
+        .theme('navAuth')
+        .ok('Delete')
+        .cancel('Cancel');
+
+      $mdDialog.show(confirm).then(function () {
+        ScreensService.deletedScreen(vm.projectId, id);
+        toastr.success('Successfully', 'Deleted', { progressBar: false });
+      });
     };
   }
 })();
