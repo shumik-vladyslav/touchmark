@@ -59,11 +59,6 @@
         controller: 'ScreenController',
         controllerAs: 'screen'
       })
-      .state('main.uikit', {
-        url: '/uikit',
-        templateUrl: 'app/pages/uikit/uikit.html',
-        freePage: true
-      })
       .state('main.boards', {
         url: '/boards',
         templateUrl: 'app/pages/boards/boards.html'

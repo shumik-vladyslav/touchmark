@@ -23,10 +23,6 @@
 			{
 				title: 'Online Support',
 				link: 'main.support'
-			},
-			{
-				title: 'UI Kit',
-				link: 'main.uikit'
 			}
 		];
 
@@ -52,7 +48,7 @@
 				link: 'main.learn'
 			}
 		];
-		
+
 		var footerMenu = [
 			{
 				title: 'Pricing',
@@ -88,7 +84,7 @@
 				label: 'Facebook'
 			},
 			{
-				image: '/assets/icons/linkedin.svg',        
+				image: '/assets/icons/linkedin.svg',
 				link: '/',
 				label: 'LinkedIn'
 			},
