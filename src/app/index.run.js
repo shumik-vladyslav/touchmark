@@ -5,6 +5,9 @@
     .module('app')
     .run(runBlock);
 
+  /* jshint ignore:start */
+  // jscs:disable
+  /* eslint-disable */
   /** @ngInject */
   function runBlock($log, $rootScope, $state, $timeout, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, data) {
@@ -14,8 +17,9 @@
         }, 0);
       }
     });
-
     $log.debug('runBlock end');
   }
-
+  /* eslint-enable */
+  // jscs:enable
+  /* jshint ignore:end */
 })();

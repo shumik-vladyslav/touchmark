@@ -6,7 +6,7 @@
     .controller('ScreenController', ScreenController);
 
   /** @ngInject */
-  function ScreenController($state, $scope, $timeout, PanZoomService) {
+  function ScreenController($state, $scope, $timeout, $window) {
     var vm = this;
 
     /* initial data */
@@ -89,16 +89,22 @@
     $scope.$watch('vm.current', function(){
       var img = new Image();
       // HERE WE CAN DO LOADER
+      /* jshint ignore:start */
+      // jscs:disable
+      /* eslint-disable */
       img.onload = function(){
-        vm.ww = $(window).width();
+        vm.ww = $window.innerWidth;
         vm.iw = this.width; // image width
-        vm.ih = this.height // image height
+        vm.ih = this.height; // image height
         if (vm.ww > vm.iw){
           vm.zoomConfig.initialPanX = (vm.ww - vm.iw) / 2;
         }
         vm.showImage = true;
         $scope.$digest();
       };
+      /* eslint-enable */
+      // jscs:enable
+      /* jshint ignore:end */
       img.src = vm.current.url;
     }, true)
     /**/
@@ -123,7 +129,7 @@
       var pinIndex = vm.pins.indexOf(pin);
       if (pinIndex > -1){
         $timeout(function(){
-          var targetEl = $('#pin-' + pinIndex).find('.pin-content-comment');
+          var targetEl = angular.element('#pin-' + pinIndex).find('.pin-content-comment');
           targetEl.scrollTop(targetEl[0].scrollHeight);
         });
       }
@@ -132,7 +138,7 @@
       var pinIndex = vm.pins.indexOf(pin);
       if (pinIndex > -1){
         $timeout(function(){
-          var targetEl = $('#pin-' + pinIndex + ' .pin-content-comment .pin-new-comment-form md-input-container textarea');
+          var targetEl = angular.element('#pin-' + pinIndex + ' .pin-content-comment .pin-new-comment-form md-input-container textarea');
           targetEl.focus();
         });
       }

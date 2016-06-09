@@ -164,14 +164,14 @@
 			}
 		];
 
-		var rndScreen = function() {
-			var col = [];
-			// var rnd = Math.floor(Math.random() * 5) + 1;
-			for (var i = 0; i < screens.length; i++) {
-				col.push(screens[i]);
-			}
-			return col;
-		};
+		// var rndScreen = function() {
+		// 	var col = [];
+		// 	// var rnd = Math.floor(Math.random() * 5) + 1;
+		// 	for (var i = 0; i < screens.length; i++) {
+		// 		col.push(screens[i]);
+		// 	}
+		// 	return col;
+		// };
 
 		var project = {
       id: 1,
