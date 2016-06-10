@@ -17,7 +17,7 @@
     };
     vm.projectId = +$state.params['screens'];
     vm.project = ScreensService.project;
-    vm.filters = {};
+    vm.filters = {archived: false};
     vm.orders = '';
     vm.cardTypes = [
       {
@@ -50,11 +50,11 @@
         }
       }
 
-      var isType = ((vm.filters.type && el.type === vm.filters.type) || !vm.filters.type);
+      // var isType = ((vm.filters.type && el.type === vm.filters.type) || !vm.filters.type);
 
       var archived = (vm.filters.archived === el.archived);
 
-      var result = (isType && isCollaborator && archived);
+      var result = (isCollaborator && archived);
 
       return result;
     };
