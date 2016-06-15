@@ -44,3 +44,15 @@
          padding-left: 50px;
      }
  }
+
+ @media  screen and (min-device-width: 300px) and (min-width: 300px){
+     footer{
+        height: 250px;
+     }
+}
+
+@media  screen and (min-device-width: 1280px) and (min-width: 1280px){
+   footer{
+        height: 150px;
+     }
+}

@@ -3,13 +3,13 @@
         <div flex="20" class="footer-logo">
             <img flex ng-src="/assets/images/main/logo_footer.jpg">
         </div>
-        <div flex="80" layout="column" layout-align="center center">
-            <div class="footer-link" layout="row" layout-align="space-around center">
-                <p flex="20"  ng-repeat="col in footerbar.cols">
+        <div flex="80" layout="column" layout-xs="row" layout-sm="row" layout-align="center center" >
+            <div class="footer-link" layout="row" layout-align="space-around center" layout-xs="column" layout-sm="column">
+                <p flex="20" flex-xs="40" flex-sm="40" ng-repeat="col in footerbar.cols">
                     <a ui-sref="{{col.link}}">{{col.title}}</a>
                 </p>
             </div>
-            <div class="footer-socials">
+            <div class="footer-socials" layout-align-xs="space-around center" layout-xs="column" layout-align-sm="space-around center" layout-sm="column">
                 <p>FOLLOW US:</p>
                 <md-button class="md-icon-button" ng-repeat="social in footerbar.socials" ng-href="{{social.link}}" target="_blank" aria-label="{{social.label}}">
                     <md-icon md-svg-src="{{social.image}}"></md-icon>

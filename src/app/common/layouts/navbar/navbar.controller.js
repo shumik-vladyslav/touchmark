@@ -16,6 +16,9 @@
     vm.isAuthorized = AuthService.isAuthorized;
     vm.userInfo = AuthService.getUserInfo;
 
+    vm.isOpen = false;
+    vm.selectedDirection = 'down';
+    vm.selectedMode = 'md-fling';
     function logOut() {
       AuthService.logOut();
       theme();

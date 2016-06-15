@@ -1,16 +1,29 @@
 <md-toolbar layout="row" layout-align="center center" md-theme="{{navbar.theme()}}" class="navbar" flex>
-  <span flex="5"></span>
+  <span flex="5" hide-md></span>
   <a href="/" class="logo" layout="row" layout-align="center center">
-    <img ng-src="/assets/images/logo.png" alt="">
-    desmark
+    <img ng-src="/assets/images/logo.png" alt=""> desmark
   </a>
-  <span flex="5"></span>
-  <section layout="row" layout-align="left center" flex>
+  <span flex="5" ></span>
+  <section hide-xs hide-sm layout="row" layout-align="left center" flex>
     <md-button ng-repeat="menu in navbar.menu()" ui-sref="{{menu.link}}">{{menu.title}}</md-button>
   </section>
+
+  <div hide-gt-sm class="lock-size" layout="row" layout-align="center center">
+    <md-fab-speed-dial md-open="navbar.isOpen" md-direction="{{navbar.selectedDirection}}" ng-class="navbar.selectedMode">
+      <md-fab-trigger>
+        <md-button aria-label="menu">
+          Menu
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions ng-if="navbar.isOpen" ng-class="!navbar.isAuthorized() ? 'md-fab-no-auth': 'md-fab-auth'">
+        <md-button ng-repeat="menu in navbar.menu()" ui-sref="{{menu.link}}">{{menu.title}}</md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
+
   <section layout="row" layout-align="center right" ng-if="!navbar.isAuthorized()">
     <md-button ng-click="navbar.signIn($event)">Sign in</md-button>
-  	<md-button ng-click="navbar.signUp($event)">Sign up</md-button>
+    <md-button ng-click="navbar.signUp($event)">Sign up</md-button>
   </section>
   <section layout="row" layout-align="center right" ng-if="navbar.isAuthorized()">
     <md-button class="md-icon-button" ng-click="" aria-label="Notifications">
@@ -19,5 +32,7 @@
     <md-button ng-click="">{{navbar.userInfo().email}}</md-button>
     <md-button ng-click="navbar.logOut()">Log out</md-button>
   </section>
-  <span flex="5"></span>
+  <span flex="5" hide-md></span>
+
+
 </md-toolbar>

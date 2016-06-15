@@ -48,7 +48,7 @@
         </md-menu-content>
       </md-menu>
     </md-menu-bar>
-    <group-button>
+    <group-button hide-xs hide-sm>
       <md-button class="md-mini" ng-class="{'md-raised md-primary md-hue-3': type.key === proj.cardType}"
                  ng-click="proj.setCardType(type.key)" aria-label="type.value"
                  ng-repeat="type in proj.cardTypes">
@@ -64,7 +64,7 @@
   <div layout="row" layout-align="center center" layout-wrap flex>
     <card info="screen" type="proj.cardType" ng-repeat="screen in proj.project.screens | orderBy: proj.orders |
       searchField: 'name' : 'update' | filter: proj.search | pick: proj.pickFilter" ng-hide="proj.project.screens | isEmpty"
-      flex="{{proj.cardType === 'module' ? '33' : '100'}}">
+      flex="{{proj.cardType === 'module' ? '33' : '100'}}" flex-xs="100" flex-sm="100" flex-md="{{proj.cardType === 'module' ? '50' : '100'}}">
       <card-main-action>
         <md-button type="button" class="enter" md-no-ink ng-click="proj.view(screen.id)" layout="column" aria-label="Enter">
           <md-icon md-svg-src="assets/icons/eye.svg" class="icon"></md-icon>

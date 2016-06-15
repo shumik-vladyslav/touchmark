@@ -20,4 +20,33 @@
 	&.md-navAuth-theme .logo {
 		color: #fff;
 	}
+
+	.md-fab-no-auth .md-navGuest-theme{
+		color: #fff
+	}
 }
+
+@media  screen and (min-device-width: 300px) and (min-width: 300px){
+   .lock-size md-fab-speed-dial {
+		height: 50px 
+	}
+	.lock-size md-fab-speed-dial md-fab-actions a{
+		background: #004759;
+	}
+	md-toolbar{
+		z-index: inherit;
+	}
+}
+
+@media  screen and (min-device-width: 600px) and (min-width: 600px){
+     .lock-size md-fab-speed-dial {
+		height: 50px 
+	}
+	.lock-size md-fab-speed-dial md-fab-actions a{
+		background: #004759;
+	}
+	md-toolbar{
+		z-index: inherit;
+	}
+}
+
